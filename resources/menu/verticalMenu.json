@@ -1,0 +1,131 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard",
+      "badge": [
+        "danger",
+        "5"
+      ],
+      "submenu": [
+        {
+          "url": "/",
+          "name": "Analytics",
+          "slug": "dashboard-analytics"
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "users",
+      "url": "users"
+    },
+    {
+      "name": "Properties",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "properties",
+      "url": "properties"
+    },
+    {
+      "name": " Add Properties",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "properties",
+      "url": "addProperties"
+    },
+    {
+      "name": "Roles",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "roles",
+      "url": "roles"
+    },
+    {
+      "name": "Permissions",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "permissions",
+      "url": "permissions"
+    },
+    {
+      "name": "Layouts",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "layouts/without-menu",
+          "name": "Without menu",
+          "slug": "layouts-without-menu"
+        },
+        {
+          "url": "layouts/without-navbar",
+          "name": "Without navbar",
+          "slug": "layouts-without-navbar"
+        },
+        {
+          "url": "layouts/container",
+          "name": "Container",
+          "slug": "layouts-container"
+        },
+        {
+          "url": "layouts/fluid",
+          "name": "Fluid",
+          "slug": "layouts-fluid"
+        },
+        {
+          "url": "layouts/blank",
+          "name": "Blank",
+          "slug": "layouts-blank",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "menuHeader": "Apps & Pages"
+    },
+    {
+      "name": "Authentications",
+      "icon": "menu-icon tf-icons bx bx-lock-open-alt",
+      "slug": "auth",
+      "submenu": [
+        {
+          "url": "auth/login-basic",
+          "name": "Login",
+          "slug": "auth-login-basic",
+          "target": "_blank"
+        },
+        {
+          "url": "auth/register-basic",
+          "name": "Register",
+          "slug": "auth-register-basic",
+          "target": "_blank"
+        },
+        {
+          "url": "auth/forgot-password-basic",
+          "name": "Forgot Password",
+          "slug": "auth-forgot-password-basic",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "name": "Misc",
+      "icon": "menu-icon tf-icons bx bx-cube-alt",
+      "slug": "pages-misc",
+      "submenu": [
+        {
+          "url": "pages/misc-error",
+          "name": "Error",
+          "slug": "pages-misc-error",
+          "target": "_blank"
+        },
+        {
+          "url": "pages/misc-under-maintenance",
+          "name": "Under Maintenance",
+          "slug": "pages-misc-under-maintenance",
+          "target": "_blank"
+        }
+      ]
+    }
+  ]
+}
