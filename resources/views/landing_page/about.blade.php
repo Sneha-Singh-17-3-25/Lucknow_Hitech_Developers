@@ -143,50 +143,14 @@
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- Navigation Bar -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full py-4 z-50 transition-all duration-300">
-        <div class="w-11/12 max-w-screen-xl mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <i class="fas fa-building text-saffron text-2xl mr-2"></i>
-                <span class="text-xl font-heading font-bold text-white">SELL <span
-                        class="text-saffron">SQUARE</span></span>
-            </a>
-
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="{{route('landing_index')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">Home</a>
-                <!-- <a href="#" class="text-white hover:text-saffron transition-colors duration-300">Properties</a> -->
-                <a href="{{route('landing_agents')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">Agents</a>
-                <a href="{{route('landing_about')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">About
-                    Us</a>
-                <a href="{{route('landing_contact')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">Contact</a>
-            </div>
-
-            <div class="hidden md:flex items-center">
-                <a href="#" class="mr-6 text-white hover:text-saffron transition-colors duration-300 flex items-center">
-                    <i class="fas fa-phone-alt mr-2"></i> +91 98765 43210
-                </a>
-                <a href="#"
-                    class="ml-4 px-5 py-2 bg-saffron hover:bg-saffron-dark text-white rounded-md transition-colors duration-300 flex items-center">
-                    <i class="fas fa-plus-circle mr-2"></i> Post Property
-                </a>
-            </div>
-
-            <!-- Mobile menu button -->
-            <button class="md:hidden text-white focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </div>
-    </nav>
+    @include('landing_page/include/navbar')
 
     <!-- About Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[50vh] overflow-hidden">
         <!-- Video Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
             <video autoplay muted loop playsinline class="object-cover w-full h-full">
-                <source src="{{asset('videos/header2.mp4')}}" type="video/mp4">
+                <source src="{{asset('videos/about.mp4')}}" type="video/mp4">
                 <!-- Fallback image in case video doesn't load -->
                 <img src="/api/placeholder/1920/600" alt="Real Estate Excellence" class="object-cover w-full h-full">
             </video>
@@ -196,7 +160,7 @@
 
         <div class="w-11/12 max-w-screen-lg z-10">
             <h1 class="text-4xl md:text-6xl leading-tight font-heading font-bold text-white text-shadow">About <span
-                    class="text-saffron">SELL SQUARE</span></h1>
+                    class="text-saffron">Us</span></h1>
             <p class="text-white/80 max-w-xl mx-auto mt-4">Your Trusted Partner in Real Estate Excellence</p>
             <div class="mt-8 flex justify-center space-x-4">
                 <a href="#about-section"
@@ -246,7 +210,8 @@
                     <p class="text-gray-600 mb-6 leading-relaxed">Our team of seasoned professionals brings extensive
                         local knowledge and market expertise to every transaction, ensuring that your real estate
                         journey is smooth and successful. Whether you're buying your first home, investing in commercial
-                        property, or selling a luxury estate, SELL SQUARE delivers exceptional service tailored to your
+                        property, or selling a luxury estate, Lucknow Hitech Developers delivers exceptional service
+                        tailored to your
                         unique needs.</p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -268,7 +233,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold mb-2 text-navy">10,000+ Transactions</h4>
-                                <p class="text-gray-600 text-sm">Successfully completed across major Indian cities</p>
+                                <p class="text-gray-600 text-sm">Successfully completed across major Lucknow areas</p>
                             </div>
                         </div>
                     </div>
@@ -353,7 +318,8 @@
             <div class="relative mb-16 text-center">
                 <span class="inline-block h-1 w-12 bg-saffron mb-4"></span>
                 <p class="text-saffron uppercase tracking-widest font-medium mb-2">Our Impact</p>
-                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">SELL SQUARE By The Numbers</h2>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Lucknow Hitech Developers By The Numbers
+                </h2>
                 <div class="w-24 h-1 bg-saffron mx-auto"></div>
             </div>
 
@@ -383,8 +349,8 @@
                 <!-- Stat 4 -->
                 <div class="slide-in">
                     <div class="text-5xl font-bold text-saffron mb-2">12</div>
-                    <div class="text-xl mb-1">Major Cities</div>
-                    <p class="text-white/70">Pan-India Presence</p>
+                    <div class="text-xl mb-1">Major Areas</div>
+                    <p class="text-white/70">Lucknow all areas</p>
                 </div>
             </div>
 
@@ -411,7 +377,7 @@
 
 
     <!-- Footer Start-->
-    @include('landing_page.include.footer');
+    @include('landing_page.include.footer')
     <!-- Footer End-->
 
 

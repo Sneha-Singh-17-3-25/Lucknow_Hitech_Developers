@@ -1,0 +1,16 @@
+{
+    "menu": [
+        {
+            "url": "/",
+            "name": "Dashboard",
+            "icon": "menu-icon tf-icons bx bx-home-circle",
+            "slug": "dashboard"
+        },
+        {
+            "url": "/properties",
+            "name": "Properties",
+            "icon": "menu-icon tf-icons bx bx-building-house",
+            "slug": "properties"
+        }
+    ]
+}

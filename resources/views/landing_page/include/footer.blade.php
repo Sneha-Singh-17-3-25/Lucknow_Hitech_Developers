@@ -4,8 +4,8 @@
              <div>
                  <a href="#" class="flex items-center mb-6">
                      <i class="fas fa-building text-saffron text-2xl mr-2"></i>
-                     <span class="text-xl font-heading font-bold">Lucknow Hitech Developers <span
-                             class="text-saffron">Properties</span></span>
+                     <span class="text-xl font-heading font-bold">Lucknow Hitech <span
+                             class="text-saffron">Developers</span></span>
                  </a>
                  <p class="text-gray-400 mb-6">India's premier real estate platform offering curated properties
                      across major Lucknow areas.</p>
@@ -39,9 +39,12 @@
                              Us</a>
                      </li>
                      <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Properties</a></li>
-                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Privacy Policy</a>
+                     <li><a href="{{route('landing_privacypolicy')}}"
+                             class="text-gray-400 hover:text-saffron transition-colors">Privacy Policy</a>
                      </li>
-                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Terms &
+                     <li><a href="{{route('landing_termsconditions')}}"
+                             class="text-gray-400 hover:text-saffron transition-colors">Terms
+                             &
                              Conditions</a>
                      </li>
                      <li><a href="{{route('landing_contact')}}"
@@ -52,55 +55,33 @@
                  </ul>
              </div>
              <div>
-                 <h3 class="text-lg font-bold mb-6">Top Locations</h3>
+                 <h3 class="text-lg font-bold mb-6">Top Lucknow Locations</h3>
                  <ul class="space-y-3">
-                     <li>
-                         <a href="#" class="flex items-center text-gray-400 hover:text-saffron transition-colors">
-                             <img src="/path-to-your-logo/building.png" alt="Building" class="w-5 h-5 mr-2"> DLF MY PAD
-                         </a>
-                     </li>
-                     <li>
-                         <a href="#" class="flex items-center text-gray-400 hover:text-saffron transition-colors">
-                             <img src="/path-to-your-logo/building.png" alt="Building" class="w-5 h-5 mr-2">Omaxe
-                         </a>
-                     </li>
-                     <li>
-                         <a href="#" class="flex items-center text-gray-400 hover:text-saffron transition-colors">
-                             <img src="/path-to-your-logo/building.png" alt="Building" class="w-5 h-5 mr-2">Shalimar
-                         </a>
-                     </li>
-                     <li>
-                         <a href="#" class="flex items-center text-gray-400 hover:text-saffron transition-colors">
-                             <img src="/path-to-your-logo/building.png" alt="Building" class="w-5 h-5 mr-2">Ekana
-                         </a>
-                     </li>
-                     <li>
-                         <a href="#" class="flex items-center text-gray-400 hover:text-saffron transition-colors">
-                             <img src="/path-to-your-logo/building.png" alt="Building" class="w-5 h-5 mr-2">Bhutani
-                         </a>
-                     </li>
-                     <!-- <li>
-                         <a href="#" class="flex items-center text-gray-400 hover:text-saffron transition-colors">
-                             <img src="/path-to-your-logo/building.png" alt="Building" class="w-5 h-5 mr-2"> Chennai
-                         </a>
-                     </li> -->
+                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Gomti Nagar</a></li>
+                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Hazratganj</a></li>
+                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Indira Nagar</a></li>
+                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Aliganj</a></li>
+                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Mahanagar</a></li>
+                     <li><a href="#" class="text-gray-400 hover:text-saffron transition-colors">Chinhat</a></li>
                  </ul>
              </div>
+
 
              <div>
                  <h3 class="text-lg font-bold mb-6">Contact Us</h3>
                  <ul class="space-y-4">
                      <li class="flex items-start">
                          <i class="fas fa-map-marker-alt mt-1 mr-3 text-saffron"></i>
-                         <span class="text-gray-400">201, SELLSQUARETower, Bandra Kurla Complex, Mumbai 400051</span>
+                         <span class="text-gray-400">DLF MY PAD , B1 Tower , 9th Floor , Vibhuti Khand , Gomti Nagar
+                             Lucknow 226010</span>
                      </li>
                      <li class="flex items-center">
                          <i class="fas fa-phone-alt mr-3 text-saffron"></i>
-                         <span class="text-gray-400">+91 98765 43210</span>
+                         <span class="text-gray-400">+91 9335766586 <br>+91 8299370217</span>
                      </li>
                      <li class="flex items-center">
                          <i class="fas fa-envelope mr-3 text-saffron"></i>
-                         <span class="text-gray-400">info@pinnacleproperties.in</span>
+                         <span class="text-gray-400">lucknowhitechdevelopers@gmail.com</span>
                      </li>
                      <li class="flex items-center">
                          <i class="fas fa-clock mr-3 text-saffron"></i>
@@ -110,7 +91,7 @@
              </div>
          </div>
          <div class="pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-             <p>© 2025 SELLSQUAREProperties. All Rights Reserved. RERA Registered.</p>
+             <p>© 2025 Lucknow Hitech Developers Properties . All Rights Reserved. RERA Registered.</p>
          </div>
      </div>
  </footer>

@@ -233,50 +233,15 @@
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- Navigation Bar -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full py-4 z-50 transition-all duration-300">
-        <div class="w-11/12 max-w-screen-xl mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <i class="fas fa-building text-saffron text-2xl mr-2"></i>
-                <span class="text-xl font-heading font-bold text-white">SELL <span
-                        class="text-saffron">SQUARE</span></span>
-            </a>
+    @include('landing_page/include/navbar')
 
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="{{route('landing_index')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">Home</a>
-                <!-- <a href="#" class="text-white hover:text-saffron transition-colors duration-300">Properties</a> -->
-                <a href="{{route('landing_agents')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">Agents</a>
-                <a href="{{route('landing_about')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">About
-                    Us</a>
-                <a href="{{route('landing_contact')}}"
-                    class="text-white hover:text-saffron transition-colors duration-300">Contact</a>
-            </div>
-
-            <div class="hidden md:flex items-center">
-                <a href="#" class="mr-6 text-white hover:text-saffron transition-colors duration-300 flex items-center">
-                    <i class="fas fa-phone-alt mr-2"></i> +91 98765 43210
-                </a>
-                <a href="#"
-                    class="ml-4 px-5 py-2 bg-saffron hover:bg-saffron-dark text-white rounded-md transition-colors duration-300 flex items-center">
-                    <i class="fas fa-plus-circle mr-2"></i> Post Property
-                </a>
-            </div>
-
-            <!-- Mobile menu button -->
-            <button class="md:hidden text-white focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </div>
-    </nav>
 
     <!-- Contact Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[50vh] overflow-hidden">
         <!-- Video Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
             <video autoplay muted loop playsinline class="object-cover w-full h-full">
-                <source src="{{asset('videos/header2.mp4')}}" type="video/mp4">
+                <source src="{{asset('videos/contact.mp4')}}" type="video/mp4">
                 <!-- Fallback image in case video doesn't load -->
                 <img src="/api/placeholder/1920/600" alt="Contact Us" class="object-cover w-full h-full">
             </video>
@@ -319,7 +284,8 @@
                         <i class="fas fa-map-marker-alt text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Visit Our Office</h3>
-                    <p class="text-gray-600 text-center">201, SELLSQUARE Tower, Bandra Kurla Complex, Mumbai 400051</p>
+                    <p class="text-gray-600 text-center">DLF MY PAD , B1 Tower , 9th Floor , Vibhuti Khand , Gomti Nagar
+                        Lucknow 226010</p>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
@@ -327,8 +293,8 @@
                         <i class="fas fa-phone-alt text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Call Us</h3>
-                    <p class="text-gray-600 text-center">+91 98765 43210</p>
-                    <p class="text-gray-600 text-center">+91 22 4567 8901</p>
+                    <p class="text-gray-600 text-center">+91 9335766586</p>
+                    <p class="text-gray-600 text-center">+91 8299370217</p>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
@@ -336,8 +302,8 @@
                         <i class="fas fa-envelope text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Email Us</h3>
-                    <p class="text-gray-600 text-center">info@sellsquare.in</p>
-                    <p class="text-gray-600 text-center">support@sellsquare.in</p>
+                    <!-- <p class="text-gray-600 text-center">info@sellsquare.in</p> -->
+                    <p class="text-gray-600 text-center">lucknowhitechdevelopers@gmail.com</p>
                 </div>
             </div>
 
@@ -415,7 +381,7 @@
                 <div class="space-y-8">
                     <div class="map-container slide-in w-full h-[450px]">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.186989214644!2d81.00378117522263!3d26.865799576675187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be2bef8e5f9d3%3A0xa0cd5cc1e323292c!2sDLF%20MyPad!5e0!3m2!1sen!2sin!4v1746783915053!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.186989214653!2d81.00378117522263!3d26.865799576675187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be2bef8e5f9d3%3A0xa0cd5cc1e323292c!2sDLF%20MyPad!5e0!3m2!1sen!2sin!4v1747391818930!5m2!1sen!2sin"
                             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
@@ -461,14 +427,15 @@
                             alt="Mumbai Office" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Mumbai <span class="text-saffron">HQ</span></h3>
+                        <h3 class="text-xl font-semibold mb-2">Gomti <span class="text-saffron">Nagar</span></h3>
                         <div class="flex items-start mb-3">
                             <i class="fas fa-map-marker-alt text-saffron mt-1 mr-3"></i>
-                            <p class="text-gray-700">201, SELLSQUARE Tower, Bandra Kurla Complex, Mumbai 400051</p>
+                            <p class="text-gray-700">DLF MY PAD , B1 Tower , 9th Floor , Vibhuti Khand , Gomti Nagar
+                                Lucknow 226010</p>
                         </div>
                         <div class="flex items-center mb-3">
                             <i class="fas fa-phone-alt text-saffron mr-3"></i>
-                            <p class="text-gray-700">+91 98765 43210</p>
+                            <p class="text-gray-700">+91 9335766586</p>
                         </div>
                         <a href="#" class="text-saffron hover:text-saffron-dark font-medium flex items-center mt-4">
                             <span>Get Directions</span>
@@ -559,9 +526,9 @@
                 <div class="slide-in">
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold mb-3">What areas do you serve?</h3>
-                        <p class="text-gray-700">We currently have offices in Mumbai, Delhi NCR, and Bangalore, but we
-                            handle properties across all major Indian cities including Hyderabad, Pune, Chennai,
-                            Kolkata, and Ahmedabad.</p>
+                        <p class="text-gray-700">We currently have offices in Lucknow, and we
+                            handle properties across all major Lucknow areas including Gomti Nagar, Hazratganj, Aliganj,
+                            Mahanagar, and Indira Nagar.</p>
                     </div>
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold mb-3">Can you help with home loans?</h3>
@@ -636,7 +603,8 @@
                         </div>
                         <div class="text-center">
                             <i class="fas fa-quote-left text-saffron opacity-50 text-3xl mb-2"></i>
-                            <p class="italic text-white/90 mb-4">SELLSQUARE Properties helped me find my dream home in
+                            <p class="italic text-white/90 mb-4">Lucknow Hitech Developers Properties helped me find my
+                                dream home in
                                 just two weeks. Their team was professional, responsive, and truly understood my needs.
                             </p>
                             <div class="flex items-center justify-center">

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
+
 
 
 class registerController extends Controller
@@ -42,6 +44,7 @@ class registerController extends Controller
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
+            'is_admin' => '0'
         ]);
 
         $user->assignRole($request->userType);
@@ -58,9 +61,22 @@ class registerController extends Controller
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // $user = User::where('email', $request->email);
+            $redirectPath = Auth::user()->is_admin == 1
+                ? route('dashboard-analytics')
+                : route('landing_index');
+            // $user = Auth::user();
+            // if ($user->hasRole('super-admin')) {
+            //     $redirectPath = route('dashboard-analytics');
+            // } else {
+            //     $redirectPath = route('landing_index');
+            // }
+            // Auth::login($user);
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Login successful',
+                'redirect' => $redirectPath,
                 'user' => Auth::user()
             ]);
         }

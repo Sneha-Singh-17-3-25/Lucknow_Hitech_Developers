@@ -155,6 +155,9 @@ Route::delete('/users/delete/{id}', [UserController::class, 'delete_users'])->na
 Route::get('landing/about', [aboutController::class, 'landing_about'])->name('landing_about');
 Route::get('landing/contact', [aboutController::class, 'landing_contact'])->name('landing_contact');
 Route::get('landing/agents', [aboutController::class, 'landing_agents'])->name('landing_agents');
+Route::get('landing/termsconditions', [aboutController::class, 'landing_termsconditions'])->name('landing_termsconditions');
+Route::get('landing/privacypolicy', [aboutController::class, 'landing_privacypolicy'])->name('landing_privacypolicy');
+
 
 Route::post('landing/register', [registerController::class, 'landing_register'])->name('landing_register');
 Route::post('landing/login', [registerController::class, 'landing_login'])->name('landing_login');

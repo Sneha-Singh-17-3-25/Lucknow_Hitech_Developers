@@ -21,4 +21,14 @@ class aboutController extends Controller
     {
         return view('landing_page/agents');
     }
+
+    public function landing_termsconditions()
+    {
+        return view('landing_page/terms&conditions');
+    }
+
+    public function landing_privacypolicy()
+    {
+        return view('landing_page/privacy_policy');
+    }
 }

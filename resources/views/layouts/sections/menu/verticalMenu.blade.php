@@ -27,6 +27,28 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
+    @php
+    use Illuminate\Support\Facades\Auth;
+
+    $verticalMenuJson = null;
+
+    if (Auth::check()) {
+
+
+    if (auth()->user()->hasRole('super-admin')) {
+
+    $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenu.json'));
+    } elseif (true) {
+    $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenuSeller.json'));
+    }
+
+
+    $menuData = $verticalMenuJson;
+    $menuData = [(object) $menuData];
+    $menuData = compact($menuData);
+
+    }
+    @endphp
 
     <ul class="menu-inner py-1">
         @foreach ($menuData[0]->menu as $menu)
