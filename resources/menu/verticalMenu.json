@@ -1,0 +1,63 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard",
+      "submenu": [
+        {
+          "url": "/",
+          "name": "Analytics",
+          "slug": "dashboard-analytics"
+        }
+      ]
+    },
+    {
+      "name": "Members",
+      "icon": "menu-icon tf-icons bx bx-user",
+      "slug": "members",
+      "submenu": [
+        {
+          "url": "users",
+          "name": "Users",
+          "slug": "users"
+        }
+      ]
+    },
+    {
+      "name": "Roles & Permissions",
+      "icon": "menu-icon tf-icons bx bx-shield-quarter",
+      "slug": "roles-permissions",
+      "submenu": [
+        {
+          "url": "roles",
+          "name": "Roles",
+          "slug": "roles"
+        },
+        {
+          "url": "permissions",
+          "name": "Permissions",
+          "slug": "permissions"
+        }
+      ]
+    },
+    {
+      "name": "Properties",
+      "icon": "menu-icon tf-icons bx bx-building-house",
+      "slug": "properties",
+      "submenu": [
+        {
+          "url": "properties",
+          "name": "All Properties",
+          "slug": "properties-all"
+        },
+        {
+          "url": "addProperties",
+          "name": "Add Property",
+          "slug": "properties-add"
+        }
+      ]
+    }
+  ]
+}
