@@ -241,7 +241,7 @@
 
         /* login and registration css End */
     </style>
-    @yield('style')
+    @stack('style')
 </head>
 
 <body>
@@ -430,7 +430,7 @@
         </div>
     </div>
 
-    @yield('script')
+    @stack('script')
 
 
     <!-- registeration js --------------------------------->
