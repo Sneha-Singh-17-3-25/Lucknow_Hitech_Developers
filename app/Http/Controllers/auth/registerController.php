@@ -61,17 +61,24 @@ class registerController extends Controller
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // $user = User::where('email', $request->email);
-            $redirectPath = Auth::user()->is_admin == 1
-                ? route('dashboard-analytics')
-                : route('landing_index');
-            // $user = Auth::user();
+
+            $user = Auth::user();
+
+
+            if ($user->is_admin == 1) {
+                $redirectPath = route('dashboard-analytics');
+            } else {
+                $redirectPath = route('landing_index');
+            }
+
             // if ($user->hasRole('super-admin')) {
+            //     $redirectPath = route('dashboard-analytics');
+            // } elseif ($user->hasRole('seller')) {
             //     $redirectPath = route('dashboard-analytics');
             // } else {
             //     $redirectPath = route('landing_index');
             // }
-            // Auth::login($user);
+
 
             return response()->json([
                 'status' => 'success',
