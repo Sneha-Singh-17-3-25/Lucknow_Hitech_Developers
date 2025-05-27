@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,6 +85,9 @@
     }
 
     /* Custom loader */
+=======
+<style>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     .loader {
         border: 4px solid rgba(255, 153, 51, 0.3);
         border-radius: 50%;
@@ -137,7 +141,11 @@
         right: 10px;
     }
 
+<<<<<<< HEAD
     .contact-input {
+=======
+    */ .contact-input {
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
         transition: all 0.3s ease;
         border-color: #E2E8F0;
     }
@@ -228,6 +236,7 @@
     .btn-hover-slide:hover::before {
         left: 0;
     }
+<<<<<<< HEAD
     </style>
 </head>
 
@@ -270,13 +279,26 @@
             </button>
         </div>
     </nav>
+=======
+</style>
+
+@extends('layouts/users/app')
+
+<body class="font-sans text-slate bg-gray-50">
+
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
     <!-- Contact Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[50vh] overflow-hidden">
         <!-- Video Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
             <video autoplay muted loop playsinline class="object-cover w-full h-full">
+<<<<<<< HEAD
                 <source src="{{asset('videos/header2.mp4')}}" type="video/mp4">
+=======
+                <source src="{{asset('videos/contact.mp4')}}" type="video/mp4">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 <!-- Fallback image in case video doesn't load -->
                 <img src="/api/placeholder/1920/600" alt="Contact Us" class="object-cover w-full h-full">
             </video>
@@ -314,28 +336,49 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
+=======
+                <div class="bg-white rounded-lg shadow-md p-6 contact-info-card">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="w-16 h-16 rounded-full contact-icon flex items-center justify-center mb-4 mx-auto">
                         <i class="fas fa-map-marker-alt text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Visit Our Office</h3>
+<<<<<<< HEAD
                     <p class="text-gray-600 text-center">201, SELLSQUARE Tower, Bandra Kurla Complex, Mumbai 400051</p>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
+=======
+                    <p class="text-gray-600 text-center">DLF MY PAD , B1 Tower , 9th Floor , Vibhuti Khand , Gomti Nagar
+                        Lucknow 226010</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 contact-info-card">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="w-16 h-16 rounded-full contact-icon flex items-center justify-center mb-4 mx-auto">
                         <i class="fas fa-phone-alt text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Call Us</h3>
+<<<<<<< HEAD
                     <p class="text-gray-600 text-center">+91 98765 43210</p>
                     <p class="text-gray-600 text-center">+91 22 4567 8901</p>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
+=======
+                    <p class="text-gray-600 text-center">+91 9335766586</p>
+                    <p class="text-gray-600 text-center">+91 8299370217</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 contact-info-card">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="w-16 h-16 rounded-full contact-icon flex items-center justify-center mb-4 mx-auto">
                         <i class="fas fa-envelope text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Email Us</h3>
+<<<<<<< HEAD
                     <p class="text-gray-600 text-center">info@sellsquare.in</p>
                     <p class="text-gray-600 text-center">support@sellsquare.in</p>
                 </div>
@@ -343,6 +386,15 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 <div class="bg-white rounded-lg shadow-lg p-8 slide-in">
+=======
+                    <!-- <p class="text-gray-600 text-center">info@sellsquare.in</p> -->
+                    <p class="text-gray-600 text-center">lucknowhitechdevelopers@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-white">
+                <div class="bg-white rounded-lg shadow-md p-8 slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <h3 class="text-2xl font-heading font-bold text-slate mb-6">Send us a <span
                             class="text-saffron">Message</span></h3>
                     <form id="contact-form" class="space-y-6">
@@ -415,13 +467,21 @@
                 <div class="space-y-8">
                     <div class="map-container slide-in w-full h-[450px]">
                         <iframe
+<<<<<<< HEAD
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.186989214644!2d81.00378117522263!3d26.865799576675187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be2bef8e5f9d3%3A0xa0cd5cc1e323292c!2sDLF%20MyPad!5e0!3m2!1sen!2sin!4v1746783915053!5m2!1sen!2sin"
+=======
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.186989214653!2d81.00378117522263!3d26.865799576675187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be2bef8e5f9d3%3A0xa0cd5cc1e323292c!2sDLF%20MyPad!5e0!3m2!1sen!2sin!4v1747391818930!5m2!1sen!2sin"
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
 
+<<<<<<< HEAD
                     <div class="bg-white rounded-lg shadow-lg p-6 slide-in">
+=======
+                    <div class="bg-white rounded-lg shadow-md p-6 slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         <h3 class="text-xl font-semibold mb-4">Office <span class="text-saffron">Hours</span></h3>
                         <ul class="space-y-3">
                             <li class="flex justify-between items-center py-2 border-b border-gray-100">
@@ -455,12 +515,17 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden slide-in">
+=======
+                <div class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="h-48 overflow-hidden">
                         <img src="https://img.freepik.com/premium-photo/young-elegant-businesswoman-sitting-by-desk-corner-modern-office-looking-computer-screen-pandemic-period_274679-15360.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740"
                             alt="Mumbai Office" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6">
+<<<<<<< HEAD
                         <h3 class="text-xl font-semibold mb-2">Mumbai <span class="text-saffron">HQ</span></h3>
                         <div class="flex items-start mb-3">
                             <i class="fas fa-map-marker-alt text-saffron mt-1 mr-3"></i>
@@ -469,6 +534,17 @@
                         <div class="flex items-center mb-3">
                             <i class="fas fa-phone-alt text-saffron mr-3"></i>
                             <p class="text-gray-700">+91 98765 43210</p>
+=======
+                        <h3 class="text-xl font-semibold mb-2">Gomti <span class="text-saffron">Nagar</span></h3>
+                        <div class="flex items-start mb-3">
+                            <i class="fas fa-map-marker-alt text-saffron mt-1 mr-3"></i>
+                            <p class="text-gray-700">DLF MY PAD , B1 Tower , 9th Floor , Vibhuti Khand , Gomti Nagar
+                                Lucknow 226010</p>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-phone-alt text-saffron mr-3"></i>
+                            <p class="text-gray-700">+91 9335766586</p>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         </div>
                         <a href="#" class="text-saffron hover:text-saffron-dark font-medium flex items-center mt-4">
                             <span>Get Directions</span>
@@ -477,7 +553,11 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden slide-in">
+=======
+                <div class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="h-48 overflow-hidden">
                         <img src="https://img.freepik.com/free-photo/empty-office-workplace-with-table-chair-computer_1170-1959.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740"
                             alt="Delhi Office" class="w-full h-full object-cover">
@@ -499,7 +579,11 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden slide-in">
+=======
+                <div class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="h-48 overflow-hidden">
                         <img src="https://img.freepik.com/premium-photo/casual-colleagues-smiling_107420-34326.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740"
                             alt="Bangalore Office" class="w-full h-full object-cover">
@@ -559,9 +643,15 @@
                 <div class="slide-in">
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold mb-3">What areas do you serve?</h3>
+<<<<<<< HEAD
                         <p class="text-gray-700">We currently have offices in Mumbai, Delhi NCR, and Bangalore, but we
                             handle properties across all major Indian cities including Hyderabad, Pune, Chennai,
                             Kolkata, and Ahmedabad.</p>
+=======
+                        <p class="text-gray-700">We currently have offices in Lucknow, and we
+                            handle properties across all major Lucknow areas including Gomti Nagar, Hazratganj, Aliganj,
+                            Mahanagar, and Indira Nagar.</p>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     </div>
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold mb-3">Can you help with home loans?</h3>
@@ -604,11 +694,19 @@
                         <div class="flex space-x-4">
                             <a href="#"
                                 class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
+<<<<<<< HEAD
                                 <i class="fab fa-instagram"></i>
                             </a>
                             <a href="#"
                                 class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
                                 <i class="fab fa-linkedin-in"></i>
+=======
+                                <i class="fab fa-instagram text-white"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
+                                <i class="fab fa-linkedin-in text-white"></i>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                             </a>
                         </div>
                     </div>
@@ -636,7 +734,12 @@
                         </div>
                         <div class="text-center">
                             <i class="fas fa-quote-left text-saffron opacity-50 text-3xl mb-2"></i>
+<<<<<<< HEAD
                             <p class="italic text-white/90 mb-4">SELLSQUARE Properties helped me find my dream home in
+=======
+                            <p class="italic text-white/90 mb-4">Lucknow Hitech Developers Properties helped me find my
+                                dream home in
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                                 just two weeks. Their team was professional, responsive, and truly understood my needs.
                             </p>
                             <div class="flex items-center justify-center">
@@ -684,6 +787,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     <!-- Footer Start-->
     @include('landing_page.include.footer');
     <!-- Footer End-->
@@ -773,3 +877,88 @@
 </body>
 
 </html>
+=======
+
+    <!-- Script for scroll effects and nav background -->
+    <script>
+        // Show/hide navigation background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate');
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('bg-slate');
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Initialize scroll animations when the page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check if GSAP ScrollTrigger is available
+            if (typeof ScrollTrigger !== 'undefined') {
+                // Initialize GSAP ScrollTrigger
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Animate slide-in elements
+                const slideInElements = document.querySelectorAll('.slide-in');
+                slideInElements.forEach(element => {
+                    ScrollTrigger.create({
+                        trigger: element,
+                        start: "top 80%",
+                        onEnter: () => element.classList.add('appear')
+                    });
+                });
+            } else {
+                // Fallback for browsers without GSAP
+                const slideInElements = document.querySelectorAll('.slide-in');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('appear');
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                slideInElements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+
+            // Form validation (basic example)
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Basic validation
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const message = document.getElementById('message').value;
+
+                    if (!name || !email || !phone || !message) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    // Add animation to show form is submitting
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+                    submitButton.innerHTML = '<div class="loader mx-auto"></div>';
+                    submitButton.disabled = true;
+
+                    // Simulate form submission (replace with actual ajax submission)
+                    setTimeout(() => {
+                        alert('Thank you for contacting us! We will get back to you soon.');
+                        contactForm.reset();
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c

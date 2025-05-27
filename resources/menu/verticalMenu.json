@@ -2,6 +2,7 @@
   "menu": [
     {
       "url": "/",
+<<<<<<< HEAD
       "name": "Dashboards",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard",
@@ -9,6 +10,11 @@
         "danger",
         "5"
       ],
+=======
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard",
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
       "submenu": [
         {
           "url": "/",
@@ -18,6 +24,7 @@
       ]
     },
     {
+<<<<<<< HEAD
       "name": "Users",
       "icon": "menu-icon tf-icons bx bx-layout",
       "slug": "users",
@@ -124,6 +131,50 @@
           "name": "Under Maintenance",
           "slug": "pages-misc-under-maintenance",
           "target": "_blank"
+=======
+      "name": "Members",
+      "icon": "menu-icon tf-icons bx bx-user",
+      "slug": "members",
+      "submenu": [
+        {
+          "url": "users",
+          "name": "Users",
+          "slug": "users"
+        }
+      ]
+    },
+    {
+      "name": "Roles & Permissions",
+      "icon": "menu-icon tf-icons bx bx-shield-quarter",
+      "slug": "roles-permissions",
+      "submenu": [
+        {
+          "url": "roles",
+          "name": "Roles",
+          "slug": "roles"
+        },
+        {
+          "url": "permissions",
+          "name": "Permissions",
+          "slug": "permissions"
+        }
+      ]
+    },
+    {
+      "name": "Properties",
+      "icon": "menu-icon tf-icons bx bx-building-house",
+      "slug": "properties",
+      "submenu": [
+        {
+          "url": "properties",
+          "name": "All Properties",
+          "slug": "properties-all"
+        },
+        {
+          "url": "addProperties",
+          "name": "Add Property",
+          "slug": "properties-add"
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
         }
       ]
     }

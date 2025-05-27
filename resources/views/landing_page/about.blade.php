@@ -140,6 +140,7 @@
     }
     </style>
 </head>
+<<<<<<< HEAD
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- Navigation Bar -->
@@ -180,13 +181,22 @@
             </button>
         </div>
     </nav>
+=======
+@extends('layouts/users/app')
+
+<body class="font-sans text-slate bg-gray-50">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
     <!-- About Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[50vh] overflow-hidden">
         <!-- Video Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
             <video autoplay muted loop playsinline class="object-cover w-full h-full">
+<<<<<<< HEAD
                 <source src="{{asset('videos/header2.mp4')}}" type="video/mp4">
+=======
+                <source src="{{asset('videos/about.mp4')}}" type="video/mp4">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 <!-- Fallback image in case video doesn't load -->
                 <img src="/api/placeholder/1920/600" alt="Real Estate Excellence" class="object-cover w-full h-full">
             </video>
@@ -196,7 +206,11 @@
 
         <div class="w-11/12 max-w-screen-lg z-10">
             <h1 class="text-4xl md:text-6xl leading-tight font-heading font-bold text-white text-shadow">About <span
+<<<<<<< HEAD
                     class="text-saffron">SELL SQUARE</span></h1>
+=======
+                    class="text-saffron">Us</span></h1>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
             <p class="text-white/80 max-w-xl mx-auto mt-4">Your Trusted Partner in Real Estate Excellence</p>
             <div class="mt-8 flex justify-center space-x-4">
                 <a href="#about-section"
@@ -246,7 +260,12 @@
                     <p class="text-gray-600 mb-6 leading-relaxed">Our team of seasoned professionals brings extensive
                         local knowledge and market expertise to every transaction, ensuring that your real estate
                         journey is smooth and successful. Whether you're buying your first home, investing in commercial
+<<<<<<< HEAD
                         property, or selling a luxury estate, SELL SQUARE delivers exceptional service tailored to your
+=======
+                        property, or selling a luxury estate, Lucknow Hitech Developers delivers exceptional service
+                        tailored to your
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         unique needs.</p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -268,7 +287,11 @@
                             </div>
                             <div>
                                 <h4 class="font-bold mb-2 text-navy">10,000+ Transactions</h4>
+<<<<<<< HEAD
                                 <p class="text-gray-600 text-sm">Successfully completed across major Indian cities</p>
+=======
+                                <p class="text-gray-600 text-sm">Successfully completed across major Lucknow areas</p>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                             </div>
                         </div>
                     </div>
@@ -353,7 +376,12 @@
             <div class="relative mb-16 text-center">
                 <span class="inline-block h-1 w-12 bg-saffron mb-4"></span>
                 <p class="text-saffron uppercase tracking-widest font-medium mb-2">Our Impact</p>
+<<<<<<< HEAD
                 <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">SELL SQUARE By The Numbers</h2>
+=======
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Lucknow Hitech Developers By The Numbers
+                </h2>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 <div class="w-24 h-1 bg-saffron mx-auto"></div>
             </div>
 
@@ -383,8 +411,13 @@
                 <!-- Stat 4 -->
                 <div class="slide-in">
                     <div class="text-5xl font-bold text-saffron mb-2">12</div>
+<<<<<<< HEAD
                     <div class="text-xl mb-1">Major Cities</div>
                     <p class="text-white/70">Pan-India Presence</p>
+=======
+                    <div class="text-xl mb-1">Major Areas</div>
+                    <p class="text-white/70">Lucknow all areas</p>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 </div>
             </div>
 
@@ -411,7 +444,11 @@
 
 
     <!-- Footer Start-->
+<<<<<<< HEAD
     @include('landing_page.include.footer');
+=======
+    <!-- @include('landing_page.include.footer') -->
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     <!-- Footer End-->
 
 

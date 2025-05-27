@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
+=======
+use Spatie\Permission\Traits\HasRoles;
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
 
 class registerController extends Controller
@@ -42,6 +47,10 @@ class registerController extends Controller
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
+<<<<<<< HEAD
+=======
+            'is_admin' => '0'
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
         ]);
 
         $user->assignRole($request->userType);
@@ -58,9 +67,35 @@ class registerController extends Controller
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+<<<<<<< HEAD
             return response()->json([
                 'status' => 'success',
                 'message' => 'Login successful',
+=======
+
+            $user = Auth::user();
+
+
+            if ($user->is_admin == 1) {
+                $redirectPath = route('dashboard-analytics');
+            } else {
+                $redirectPath = route('landing_index');
+            }
+
+            // if ($user->hasRole('super-admin')) {
+            //     $redirectPath = route('dashboard-analytics');
+            // } elseif ($user->hasRole('seller')) {
+            //     $redirectPath = route('dashboard-analytics');
+            // } else {
+            //     $redirectPath = route('landing_index');
+            // }
+
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login successful',
+                'redirect' => $redirectPath,
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 'user' => Auth::user()
             ]);
         }

@@ -19,6 +19,7 @@ $container = ($container ?? 'container-xxl');
 
 @section('layoutContent')
 <div class="layout-wrapper layout-content-navbar {{ $isMenu ? '' : 'layout-without-menu' }}">
+<<<<<<< HEAD
   <div class="layout-container">
 
     @if ($isMenu)
@@ -71,3 +72,57 @@ $container = ($container ?? 'container-xxl');
   </div>
   <!-- / Layout wrapper -->
   @endsection
+=======
+    <div class="layout-container">
+
+        @if ($isMenu)
+        @include('layouts/sections/menu/verticalMenu')
+        @endif
+
+
+        <!-- Layout page -->
+        <div class="layout-page">
+            <!-- BEGIN: Navbar-->
+            @if ($isNavbar)
+            @include('layouts/sections/navbar/navbar')
+            @endif
+            <!-- END: Navbar-->
+
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+
+                <!-- Content -->
+                @if ($isFlex)
+                <div class="{{$container}} d-flex align-items-stretch flex-grow-1 p-0">
+                    @else
+                    <div class="{{$container}} flex-grow-1 container-p-y">
+                        @endif
+
+                        @yield('content')
+
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    @if ($isFooter)
+                    @include('layouts/sections/footer/footer')
+                    @endif
+                    <!-- / Footer -->
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!--/ Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        @if ($isMenu)
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        @endif
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+    @endsection
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c

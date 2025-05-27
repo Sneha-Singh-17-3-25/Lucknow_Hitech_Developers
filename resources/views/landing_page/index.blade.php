@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,11 +231,31 @@
     /* login and registration css End */
     </style>
 </head>
+=======
+@extends('layouts/users/app')
+<!-- style for marquee -->
+<style>
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-80%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 20s linear infinite;
+}
+</style>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- this div for showToast -->
     <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
 
+<<<<<<< HEAD
     <!-- Navigation Bar -->
     <nav id="navbar" class="fixed top-0 left-0 w-full py-4 z-50 transition-all duration-300">
         <div class="w-11/12 max-w-screen-xl mx-auto flex justify-between items-center">
@@ -310,6 +331,13 @@
             <video autoplay muted loop playsinline class="object-cover w-full h-full">
                 <source src="{{asset('videos/header1.mp4')}}" type="video/mp4">
                 <!-- Fallback image in case video doesn't load -->
+=======
+    <!-- Hero Section -->
+    <section class="relative flex justify-center items-center text-center h-screen overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full">
+            <video autoplay muted loop playsinline class="object-cover w-full h-full">
+                <source src="{{asset('videos/header1.mp4')}}" type="video/mp4">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 <img src="https://images.pexels.com/photos/4161619/pexels-photo-4161619.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Luxury Property" class="object-cover w-full h-full">
             </video>
@@ -321,7 +349,12 @@
             <p class="text-white text-sm mb-3 tracking-wider font-light">RERA No. MH12345678</p>
             <h1 class="text-4xl md:text-6xl mb-3 leading-tight font-heading font-bold text-white text-shadow">Discover
                 Your Dream <br><span class="text-saffron">Home in India</span></h1>
+<<<<<<< HEAD
             <p class="text-white/80 max-w-xl mx-auto mb-8">Explore premium properties across major cities with trusted
+=======
+            <p class="text-white/80 max-w-xl mx-auto mb-8">Explore premium properties across major Lucknow areas with
+                trusted
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 experts guiding you every step of the way.</p>
 
             <div class="flex justify-center mt-8 mb-8">
@@ -344,11 +377,21 @@
                 <div class="flex-shrink-0 flex">
                     <select class="bg-white/10 backdrop-blur-md border-none text-white py-4 px-6 focus:outline-none">
                         <option value="">City</option>
+<<<<<<< HEAD
                         <option value="mumbai">Mumbai</option>
                         <option value="delhi">Delhi</option>
                         <option value="bangalore">Bangalore</option>
                         <option value="hyderabad">Hyderabad</option>
                         <option value="pune">Pune</option>
+=======
+                        <option value="mumbai">Gomti Nagar</option>
+                        <option value="delhi">Hazratganj</option>
+                        <option value="bangalore">Indira Nagar</option>
+                        <option value="hyderabad">Aliganj</option>
+                        <option value="bangalore">Mahanagar</option>
+                        <option value="hyderabad">Vibhuti Khand</option>
+                        <option value="pune">Chinhat</option>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     </select>
                     <button
                         class="bg-saffron hover:bg-saffron-dark text-white py-4 px-8 flex items-center justify-center text-base font-medium transition-colors duration-300">
@@ -373,11 +416,20 @@
                 </div>
                 <div class="flex items-center text-white/90">
                     <i class="fas fa-map-marked-alt text-saffron mr-2"></i>
+<<<<<<< HEAD
                     <span>Pan India Presence</span>
+=======
+                    <span>Major Lucknow Areas</span>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 </div>
             </div>
         </div>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
         <!-- Scroll down indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
             <span class="text-white/80 text-sm mb-2">Scroll Down</span>
@@ -409,14 +461,63 @@
         </style>
     </section>
 
+<<<<<<< HEAD
     <!-- Properties Section -->
     <section id="properties-section" class="relative py-20">
         <!-- Decorative background -->
+=======
+
+    <!-- Real Estate Horizontal Marquee -->
+    <div class="bg-gradient-to-r from-navy to-navy-light overflow-hidden whitespace-nowrap border-y border-saffron/20">
+        <div class="animate-marquee flex inline-block py-4">
+            <span class="text-white/90 text-lg font-medium mx-8">🏠 Premium Properties Available in Gomti
+                Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏢 Luxury Apartments Starting From ₹50 Lakhs</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🌟 RERA Approved Projects in Hazratganj</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🔑 Ready to Move Homes in Indira Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">💰 Zero Brokerage on Direct Bookings</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏡 Villa Projects in Aliganj - Limited Units</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">📈 Property Values Rising - Invest Now</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🎯 Get Free Property Consultation Today</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏠 Premium Properties Available in Gomti
+                Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏢 Luxury Apartments Starting From ₹50 Lakhs</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🌟 RERA Approved Projects in Hazratganj</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🔑 Ready to Move Homes in Indira Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">💰 Zero Brokerage on Direct Bookings</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏡 Villa Projects in Aliganj - Limited Units</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">📈 Property Values Rising - Invest Now</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🎯 Get Free Property Consultation Today</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+        </div>
+    </div>
+
+    <!-- Properties Section -->
+    <section id="properties-section" class="relative py-20">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
         <div class="absolute top-0 right-0 w-1/3 h-72 bg-navy/5 -z-10 rounded-l-full"></div>
         <div class="absolute bottom-0 left-0 w-1/4 h-48 bg-saffron/5 -z-10 rounded-tr-full"></div>
 
         <div class="max-w-screen-xl mx-auto px-4">
+<<<<<<< HEAD
             <!-- Section Header with Accent Line -->
+=======
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
             <div class="relative mb-16 text-center">
                 <span class="inline-block h-1 w-12 bg-saffron mb-4"></span>
                 <p class="text-saffron uppercase tracking-widest font-medium mb-2">Handpicked Properties</p>
@@ -480,8 +581,13 @@
                 <p class="text-saffron uppercase tracking-widest font-medium mb-2">Explore India</p>
                 <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6 text-slate">Popular Locations</h2>
                 <div class="w-24 h-1 bg-saffron mx-auto"></div>
+<<<<<<< HEAD
                 <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Discover properties in India's most desirable
                     neighborhoods and thriving cities.</p>
+=======
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Discover properties in Lucknow most desirable
+                    neighborhoods and thriving areas.</p>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
             </div>
 
             <!-- City cards -->
@@ -497,7 +603,12 @@
             <div class="relative mb-16 text-center">
                 <span class="inline-block h-1 w-12 bg-saffron mb-4"></span>
                 <p class="text-saffron uppercase tracking-widest font-medium mb-2">Our Commitment</p>
+<<<<<<< HEAD
                 <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Why Choose SELLSQUARE Properties</h2>
+=======
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Why Choose Lucknow Hitech
+                    Developers Properties</h2>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 <div class="w-24 h-1 bg-saffron mx-auto"></div>
             </div>
 
@@ -557,6 +668,7 @@
     <!-- Call to action -->
     <section class="py-16 bg-saffron">
         <div class="max-w-screen-xl mx-auto px-4 text-center">
+<<<<<<< HEAD
             <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6 text-white">Ready to Find Your Dream Home?</h2>
             <p class="text-white/90 max-w-2xl mx-auto mb-8">Let our experts guide you through the process. Schedule a
                 consultation today!</p>
@@ -569,10 +681,45 @@
                     class="px-8 py-4 bg-navy text-white font-bold rounded-md hover:bg-white hover:text-navy transition-colors duration-300">
                     Browse Properties
                 </a>
+=======
+            <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6 text-white">Trusted By Industry Leaders</h2>
+            <p class="text-white/90 max-w-2xl mx-auto mb-12">We partner with renowned real estate platforms to bring you
+                the best properties and services.</p>
+
+            <!-- Partners Logo Grid -->
+            <div
+                class="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-12 bg-white/10 py-12 px-6 rounded-lg">
+                <!-- Logo 1 -->
+                <div class="w-32 md:w-40">
+                    <img src="{{asset('images/dlfmypad.png')}}" alt="Century 21"
+                        class="w-20 h-14 opacity-90 hover:opacity-100 transition-opacity" />
+                </div>
+                <!-- Logo 2 -->
+                <div class="w-32 md:w-40">
+                    <img src="{{asset('images/bhutani.png')}}" alt="RE/MAX"
+                        class="w-20 h-14 opacity-90 hover:opacity-100 transition-opacity" />
+                </div>
+                <!-- Logo 3 -->
+                <div class="w-32 md:w-40">
+                    <img src="{{asset('images/ekana.png')}}" alt="Sotheby's"
+                        class="w-20 h-14 opacity-90 hover:opacity-100 transition-opacity" />
+                </div>
+                <!-- Logo 4 -->
+                <div class="w-32 md:w-40">
+                    <img src="{{asset('images/omaxe.png')}}" 1 alt="Keller Williams"
+                        class="w-20 h-14 opacity-90 hover:opacity-100 transition-opacity" />
+                </div>
+                <!-- Logo 5 -->
+                <div class="w-32 md:w-40">
+                    <img src="{{asset('images/shalimar.png')}}" alt="Coldwell Banker"
+                        class="w-20 h-14 opacity-90 hover:opacity-100 transition-opacity" />
+                </div>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
             </div>
         </div>
     </section>
 
+<<<<<<< HEAD
     <!-- Footer Start-->
     @include('landing_page.include.footer');
     <!-- Footer End-->
@@ -754,13 +901,20 @@
 
 
 
+=======
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     <!-- JavaScript for interactive elements -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const userTypeOptions = document.querySelectorAll('.user-type-option');
         userTypeOptions.forEach(option => {
             option.addEventListener('click', function() {
+<<<<<<< HEAD
                 userTypeOptions.forEach(opt => opt.classList.remove('active'));
+=======
+                userTypeOptions.forEach(opt => opt.classList.remove(
+                    'active'));
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 this.classList.add('active');
                 this.querySelector('input[type="radio"]').checked = true;
             });
@@ -803,7 +957,12 @@
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
             tabs.forEach(t => {
+<<<<<<< HEAD
                 t.classList.remove('active', 'border-saffron', 'text-saffron');
+=======
+                t.classList.remove('active', 'border-saffron',
+                    'text-saffron');
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 t.classList.add('border-transparent', 'text-white/70');
             });
             this.classList.add('active', 'border-saffron', 'text-saffron');
@@ -871,6 +1030,7 @@
                 // Sample property data - in a real app, this would come from an API
                 this.properties = [{
                         id: 1,
+<<<<<<< HEAD
                         title: 'Luxury Apartment in South Mumbai',
                         location: 'Worli, Mumbai',
                         price: '₹2.5 Cr',
@@ -878,6 +1038,15 @@
                         bathrooms: 3,
                         area: '1800 sq.ft.',
                         image: 'https://images.pexels.com/photos/5824520/pexels-photo-5824520.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        title: 'Luxury Apartment in Gomti Nagar',
+                        location: 'DLF MY PAD , gomti nagar',
+                        price: '₹1.2 Cr',
+                        bedrooms: 3,
+                        bathrooms: 3,
+                        area: '1800 sq.ft.',
+                        image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Apartment',
                         tags: ['buy', 'premium'],
                         isNew: false,
@@ -885,6 +1054,7 @@
                     },
                     {
                         id: 2,
+<<<<<<< HEAD
                         title: 'Modern Villa with Garden',
                         location: 'Koregaon Park, Pune',
                         price: '₹3.8 Cr',
@@ -892,6 +1062,15 @@
                         bathrooms: 4,
                         area: '3200 sq.ft.',
                         image: 'https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        title: 'Apartment in Chinhat',
+                        location: 'chinhat',
+                        price: '₹70 lakh',
+                        bedrooms: 2,
+                        bathrooms: 2,
+                        area: '3200 sq.ft.',
+                        image: 'https://images.pexels.com/photos/275484/pexels-photo-275484.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Villa',
                         tags: ['buy', 'premium'],
                         isNew: false,
@@ -899,6 +1078,7 @@
                     },
                     {
                         id: 3,
+<<<<<<< HEAD
                         title: 'Spacious Flat with Sea View',
                         location: 'Marine Drive, Mumbai',
                         price: '₹90,000/month',
@@ -906,6 +1086,15 @@
                         bathrooms: 2,
                         area: '1200 sq.ft.',
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        title: 'Apartment in vibhuti khand',
+                        location: 'vibhuti khand,gomti nagar',
+                        price: '₹18,000/month',
+                        bedrooms: 2,
+                        bathrooms: 1,
+                        area: '1200 sq.ft.',
+                        image: 'https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Apartment',
                         tags: ['rent'],
                         isNew: false,
@@ -913,13 +1102,22 @@
                     },
                     {
                         id: 4,
+<<<<<<< HEAD
                         title: 'New Launch: Green Valley Residences',
                         location: 'Electronic City, Bangalore',
+=======
+                        title: 'Flat in Hajratganj',
+                        location: 'hajratganj',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         price: '₹75 Lakh onwards',
                         bedrooms: '1/2/3 BHK',
                         bathrooms: 2,
                         area: '650-1450 sq.ft.',
+<<<<<<< HEAD
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        image: 'https://images.pexels.com/photos/7174388/pexels-photo-7174388.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Apartment',
                         tags: ['buy', 'new'],
                         isNew: true,
@@ -933,7 +1131,11 @@
                         bedrooms: null,
                         bathrooms: 4,
                         area: '5000 sq.ft.',
+<<<<<<< HEAD
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Commercial',
                         tags: ['rent'],
                         isNew: false,
@@ -947,7 +1149,11 @@
                         bedrooms: 4,
                         bathrooms: 4,
                         area: '3600 sq.ft.',
+<<<<<<< HEAD
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        image: 'https://images.pexels.com/photos/6312072/pexels-photo-6312072.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Penthouse',
                         tags: ['buy', 'premium'],
                         isNew: false,
@@ -989,7 +1195,11 @@
                         bedrooms: 2,
                         bathrooms: 2,
                         area: '1100 sq.ft.',
+<<<<<<< HEAD
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        image: 'https://media.istockphoto.com/id/907633960/photo/lobby-entrance-with-reception-desk-and-lounge-area.webp?a=1&b=1&s=612x612&w=0&k=20&c=8dPy43BpMqFAHERyxloNcc3KI6tqV0ymWaMnEfcMaks=',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Service Apartment',
                         tags: ['rent', 'premium'],
                         isNew: false,
@@ -1031,7 +1241,11 @@
                         bedrooms: 3,
                         bathrooms: 3,
                         area: '1950 sq.ft.',
+<<<<<<< HEAD
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        image: 'https://images.unsplash.com/photo-1609644124044-94dc4301872e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fEJlYWNoJTIwVmlldyUyMEFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Apartment',
                         tags: ['buy', 'premium'],
                         isNew: false,
@@ -1043,9 +1257,15 @@
                         location: 'Chattarpur, Delhi',
                         price: '₹12 Cr',
                         bedrooms: 5,
+<<<<<<< HEAD
                         bathrooms: 6,
                         area: '10000 sq.ft.',
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        bathrooms: 5,
+                        area: '10000 sq.ft.',
+                        image: 'https://media.istockphoto.com/id/185275043/photo/old-stone-house.webp?a=1&b=1&s=612x612&w=0&k=20&c=MfVPCSPC4H5ZCnzg6vCjNLdaFdAsXbZ4XDfL0E0gZEA=',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Farmhouse',
                         tags: ['buy', 'premium'],
                         isNew: false,
@@ -1059,7 +1279,11 @@
                         bedrooms: 1,
                         bathrooms: 1,
                         area: '550 sq.ft.',
+<<<<<<< HEAD
                         image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+=======
+                        image: 'https://images.pexels.com/photos/6045325/pexels-photo-6045325.jpeg?auto=compress&cs=tinysrgb&w=600',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         type: 'Studio',
                         tags: ['rent'],
                         isNew: false,
@@ -1145,7 +1369,12 @@
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if (btn.dataset.filter === filter) {
                     btn.classList.add('bg-saffron', 'text-white');
+<<<<<<< HEAD
                     btn.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+=======
+                    btn.classList.remove('bg-white', 'text-gray-700',
+                        'hover:bg-gray-100');
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 } else {
                     btn.classList.remove('bg-saffron', 'text-white');
                     btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
@@ -1222,6 +1451,7 @@
                 if (index >= startIndex) {
                     const propertyCard = this.createPropertyCard(property);
                     grid.appendChild(propertyCard);
+<<<<<<< HEAD
 
                     // Animate new cards
                     // gsap.from(propertyCard, {
@@ -1230,6 +1460,8 @@
                     //     duration: 0.5,
                     //     delay: 0.1 * (index % this.perPage)
                     // });
+=======
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                 }
             });
         },
@@ -1291,42 +1523,74 @@
 
         loadCityData() {
             const cities = [{
+<<<<<<< HEAD
                     name: 'Mumbai',
+=======
+                    name: 'Gomti Nagar',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 245,
                     image: 'https://img.freepik.com/premium-photo/man-is-filming-house-with-camera-camera_1247965-98133.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Delhi NCR',
+=======
+                    name: 'Hazratganj',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 312,
                     image: 'https://img.freepik.com/free-photo/vertical-shot-modern-apartments-daytime_181624-13625.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Bangalore',
+=======
+                    name: 'Vibhuti Khand',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 186,
                     image: 'https://img.freepik.com/premium-photo/view-swimming-pool-by-building-against-sky_1048944-21046320.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Hyderabad',
+=======
+                    name: 'Aliganj',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 154,
                     image: 'https://img.freepik.com/premium-photo/building-with-large-window-top_822609-687.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Pune',
+=======
+                    name: 'Chinhat',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 128,
                     image: 'https://img.freepik.com/free-photo/analog-landscape-city-with-buildings_23-2149661456.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Chennai',
+=======
+                    name: 'Indira Nagar',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 97,
                     image: 'https://img.freepik.com/free-photo/analog-landscape-city-with-buildings_23-2149661457.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Kolkata',
+=======
+                    name: 'Mahanagar',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 89,
                     image: 'https://img.freepik.com/premium-photo/building-with-street-light-as-street-view_764413-97.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
+<<<<<<< HEAD
                     name: 'Ahmedabad',
+=======
+                    name: 'Faizabad Road',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     properties: 76,
                     image: 'https://img.freepik.com/premium-photo/holiday-apartments-city-playa-blanca-lanzarote-island-hotel-complex-royal-monica-canary-islands-december-2018_152520-1542.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
@@ -1336,7 +1600,12 @@
 
             cities.forEach((city, index) => {
                 const cityCard = document.createElement('div');
+<<<<<<< HEAD
                 cityCard.className = 'slide-in relative rounded-lg overflow-hidden group shadow-md';
+=======
+                cityCard.className =
+                    'slide-in relative rounded-lg overflow-hidden group shadow-md';
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
                 cityCard.innerHTML = `
                 <img src="${city.image}" alt="${city.name}" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
@@ -1361,19 +1630,31 @@
             const testimonials = [{
                     name: 'Rohit Sharma',
                     position: 'Entrepreneur',
+<<<<<<< HEAD
                     testimonial: 'SELLSQUAREProperties made my property search incredibly smooth. Their expertise and transparent process helped me find my dream home in Mumbai.',
+=======
+                    testimonial: 'Lucknow Hitech Developers made my property search incredibly smooth. Their expertise and transparent process helped me find my dream home in Mumbai.',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     image: 'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-red-checkered-shirt-fashion-man-posing_158538-4914.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
                     name: 'Priya Patel',
                     position: 'Software Engineer',
+<<<<<<< HEAD
                     testimonial: 'As a first-time homebuyer, I was nervous about the process. The team at SELLSQUAREguided me through every step and found me a perfect apartment in Bangalore.',
+=======
+                    testimonial: 'As a first-time homebuyer, I was nervous about the process. The team at Lucknow Hitech Developers me through every step and found me a perfect apartment in Bangalore.',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     image: 'https://img.freepik.com/premium-photo/beauty-fashion-portrait-young-beautiful-brunette-woman-with-long-black-hair-green-eyes_333900-2852.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 },
                 {
                     name: 'Anand Mehta',
                     position: 'Finance Director',
+<<<<<<< HEAD
                     testimonial: 'I have worked with several real estate companies, but SELLSQUAREProperties stands out for their professionalism and attention to detail. Highly recommended!',
+=======
+                    testimonial: 'I have worked with several real estate companies, but Lucknow Hitech Developers stands out for their professionalism and attention to detail. Highly recommended!',
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     image: 'https://img.freepik.com/free-photo/smiling-young-male-posing-meadow-with-arms-crossed_23-2148179874.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
                 }
             ];
@@ -1382,7 +1663,12 @@
 
             testimonials.forEach((testimonial, index) => {
                 const testimonialCard = document.createElement('div');
+<<<<<<< HEAD
                 testimonialCard.className = 'slide-in bg-white p-8 rounded-lg shadow-lg relative';
+=======
+                testimonialCard.className =
+                    'slide-in bg-white p-8 rounded-lg shadow-lg relative';
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
                 testimonialCard.innerHTML = `
                 <div class="absolute -top-5 left-8 text-saffron text-6xl opacity-20">"</div>
@@ -1414,6 +1700,7 @@
 
 
 
+<<<<<<< HEAD
     <!-- registeration js --------------------------------->
     <script>
     document.querySelector('#signupForm').addEventListener('submit', function(e) {
@@ -1563,6 +1850,9 @@
         bsToast.show();
     }
     </script>
+=======
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
 
 </body>

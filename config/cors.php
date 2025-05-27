@@ -15,7 +15,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
+=======
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'http://127.0.0.1:8000/landing/login'],
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
     'allowed_methods' => ['*'],
 
