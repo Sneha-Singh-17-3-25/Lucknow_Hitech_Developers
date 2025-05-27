@@ -1,251 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/users/app')
+<!-- style for marquee -->
+<style>
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    100% {
+        transform: translateX(-80%);
+    }
+}
 
-    <title>SELLSQUAREProperties India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'saffron': '#FF9933',
-                        'saffron-light': '#FFB266',
-                        'saffron-dark': '#E68A00',
-                        'navy': '#0C2461',
-                        'navy-light': '#1e3799',
-                        'emerald': '#138808',
-                        'slate': '#1E293B',
-                    },
-                    fontFamily: {
-                        'sans': ['Poppins', 'Arial', 'sans-serif'],
-                        'heading': ['Montserrat', 'serif'],
-                    },
-                }
-            },
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
-
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .property-card {
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .property-card::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); */
-            /* opacity: 0; */
-            border-radius: 0.5rem;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            z-index: -1;
-        }
-
-        .property-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .property-card:hover::after {
-            opacity: 1;
-        }
-
-        .slide-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .slide-in.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hero-search-form {
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .tab.active {
-            border-color: #FF9933;
-            color: #FF9933;
-            font-weight: 600;
-        }
-
-        /* Custom loader */
-        .loader {
-            border: 4px solid rgba(255, 153, 51, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid #FF9933;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .badge {
-            position: absolute;
-            top: 10px;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            z-index: 10;
-        }
-
-        .badge-premium {
-            background-color: #FF9933;
-            color: white;
-            left: 10px;
-        }
-
-        .badge-new {
-            background-color: #138808;
-            color: white;
-            left: 10px;
-        }
-
-        .badge-hot {
-            background-color: #e74c3c;
-            color: white;
-            left: 10px;
-        }
-
-        .badge-type {
-            background-color: #0C2461;
-            color: white;
-            right: 10px;
-        }
-
-
-
-        /* login and registration css start */
-
-        /* Custom Colors */
-        /* Custom Colors */
-        :root {
-            --saffron: #FF9933;
-            --saffron-light: #FFB266;
-            --saffron-dark: #E68A00;
-            --navy: #0C2461;
-            --navy-light: #1e3799;
-        }
-
-        /* Form styling */
-        .form-control:focus {
-            border-color: var(--saffron);
-            box-shadow: 0 0 0 0.25rem rgba(255, 153, 51, 0.25);
-        }
-
-        .input-group-text {
-            border: 1px solid #ced4da;
-            border-right: none;
-        }
-
-        /* User type option styling */
-        .user-type-option label {
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
-            width: 80px;
-        }
-
-        .user-type-option label:hover {
-            background-color: rgba(255, 153, 51, 0.1);
-        }
-
-        .user-type-option.active label {
-            border-color: var(--saffron);
-            background-color: rgba(255, 153, 51, 0.15);
-        }
-
-        /* Button styling */
-        .btn {
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        /* Modal styling */
-        .modal-content {
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .modal-header,
-        .modal-footer {
-            border: none;
-        }
-
-        /* Animation for modals */
-        .modal.fade .modal-dialog {
-            transition: transform 0.3s ease-out;
-        }
-
-        .bg-saffron {
-            background-color: #FF9933 !important;
-            color: white !important;
-        }
-
-        /* login and registration css End */
-    </style>
-</head>
+.animate-marquee {
+    animation: marquee 20s linear infinite;
+}
+</style>
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- this div for showToast -->
     <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
 
-    <!-- Navigation Bar -->
-    @include('landing_page/include/navbar')
-
-
     <!-- Hero Section -->
     <section class="relative flex justify-center items-center text-center h-screen overflow-hidden">
-        <!-- Video Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
             <video autoplay muted loop playsinline class="object-cover w-full h-full">
                 <source src="{{asset('videos/header1.mp4')}}" type="video/mp4">
-                <!-- Fallback image in case video doesn't load -->
                 <img src="https://images.pexels.com/photos/4161619/pexels-photo-4161619.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Luxury Property" class="object-cover w-full h-full">
             </video>
@@ -317,6 +96,8 @@
             </div>
         </div>
 
+
+
         <!-- Scroll down indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
             <span class="text-white/80 text-sm mb-2">Scroll Down</span>
@@ -324,38 +105,77 @@
         </div>
 
         <style>
-            /* Custom color for the saffron accent */
-            .text-saffron {
-                color: #FF9933;
-            }
+        /* Custom color for the saffron accent */
+        .text-saffron {
+            color: #FF9933;
+        }
 
-            .bg-saffron {
-                background-color: #FF9933;
-            }
+        .bg-saffron {
+            background-color: #FF9933;
+        }
 
-            .hover\:bg-saffron-dark:hover {
-                background-color: #E68A2E;
-            }
+        .hover\:bg-saffron-dark:hover {
+            background-color: #E68A2E;
+        }
 
-            .border-saffron {
-                border-color: #FF9933;
-            }
+        .border-saffron {
+            border-color: #FF9933;
+        }
 
-            /* Text shadow for better readability against video */
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            }
+        /* Text shadow for better readability against video */
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
         </style>
     </section>
 
+
+    <!-- Real Estate Horizontal Marquee -->
+    <div class="bg-gradient-to-r from-navy to-navy-light overflow-hidden whitespace-nowrap border-y border-saffron/20">
+        <div class="animate-marquee flex inline-block py-4">
+            <span class="text-white/90 text-lg font-medium mx-8">🏠 Premium Properties Available in Gomti
+                Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏢 Luxury Apartments Starting From ₹50 Lakhs</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🌟 RERA Approved Projects in Hazratganj</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🔑 Ready to Move Homes in Indira Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">💰 Zero Brokerage on Direct Bookings</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏡 Villa Projects in Aliganj - Limited Units</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">📈 Property Values Rising - Invest Now</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🎯 Get Free Property Consultation Today</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏠 Premium Properties Available in Gomti
+                Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏢 Luxury Apartments Starting From ₹50 Lakhs</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🌟 RERA Approved Projects in Hazratganj</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🔑 Ready to Move Homes in Indira Nagar</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">💰 Zero Brokerage on Direct Bookings</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🏡 Villa Projects in Aliganj - Limited Units</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">📈 Property Values Rising - Invest Now</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+            <span class="text-white/90 text-lg font-medium mx-8">🎯 Get Free Property Consultation Today</span>
+            <span class="text-saffron text-2xl font-medium mx-8">•</span>
+        </div>
+    </div>
+
     <!-- Properties Section -->
     <section id="properties-section" class="relative py-20">
-        <!-- Decorative background -->
         <div class="absolute top-0 right-0 w-1/3 h-72 bg-navy/5 -z-10 rounded-l-full"></div>
         <div class="absolute bottom-0 left-0 w-1/4 h-48 bg-saffron/5 -z-10 rounded-tr-full"></div>
 
         <div class="max-w-screen-xl mx-auto px-4">
-            <!-- Section Header with Accent Line -->
             <div class="relative mb-16 text-center">
                 <span class="inline-block h-1 w-12 bg-saffron mb-4"></span>
                 <p class="text-saffron uppercase tracking-widest font-medium mb-2">Handpicked Properties</p>
@@ -533,687 +353,500 @@
         </div>
     </section>
 
-
-    <!-- Footer Start-->
-    @include('landing_page.include.footer');
-    <!-- Footer End-->
-
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-sm">
-                <!-- Header -->
-                <div class="modal-header" style="background-color: #FF9933; color: white;">
-                    <h5 class="modal-title" id="loginModalLabel">Welcome Back</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-
-                <!-- Body -->
-                <div class="modal-body p-4">
-                    <form id="loginForm">
-                        <!-- Email Input -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text" style="background-color: #FFB266; color: #0C2461;">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                                <input type="email" class="form-control border-start-0" id="email" name="email"
-                                    placeholder="your@email.com" required>
-                            </div>
-                        </div>
-
-                        <!-- Password Input -->
-                        <div class="mb-4">
-                            <div class="d-flex justify-content-between">
-                                <label for="password" class="form-label">Password</label>
-                                <a href="#" class="text-decoration-none small" style="color: #E68A00;">Forgot
-                                    Password?</a>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text" style="background-color: #FFB266; color: #0C2461;">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                                <input type="password" class="form-control border-start-0" id="password" name="password"
-                                    placeholder="••••••••" required>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn w-100" style="background-color: #FF9933; color: white;">
-                            Login
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Footer -->
-                <div class="modal-footer justify-content-center border-0">
-                    <p class="mb-0">
-                        Don't have an account?
-                        <a href="#" style="color: #E68A00;" data-bs-toggle="modal" data-bs-target="#signupModal">Sign
-                            up</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-sm">
-                <!-- Header -->
-                <div class="modal-header" style="background-color: #FF9933; color: white;">
-                    <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-
-                <!-- Body -->
-                <div class="modal-body p-4">
-                    <form id="signupForm">
-                        <!-- User Type Selection -->
-                        <div class="mb-4">
-                            <label class="form-label">I am a</label>
-                            <div class="d-flex justify-content-between">
-                                <div class="user-type-option active" data-type="buyer">
-                                    <input class="form-check-input visually-hidden" type="radio" name="userType"
-                                        id="buyer" value="buyer" checked>
-                                    <label class="d-block text-center p-2 rounded" for="buyer">
-                                        <i class="fas fa-home d-block mb-1" style="color: #E68A00;"></i>
-                                        <small>Buyer</small>
-                                    </label>
-                                </div>
-                                <div class="user-type-option" data-type="seller">
-                                    <input class="form-check-input visually-hidden" type="radio" name="userType"
-                                        id="seller" value="seller">
-                                    <label class="d-block text-center p-2 rounded" for="seller">
-                                        <i class="fas fa-dollar-sign d-block mb-1" style="color: #E68A00;"></i>
-                                        <small>Seller</small>
-                                    </label>
-                                </div>
-                                <div class="user-type-option" data-type="agent">
-                                    <input class="form-check-input visually-hidden" type="radio" name="userType"
-                                        id="agent" value="agent">
-                                    <label class="d-block text-center p-2 rounded" for="agent">
-                                        <i class="fas fa-user-tie d-block mb-1" style="color: #E68A00;"></i>
-                                        <small>Agent</small>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Full Name -->
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Full Name</label>
-                            <div class="input-group">
-                                <span class="input-group-text" style="background-color: #FFB266; color: #0C2461;">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                                <input type="text" class="form-control border-start-0" id="name" placeholder="John Doe"
-                                    name="name" required>
-                            </div>
-                        </div>
-
-                        <!-- Email -->
-                        <div class=" mb-3">
-                            <label for="signup-email" class="form-label">Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text" style="background-color: #FFB266; color: #0C2461;">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                                <input type="email" class="form-control border-start-0" id="signup-email"
-                                    placeholder="your@email.com" name="email" required>
-                            </div>
-                        </div>
-
-                        <!-- Mobile -->
-                        <div class="mb-3">
-                            <label for="mobile" class="form-label">Mobile Number</label>
-                            <div class="input-group">
-                                <span class="input-group-text" style="background-color: #FFB266; color: #0C2461;">
-                                    <i class="fas fa-phone-alt"></i>
-                                </span>
-                                <input type="tel" class="form-control border-start-0" id="mobile"
-                                    placeholder="+1 (123) 456-7890" name="mobile" required>
-                            </div>
-                        </div>
-
-                        <!-- Password -->
-                        <div class="mb-4">
-                            <label for="signup-password" class="form-label">Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text" style="background-color: #FFB266; color: #0C2461;">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                                <input type="password" class="form-control border-start-0" id="signup-password"
-                                    placeholder="••••••••" name="password" required>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn w-100" style="background-color: #FF9933; color: white;">
-                            Create Account
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Footer -->
-                <div class="modal-footer justify-content-center border-0">
-                    <p class="mb-0">Already have an account?
-                        <a href="#" style="color: #E68A00;" data-bs-dismiss="modal" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">Login</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
     <!-- JavaScript for interactive elements -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const userTypeOptions = document.querySelectorAll('.user-type-option');
-            userTypeOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    userTypeOptions.forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
-                    this.querySelector('input[type="radio"]').checked = true;
-                });
-            });
-
-            // Form validation feedback
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                });
+    document.addEventListener('DOMContentLoaded', function() {
+        const userTypeOptions = document.querySelectorAll('.user-type-option');
+        userTypeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                userTypeOptions.forEach(opt => opt.classList.remove(
+                    'active'));
+                this.classList.add('active');
+                this.querySelector('input[type="radio"]').checked = true;
             });
         });
+
+        // Form validation feedback
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    });
     </script>
 
 
     <script>
-        // JavaScript for navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
+    // JavaScript for navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
 
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-navy', 'bg-opacity-95', 'shadow-md');
-                navbar.classList.remove('py-4');
-                navbar.classList.add('py-3');
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-navy', 'bg-opacity-95', 'shadow-md');
+            navbar.classList.remove('py-4');
+            navbar.classList.add('py-3');
+        } else {
+            navbar.classList.remove('bg-navy', 'bg-opacity-95', 'shadow-md');
+            navbar.classList.remove('py-3');
+            navbar.classList.add('py-4');
+        }
+    });
+
+    // Tab switching functionality
+    const tabs = document.querySelectorAll('.tab');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            tabs.forEach(t => {
+                t.classList.remove('active', 'border-saffron',
+                    'text-saffron');
+                t.classList.add('border-transparent', 'text-white/70');
+            });
+            this.classList.add('active', 'border-saffron', 'text-saffron');
+            this.classList.remove('border-transparent', 'text-white/70');
+        });
+    });
+
+    // Scroll animation for elements
+    const appearOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
             } else {
-                navbar.classList.remove('bg-navy', 'bg-opacity-95', 'shadow-md');
-                navbar.classList.remove('py-3');
-                navbar.classList.add('py-4');
+                entry.target.classList.add('appear');
+                appearOnScroll.unobserve(entry.target);
             }
         });
+    }, appearOptions);
 
-        // Tab switching functionality
-        const tabs = document.querySelectorAll('.tab');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                tabs.forEach(t => {
-                    t.classList.remove('active', 'border-saffron', 'text-saffron');
-                    t.classList.add('border-transparent', 'text-white/70');
-                });
-                this.classList.add('active', 'border-saffron', 'text-saffron');
-                this.classList.remove('border-transparent', 'text-white/70');
-            });
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.slide-in').forEach(slider => {
+            appearOnScroll.observe(slider);
         });
+    });
 
-        // Scroll animation for elements
-        const appearOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -100px 0px"
-        };
 
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
+    // Property data management
+    const propertyData = {
+        currentPage: 1,
+        totalPages: 3,
+        perPage: 6,
+        currentFilter: 'all',
+        loading: true,
+        properties: [],
+
+        initialize() {
+            this.fetchProperties();
+            this.setupEventListeners();
+        },
+
+        setupEventListeners() {
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const filter = e.target.dataset.filter;
+                    console.log(filter);
+                    this.filterProperties(filter);
+                });
+            });
+
+            // Load more button
+            document.getElementById('load-more-btn').addEventListener('click', () => {
+                this.loadMoreProperties();
+            });
+        },
+
+        fetchProperties() {
+            // Simulate API fetch
+            setTimeout(() => {
+                // Sample property data - in a real app, this would come from an API
+                this.properties = [{
+                        id: 1,
+                        title: 'Luxury Apartment in Gomti Nagar',
+                        location: 'DLF MY PAD , gomti nagar',
+                        price: '₹1.2 Cr',
+                        bedrooms: 3,
+                        bathrooms: 3,
+                        area: '1800 sq.ft.',
+                        image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['buy', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Apartment in Chinhat',
+                        location: 'chinhat',
+                        price: '₹70 lakh',
+                        bedrooms: 2,
+                        bathrooms: 2,
+                        area: '3200 sq.ft.',
+                        image: 'https://images.pexels.com/photos/275484/pexels-photo-275484.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Villa',
+                        tags: ['buy', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 3,
+                        title: 'Apartment in vibhuti khand',
+                        location: 'vibhuti khand,gomti nagar',
+                        price: '₹18,000/month',
+                        bedrooms: 2,
+                        bathrooms: 1,
+                        area: '1200 sq.ft.',
+                        image: 'https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['rent'],
+                        isNew: false,
+                        isPremium: false
+                    },
+                    {
+                        id: 4,
+                        title: 'Flat in Hajratganj',
+                        location: 'hajratganj',
+                        price: '₹75 Lakh onwards',
+                        bedrooms: '1/2/3 BHK',
+                        bathrooms: 2,
+                        area: '650-1450 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7174388/pexels-photo-7174388.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['buy', 'new'],
+                        isNew: true,
+                        isPremium: false
+                    },
+                    {
+                        id: 5,
+                        title: 'Office Space in Tech Park',
+                        location: 'Whitefield, Bangalore',
+                        price: '₹85/sq.ft.',
+                        bedrooms: null,
+                        bathrooms: 4,
+                        area: '5000 sq.ft.',
+                        image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Commercial',
+                        tags: ['rent'],
+                        isNew: false,
+                        isPremium: false
+                    },
+                    {
+                        id: 6,
+                        title: 'Luxury Penthouse with Terrace',
+                        location: 'Jubilee Hills, Hyderabad',
+                        price: '₹4.5 Cr',
+                        bedrooms: 4,
+                        bathrooms: 4,
+                        area: '3600 sq.ft.',
+                        image: 'https://images.pexels.com/photos/6312072/pexels-photo-6312072.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Penthouse',
+                        tags: ['buy', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 7,
+                        title: 'New Launch: Serene Towers',
+                        location: 'Gurgaon, Delhi NCR',
+                        price: '₹1.2 Cr onwards',
+                        bedrooms: '2/3 BHK',
+                        bathrooms: 2,
+                        area: '1100-1800 sq.ft.',
+                        image: 'https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['buy', 'new'],
+                        isNew: true,
+                        isPremium: false
+                    },
+                    {
+                        id: 8,
+                        title: 'Independent House with Garden',
+                        location: 'Anna Nagar, Chennai',
+                        price: '₹2.8 Cr',
+                        bedrooms: 3,
+                        bathrooms: 3,
+                        area: '2400 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Villa',
+                        tags: ['buy'],
+                        isNew: false,
+                        isPremium: false
+                    },
+                    {
+                        id: 9,
+                        title: 'Premium Service Apartment',
+                        location: 'Indira Nagar, Bangalore',
+                        price: '₹65,000/month',
+                        bedrooms: 2,
+                        bathrooms: 2,
+                        area: '1100 sq.ft.',
+                        image: 'https://media.istockphoto.com/id/907633960/photo/lobby-entrance-with-reception-desk-and-lounge-area.webp?a=1&b=1&s=612x612&w=0&k=20&c=8dPy43BpMqFAHERyxloNcc3KI6tqV0ymWaMnEfcMaks=',
+                        type: 'Service Apartment',
+                        tags: ['rent', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 10,
+                        title: 'Gated Community Villa',
+                        location: 'Salt Lake, Kolkata',
+                        price: '₹1.8 Cr',
+                        bedrooms: 3,
+                        bathrooms: 3,
+                        area: '2100 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Villa',
+                        tags: ['buy'],
+                        isNew: false,
+                        isPremium: false
+                    },
+                    {
+                        id: 11,
+                        title: 'New Launch: Horizon Heights',
+                        location: 'Banjara Hills, Hyderabad',
+                        price: '₹95 Lakh onwards',
+                        bedrooms: '2/3 BHK',
+                        bathrooms: 2,
+                        area: '1050-1750 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['buy', 'new'],
+                        isNew: true,
+                        isPremium: false
+                    },
+                    {
+                        id: 12,
+                        title: 'Beach View Apartment',
+                        location: 'Juhu, Mumbai',
+                        price: '₹3.9 Cr',
+                        bedrooms: 3,
+                        bathrooms: 3,
+                        area: '1950 sq.ft.',
+                        image: 'https://images.unsplash.com/photo-1609644124044-94dc4301872e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fEJlYWNoJTIwVmlldyUyMEFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D',
+                        type: 'Apartment',
+                        tags: ['buy', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 13,
+                        title: 'Luxury Farmhouse',
+                        location: 'Chattarpur, Delhi',
+                        price: '₹12 Cr',
+                        bedrooms: 5,
+                        bathrooms: 5,
+                        area: '10000 sq.ft.',
+                        image: 'https://media.istockphoto.com/id/185275043/photo/old-stone-house.webp?a=1&b=1&s=612x612&w=0&k=20&c=MfVPCSPC4H5ZCnzg6vCjNLdaFdAsXbZ4XDfL0E0gZEA=',
+                        type: 'Farmhouse',
+                        tags: ['buy', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 14,
+                        title: 'Studio Apartment for Rent',
+                        location: 'HSR Layout, Bangalore',
+                        price: '₹25,000/month',
+                        bedrooms: 1,
+                        bathrooms: 1,
+                        area: '550 sq.ft.',
+                        image: 'https://images.pexels.com/photos/6045325/pexels-photo-6045325.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Studio',
+                        tags: ['rent'],
+                        isNew: false,
+                        isPremium: false
+                    },
+                    {
+                        id: 15,
+                        title: 'New Launch: Sky Gardens',
+                        location: 'Viman Nagar, Pune',
+                        price: '₹85 Lakh onwards',
+                        bedrooms: '1/2/3 BHK',
+                        bathrooms: 2,
+                        area: '580-1680 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['buy', 'new'],
+                        isNew: true,
+                        isPremium: false
+                    },
+                    {
+                        id: 16,
+                        title: 'Mall Space for Rent',
+                        location: 'MG Road, Bangalore',
+                        price: '₹120/sq.ft.',
+                        bedrooms: null,
+                        bathrooms: null,
+                        area: '2000 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Commercial',
+                        tags: ['rent'],
+                        isNew: false,
+                        isPremium: false
+                    },
+                    {
+                        id: 17,
+                        title: 'Premium Row House',
+                        location: 'Lonavala, Maharashtra',
+                        price: '₹1.6 Cr',
+                        bedrooms: 3,
+                        bathrooms: 3,
+                        area: '1800 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Row House',
+                        tags: ['buy', 'premium'],
+                        isNew: false,
+                        isPremium: true
+                    },
+                    {
+                        id: 18,
+                        title: 'New Launch: Riverside Residences',
+                        location: 'Gomti Nagar, Lucknow',
+                        price: '₹60 Lakh onwards',
+                        bedrooms: '2/3 BHK',
+                        bathrooms: 2,
+                        area: '950-1600 sq.ft.',
+                        image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
+                        type: 'Apartment',
+                        tags: ['buy', 'new'],
+                        isNew: true,
+                        isPremium: false
+                    }
+                ];
+
+                // Load city data
+                this.loadCityData();
+
+                // Load testimonials
+                this.loadTestimonials();
+
+                // Initial properties rendering
+                this.renderProperties();
+
+                // Hide loading state
+                document.getElementById('properties-loading').classList.add('hidden');
+                document.getElementById('properties-grid').classList.remove('hidden');
+
+                this.loading = false;
+            }, 1500);
+        },
+
+        filterProperties(filter) {
+            // Update UI state
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('bg-saffron', 'text-white');
+                    btn.classList.remove('bg-white', 'text-gray-700',
+                        'hover:bg-gray-100');
                 } else {
-                    entry.target.classList.add('appear');
-                    appearOnScroll.unobserve(entry.target);
+                    btn.classList.remove('bg-saffron', 'text-white');
+                    btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
                 }
             });
-        }, appearOptions);
 
-        window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.slide-in').forEach(slider => {
-                appearOnScroll.observe(slider);
-            });
-        });
+            // Show loading
+            document.getElementById('properties-grid').classList.add('hidden');
+            document.getElementById('properties-loading').classList.remove('hidden');
 
+            // Set current filter
+            this.currentFilter = filter;
+            this.currentPage = 1;
 
-        // Property data management
-        const propertyData = {
-            currentPage: 1,
-            totalPages: 3,
-            perPage: 6,
-            currentFilter: 'all',
-            loading: true,
-            properties: [],
+            // Simulate delay for API response
+            setTimeout(() => {
+                this.renderProperties(true);
+                document.getElementById('properties-loading').classList.add('hidden');
+                document.getElementById('properties-grid').classList.remove('hidden');
+            }, 800);
+        },
 
-            initialize() {
-                this.fetchProperties();
-                this.setupEventListeners();
-            },
+        loadMoreProperties() {
+            if (this.currentPage < this.totalPages) {
+                // Show loading state on button
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                const originalText = loadMoreBtn.innerHTML;
+                loadMoreBtn.innerHTML =
+                    '<span class="flex items-center"><div class="w-5 h-5 border-2 border-t-2 border-white rounded-full animate-spin mr-2"></div>Loading...</span>';
 
-            setupEventListeners() {
-                // Filter buttons
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const filter = e.target.dataset.filter;
-                        console.log(filter);
-                        this.filterProperties(filter);
-                    });
-                });
+                // Increment page and render more properties
+                this.currentPage++;
 
-                // Load more button
-                document.getElementById('load-more-btn').addEventListener('click', () => {
-                    this.loadMoreProperties();
-                });
-            },
-
-            fetchProperties() {
-                // Simulate API fetch
-                setTimeout(() => {
-                    // Sample property data - in a real app, this would come from an API
-                    this.properties = [{
-                            id: 1,
-                            title: 'Luxury Apartment in Gomti Nagar',
-                            location: 'DLF MY PAD , gomti nagar',
-                            price: '₹1.2 Cr',
-                            bedrooms: 3,
-                            bathrooms: 3,
-                            area: '1800 sq.ft.',
-                            image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['buy', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 2,
-                            title: 'Apartment in Chinhat',
-                            location: 'chinhat',
-                            price: '₹70 lakh',
-                            bedrooms: 2,
-                            bathrooms: 2,
-                            area: '3200 sq.ft.',
-                            image: 'https://images.pexels.com/photos/275484/pexels-photo-275484.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Villa',
-                            tags: ['buy', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 3,
-                            title: 'Apartment in vibhuti khand',
-                            location: 'vibhuti khand,gomti nagar',
-                            price: '₹18,000/month',
-                            bedrooms: 2,
-                            bathrooms: 1,
-                            area: '1200 sq.ft.',
-                            image: 'https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['rent'],
-                            isNew: false,
-                            isPremium: false
-                        },
-                        {
-                            id: 4,
-                            title: 'Flat in Hajratganj',
-                            location: 'hajratganj',
-                            price: '₹75 Lakh onwards',
-                            bedrooms: '1/2/3 BHK',
-                            bathrooms: 2,
-                            area: '650-1450 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7174388/pexels-photo-7174388.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['buy', 'new'],
-                            isNew: true,
-                            isPremium: false
-                        },
-                        {
-                            id: 5,
-                            title: 'Office Space in Tech Park',
-                            location: 'Whitefield, Bangalore',
-                            price: '₹85/sq.ft.',
-                            bedrooms: null,
-                            bathrooms: 4,
-                            area: '5000 sq.ft.',
-                            image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Commercial',
-                            tags: ['rent'],
-                            isNew: false,
-                            isPremium: false
-                        },
-                        {
-                            id: 6,
-                            title: 'Luxury Penthouse with Terrace',
-                            location: 'Jubilee Hills, Hyderabad',
-                            price: '₹4.5 Cr',
-                            bedrooms: 4,
-                            bathrooms: 4,
-                            area: '3600 sq.ft.',
-                            image: 'https://images.pexels.com/photos/6312072/pexels-photo-6312072.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Penthouse',
-                            tags: ['buy', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 7,
-                            title: 'New Launch: Serene Towers',
-                            location: 'Gurgaon, Delhi NCR',
-                            price: '₹1.2 Cr onwards',
-                            bedrooms: '2/3 BHK',
-                            bathrooms: 2,
-                            area: '1100-1800 sq.ft.',
-                            image: 'https://images.pexels.com/photos/5570226/pexels-photo-5570226.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['buy', 'new'],
-                            isNew: true,
-                            isPremium: false
-                        },
-                        {
-                            id: 8,
-                            title: 'Independent House with Garden',
-                            location: 'Anna Nagar, Chennai',
-                            price: '₹2.8 Cr',
-                            bedrooms: 3,
-                            bathrooms: 3,
-                            area: '2400 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Villa',
-                            tags: ['buy'],
-                            isNew: false,
-                            isPremium: false
-                        },
-                        {
-                            id: 9,
-                            title: 'Premium Service Apartment',
-                            location: 'Indira Nagar, Bangalore',
-                            price: '₹65,000/month',
-                            bedrooms: 2,
-                            bathrooms: 2,
-                            area: '1100 sq.ft.',
-                            image: 'https://media.istockphoto.com/id/907633960/photo/lobby-entrance-with-reception-desk-and-lounge-area.webp?a=1&b=1&s=612x612&w=0&k=20&c=8dPy43BpMqFAHERyxloNcc3KI6tqV0ymWaMnEfcMaks=',
-                            type: 'Service Apartment',
-                            tags: ['rent', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 10,
-                            title: 'Gated Community Villa',
-                            location: 'Salt Lake, Kolkata',
-                            price: '₹1.8 Cr',
-                            bedrooms: 3,
-                            bathrooms: 3,
-                            area: '2100 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Villa',
-                            tags: ['buy'],
-                            isNew: false,
-                            isPremium: false
-                        },
-                        {
-                            id: 11,
-                            title: 'New Launch: Horizon Heights',
-                            location: 'Banjara Hills, Hyderabad',
-                            price: '₹95 Lakh onwards',
-                            bedrooms: '2/3 BHK',
-                            bathrooms: 2,
-                            area: '1050-1750 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['buy', 'new'],
-                            isNew: true,
-                            isPremium: false
-                        },
-                        {
-                            id: 12,
-                            title: 'Beach View Apartment',
-                            location: 'Juhu, Mumbai',
-                            price: '₹3.9 Cr',
-                            bedrooms: 3,
-                            bathrooms: 3,
-                            area: '1950 sq.ft.',
-                            image: 'https://images.unsplash.com/photo-1609644124044-94dc4301872e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fEJlYWNoJTIwVmlldyUyMEFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D',
-                            type: 'Apartment',
-                            tags: ['buy', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 13,
-                            title: 'Luxury Farmhouse',
-                            location: 'Chattarpur, Delhi',
-                            price: '₹12 Cr',
-                            bedrooms: 5,
-                            bathrooms: 5,
-                            area: '10000 sq.ft.',
-                            image: 'https://media.istockphoto.com/id/185275043/photo/old-stone-house.webp?a=1&b=1&s=612x612&w=0&k=20&c=MfVPCSPC4H5ZCnzg6vCjNLdaFdAsXbZ4XDfL0E0gZEA=',
-                            type: 'Farmhouse',
-                            tags: ['buy', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 14,
-                            title: 'Studio Apartment for Rent',
-                            location: 'HSR Layout, Bangalore',
-                            price: '₹25,000/month',
-                            bedrooms: 1,
-                            bathrooms: 1,
-                            area: '550 sq.ft.',
-                            image: 'https://images.pexels.com/photos/6045325/pexels-photo-6045325.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Studio',
-                            tags: ['rent'],
-                            isNew: false,
-                            isPremium: false
-                        },
-                        {
-                            id: 15,
-                            title: 'New Launch: Sky Gardens',
-                            location: 'Viman Nagar, Pune',
-                            price: '₹85 Lakh onwards',
-                            bedrooms: '1/2/3 BHK',
-                            bathrooms: 2,
-                            area: '580-1680 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['buy', 'new'],
-                            isNew: true,
-                            isPremium: false
-                        },
-                        {
-                            id: 16,
-                            title: 'Mall Space for Rent',
-                            location: 'MG Road, Bangalore',
-                            price: '₹120/sq.ft.',
-                            bedrooms: null,
-                            bathrooms: null,
-                            area: '2000 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Commercial',
-                            tags: ['rent'],
-                            isNew: false,
-                            isPremium: false
-                        },
-                        {
-                            id: 17,
-                            title: 'Premium Row House',
-                            location: 'Lonavala, Maharashtra',
-                            price: '₹1.6 Cr',
-                            bedrooms: 3,
-                            bathrooms: 3,
-                            area: '1800 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Row House',
-                            tags: ['buy', 'premium'],
-                            isNew: false,
-                            isPremium: true
-                        },
-                        {
-                            id: 18,
-                            title: 'New Launch: Riverside Residences',
-                            location: 'Gomti Nagar, Lucknow',
-                            price: '₹60 Lakh onwards',
-                            bedrooms: '2/3 BHK',
-                            bathrooms: 2,
-                            area: '950-1600 sq.ft.',
-                            image: 'https://images.pexels.com/photos/7018402/pexels-photo-7018402.jpeg?auto=compress&cs=tinysrgb&w=600',
-                            type: 'Apartment',
-                            tags: ['buy', 'new'],
-                            isNew: true,
-                            isPremium: false
-                        }
-                    ];
-
-                    // Load city data
-                    this.loadCityData();
-
-                    // Load testimonials
-                    this.loadTestimonials();
-
-                    // Initial properties rendering
-                    this.renderProperties();
-
-                    // Hide loading state
-                    document.getElementById('properties-loading').classList.add('hidden');
-                    document.getElementById('properties-grid').classList.remove('hidden');
-
-                    this.loading = false;
-                }, 1500);
-            },
-
-            filterProperties(filter) {
-                // Update UI state
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    if (btn.dataset.filter === filter) {
-                        btn.classList.add('bg-saffron', 'text-white');
-                        btn.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100');
-                    } else {
-                        btn.classList.remove('bg-saffron', 'text-white');
-                        btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
-                    }
-                });
-
-                // Show loading
-                document.getElementById('properties-grid').classList.add('hidden');
-                document.getElementById('properties-loading').classList.remove('hidden');
-
-                // Set current filter
-                this.currentFilter = filter;
-                this.currentPage = 1;
-
-                // Simulate delay for API response
+                // Simulate API delay
                 setTimeout(() => {
                     this.renderProperties(true);
-                    document.getElementById('properties-loading').classList.add('hidden');
-                    document.getElementById('properties-grid').classList.remove('hidden');
-                }, 800);
-            },
+                    loadMoreBtn.innerHTML = originalText;
 
-            loadMoreProperties() {
-                if (this.currentPage < this.totalPages) {
-                    // Show loading state on button
-                    const loadMoreBtn = document.getElementById('load-more-btn');
-                    const originalText = loadMoreBtn.innerHTML;
-                    loadMoreBtn.innerHTML =
-                        '<span class="flex items-center"><div class="w-5 h-5 border-2 border-t-2 border-white rounded-full animate-spin mr-2"></div>Loading...</span>';
-
-                    // Increment page and render more properties
-                    this.currentPage++;
-
-                    // Simulate API delay
-                    setTimeout(() => {
-                        this.renderProperties(true);
-                        loadMoreBtn.innerHTML = originalText;
-
-                        // Hide button if we reached the end
-                        if (this.currentPage >= this.totalPages) {
-                            loadMoreBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                        }
-                    }, 1000);
-                }
-            },
-
-            renderProperties(append = false) {
-                const grid = document.getElementById('properties-grid');
-                let filteredProperties = this.properties;
-
-                // Apply filters
-                if (this.currentFilter !== 'all') {
-                    filteredProperties = this.properties.filter(property => {
-                        console.log('I am here with ' + this.currentFilter);
-                        if (this.currentFilter === 'premium') return property.isPremium;
-                        if (this.currentFilter === 'new') return property.isNew;
-                        return property.tags.includes(this.currentFilter);
-                    });
-                }
-
-                // Pagination
-                const startIndex = append ? (this.currentPage - 1) * this.perPage : 0;
-                const endIndex = this.currentPage * this.perPage;
-                const paginatedProperties = filteredProperties.slice(0, endIndex);
-
-                // Clear grid if not appending
-                if (!append) {
-                    grid.innerHTML = '';
-                }
-
-                // Render properties
-                paginatedProperties.forEach((property, index) => {
-                    // Only render new items
-                    if (index >= startIndex) {
-                        const propertyCard = this.createPropertyCard(property);
-                        grid.appendChild(propertyCard);
-
-                        // Animate new cards
-                        // gsap.from(propertyCard, {
-                        //     opacity: 0,
-                        //     y: 30,
-                        //     duration: 0.5,
-                        //     delay: 0.1 * (index % this.perPage)
-                        // });
+                    // Hide button if we reached the end
+                    if (this.currentPage >= this.totalPages) {
+                        loadMoreBtn.classList.add('opacity-50', 'cursor-not-allowed');
                     }
+                }, 1000);
+            }
+        },
+
+        renderProperties(append = false) {
+            const grid = document.getElementById('properties-grid');
+            let filteredProperties = this.properties;
+
+            // Apply filters
+            if (this.currentFilter !== 'all') {
+                filteredProperties = this.properties.filter(property => {
+                    console.log('I am here with ' + this.currentFilter);
+                    if (this.currentFilter === 'premium') return property.isPremium;
+                    if (this.currentFilter === 'new') return property.isNew;
+                    return property.tags.includes(this.currentFilter);
                 });
-            },
+            }
 
-            createPropertyCard(property) {
-                const card = document.createElement('div');
-                card.className =
-                    'property-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 relative';
+            // Pagination
+            const startIndex = append ? (this.currentPage - 1) * this.perPage : 0;
+            const endIndex = this.currentPage * this.perPage;
+            const paginatedProperties = filteredProperties.slice(0, endIndex);
 
-                // Badges
-                let badgeHTML = '';
-                if (property.isPremium) {
-                    badgeHTML += `<span class="badge badge-premium">Premium</span>`;
-                } else if (property.isNew) {
-                    badgeHTML += `<span class="badge badge-new">New Launch</span>`;
-                } else if (property.tags.includes('hot')) {
-                    badgeHTML += `<span class="badge badge-hot">Hot Deal</span>`;
+            // Clear grid if not appending
+            if (!append) {
+                grid.innerHTML = '';
+            }
+
+            // Render properties
+            paginatedProperties.forEach((property, index) => {
+                // Only render new items
+                if (index >= startIndex) {
+                    const propertyCard = this.createPropertyCard(property);
+                    grid.appendChild(propertyCard);
                 }
+            });
+        },
 
-                badgeHTML += `<span class="badge badge-type">${property.type}</span>`;
+        createPropertyCard(property) {
+            const card = document.createElement('div');
+            card.className =
+                'property-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 relative';
 
-                // Card contents
-                card.innerHTML = `
+            // Badges
+            let badgeHTML = '';
+            if (property.isPremium) {
+                badgeHTML += `<span class="badge badge-premium">Premium</span>`;
+            } else if (property.isNew) {
+                badgeHTML += `<span class="badge badge-new">New Launch</span>`;
+            } else if (property.tags.includes('hot')) {
+                badgeHTML += `<span class="badge badge-hot">Hot Deal</span>`;
+            }
+
+            badgeHTML += `<span class="badge badge-type">${property.type}</span>`;
+
+            // Card contents
+            card.innerHTML = `
             ${badgeHTML}
             <div class="relative overflow-hidden h-56">
                 <img src="${property.image}" alt="${property.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
@@ -1247,59 +880,60 @@
             </div>
         `;
 
-                return card;
-            },
+            return card;
+        },
 
-            loadCityData() {
-                const cities = [{
-                        name: 'Gomti Nagar',
-                        properties: 245,
-                        image: 'https://img.freepik.com/premium-photo/man-is-filming-house-with-camera-camera_1247965-98133.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Hazratganj',
-                        properties: 312,
-                        image: 'https://img.freepik.com/free-photo/vertical-shot-modern-apartments-daytime_181624-13625.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Vibhuti Khand',
-                        properties: 186,
-                        image: 'https://img.freepik.com/premium-photo/view-swimming-pool-by-building-against-sky_1048944-21046320.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Aliganj',
-                        properties: 154,
-                        image: 'https://img.freepik.com/premium-photo/building-with-large-window-top_822609-687.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Chinhat',
-                        properties: 128,
-                        image: 'https://img.freepik.com/free-photo/analog-landscape-city-with-buildings_23-2149661456.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Indira Nagar',
-                        properties: 97,
-                        image: 'https://img.freepik.com/free-photo/analog-landscape-city-with-buildings_23-2149661457.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Mahanagar',
-                        properties: 89,
-                        image: 'https://img.freepik.com/premium-photo/building-with-street-light-as-street-view_764413-97.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Faizabad Road',
-                        properties: 76,
-                        image: 'https://img.freepik.com/premium-photo/holiday-apartments-city-playa-blanca-lanzarote-island-hotel-complex-royal-monica-canary-islands-december-2018_152520-1542.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                ];
+        loadCityData() {
+            const cities = [{
+                    name: 'Gomti Nagar',
+                    properties: 245,
+                    image: 'https://img.freepik.com/premium-photo/man-is-filming-house-with-camera-camera_1247965-98133.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Hazratganj',
+                    properties: 312,
+                    image: 'https://img.freepik.com/free-photo/vertical-shot-modern-apartments-daytime_181624-13625.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Vibhuti Khand',
+                    properties: 186,
+                    image: 'https://img.freepik.com/premium-photo/view-swimming-pool-by-building-against-sky_1048944-21046320.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Aliganj',
+                    properties: 154,
+                    image: 'https://img.freepik.com/premium-photo/building-with-large-window-top_822609-687.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Chinhat',
+                    properties: 128,
+                    image: 'https://img.freepik.com/free-photo/analog-landscape-city-with-buildings_23-2149661456.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Indira Nagar',
+                    properties: 97,
+                    image: 'https://img.freepik.com/free-photo/analog-landscape-city-with-buildings_23-2149661457.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Mahanagar',
+                    properties: 89,
+                    image: 'https://img.freepik.com/premium-photo/building-with-street-light-as-street-view_764413-97.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Faizabad Road',
+                    properties: 76,
+                    image: 'https://img.freepik.com/premium-photo/holiday-apartments-city-playa-blanca-lanzarote-island-hotel-complex-royal-monica-canary-islands-december-2018_152520-1542.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+            ];
 
-                const cityGrid = document.getElementById('city-grid');
+            const cityGrid = document.getElementById('city-grid');
 
-                cities.forEach((city, index) => {
-                    const cityCard = document.createElement('div');
-                    cityCard.className = 'slide-in relative rounded-lg overflow-hidden group shadow-md';
+            cities.forEach((city, index) => {
+                const cityCard = document.createElement('div');
+                cityCard.className =
+                    'slide-in relative rounded-lg overflow-hidden group shadow-md';
 
-                    cityCard.innerHTML = `
+                cityCard.innerHTML = `
                 <img src="${city.image}" alt="${city.name}" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-5 text-white">
@@ -1308,44 +942,45 @@
                 </div>
             `;
 
-                    cityGrid.appendChild(cityCard);
+                cityGrid.appendChild(cityCard);
 
-                    // Delayed animation
-                    setTimeout(() => {
-                        cityCard.classList.add('appear');
-                    }, index * 100);
-                });
-            },
+                // Delayed animation
+                setTimeout(() => {
+                    cityCard.classList.add('appear');
+                }, index * 100);
+            });
+        },
 
-            loadTestimonials() {
-                // Sample testimonial data
-                const testimonials = [{
-                        name: 'Rohit Sharma',
-                        position: 'Entrepreneur',
-                        testimonial: 'Lucknow Hitech Developers made my property search incredibly smooth. Their expertise and transparent process helped me find my dream home in Mumbai.',
-                        image: 'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-red-checkered-shirt-fashion-man-posing_158538-4914.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Priya Patel',
-                        position: 'Software Engineer',
-                        testimonial: 'As a first-time homebuyer, I was nervous about the process. The team at Lucknow Hitech Developers me through every step and found me a perfect apartment in Bangalore.',
-                        image: 'https://img.freepik.com/premium-photo/beauty-fashion-portrait-young-beautiful-brunette-woman-with-long-black-hair-green-eyes_333900-2852.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    },
-                    {
-                        name: 'Anand Mehta',
-                        position: 'Finance Director',
-                        testimonial: 'I have worked with several real estate companies, but Lucknow Hitech Developers stands out for their professionalism and attention to detail. Highly recommended!',
-                        image: 'https://img.freepik.com/free-photo/smiling-young-male-posing-meadow-with-arms-crossed_23-2148179874.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
-                    }
-                ];
+        loadTestimonials() {
+            // Sample testimonial data
+            const testimonials = [{
+                    name: 'Rohit Sharma',
+                    position: 'Entrepreneur',
+                    testimonial: 'Lucknow Hitech Developers made my property search incredibly smooth. Their expertise and transparent process helped me find my dream home in Mumbai.',
+                    image: 'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-red-checkered-shirt-fashion-man-posing_158538-4914.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Priya Patel',
+                    position: 'Software Engineer',
+                    testimonial: 'As a first-time homebuyer, I was nervous about the process. The team at Lucknow Hitech Developers me through every step and found me a perfect apartment in Bangalore.',
+                    image: 'https://img.freepik.com/premium-photo/beauty-fashion-portrait-young-beautiful-brunette-woman-with-long-black-hair-green-eyes_333900-2852.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                },
+                {
+                    name: 'Anand Mehta',
+                    position: 'Finance Director',
+                    testimonial: 'I have worked with several real estate companies, but Lucknow Hitech Developers stands out for their professionalism and attention to detail. Highly recommended!',
+                    image: 'https://img.freepik.com/free-photo/smiling-young-male-posing-meadow-with-arms-crossed_23-2148179874.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740'
+                }
+            ];
 
-                const testimonialsGrid = document.getElementById('testimonials-grid');
+            const testimonialsGrid = document.getElementById('testimonials-grid');
 
-                testimonials.forEach((testimonial, index) => {
-                    const testimonialCard = document.createElement('div');
-                    testimonialCard.className = 'slide-in bg-white p-8 rounded-lg shadow-lg relative';
+            testimonials.forEach((testimonial, index) => {
+                const testimonialCard = document.createElement('div');
+                testimonialCard.className =
+                    'slide-in bg-white p-8 rounded-lg shadow-lg relative';
 
-                    testimonialCard.innerHTML = `
+                testimonialCard.innerHTML = `
                 <div class="absolute -top-5 left-8 text-saffron text-6xl opacity-20">"</div>
                 <p class="text-gray-600 mb-6 relative">${testimonial.testimonial}</p>
                 <div class="flex items-center">
@@ -1357,176 +992,25 @@
                 </div>
             `;
 
-                    testimonialsGrid.appendChild(testimonialCard);
+                testimonialsGrid.appendChild(testimonialCard);
 
-                    // Delayed animation
-                    setTimeout(() => {
-                        testimonialCard.classList.add('appear');
-                    }, index * 150);
-                });
-            }
-        };
-
-        // Initialize the property functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            propertyData.initialize();
-        });
-    </script>
-
-
-
-    <!-- registeration js --------------------------------->
-    <script>
-        document.querySelector('#signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-
-
-
-            fetch("{{ url('landing/register') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    // console.log(formdata);
-                    if (data.errors) {
-                        // console.log(data);
-                        let messages = '';
-                        for (let field in data.errors) {
-                            messages += data.errors[field].join('\n') + '\n';
-                        }
-                        // alert(messages);
-                        showToast('alert', messages, 'bx bx-error', 'bg-saffron');
-                    } else {
-                        // alert('Registration successful!');
-                        showToast('alert', 'Registration successful!', 'bx bx-error', 'bg-saffron');
-                        const modalEl = document.getElementById('signupModal');
-                        const modal = bootstrap.Modal.getInstance(modalEl);
-                        modal.hide();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    </script>
-
-    <!-- login js ----------------------------------------------------------------->
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = {
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value
-            };
-
-            fetch('http://127.0.0.1:8000/landing/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content'),
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    console.log(data.redirect);
-                    if (data.status === 'success') {
-                        showToast('success', data.message, 'bx bx-error', 'bg-saffron');
-                        const modalEl = document.getElementById('loginModal');
-                        const modal = bootstrap.Modal.getInstance(modalEl);
-                        modal.hide();
-                        setTimeout(() => {
-                            window.location.href = data.redirect; // instead of location.href = '/'
-                        }, 1500);
-                    } else {
-                        // alert(data.message || 'Login failed.');
-                        showToast('error', 'invalid email or password ! Please try again.', 'bx bx-error',
-                            'bg-saffron');
-                    }
-                })
-                .catch(error => {
-                    console.error('Login error:', error);
-                    alert('Something went wrong.');
-                });
-        });
-    </script>
-
-    <!-- logout script -->
-    <script>
-        document.getElementById('logout').addEventListener('click', function(e) {
-
-            e.preventDefault();
-
-            fetch("{{ route('landing_logout') }}", {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.status === 'success') {
-                        showToast('Success', data.message, 'bx bx-check-circle', 'bg-saffron');
-                        // Optionally redirect after toast
-                        setTimeout(() => {
-                            window.location.href = '/';
-                        }, 1500);
-                    } else {
-                        showToast('error', 'Failed to logout.', 'bx bx-error', 'bg-danger');
-                    }
-                })
-                .catch(err => {
-                    showToast('Error', 'Something went wrong.', 'bx bx-error', 'bg-danger');
-                    console.error(err);
-                });
-        });
-    </script>
-
-
-
-
-    <script>
-        // function toshow the toast-----------------------------------------
-        function showToast(title, message, iconClass, bgColor) {
-            const toastHTML = `
-        <div class="bs-toast toast fade show ${bgColor} text-white" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header ${bgColor} text-white">
-                <i class='${iconClass} me-2'></i>
-                <strong class="me-auto">${title}</strong>
-                <small>Just now</small>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                ${message}
-            </div>
-        </div>
-    `;
-
-            document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
-
-            const toastEl = document.querySelector('#toast-container .toast:last-child');
-            const bsToast = new bootstrap.Toast(toastEl, {
-                delay: 3000
+                // Delayed animation
+                setTimeout(() => {
+                    testimonialCard.classList.add('appear');
+                }, index * 150);
             });
-            bsToast.show();
-
         }
+    };
+
+    // Initialize the property functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        propertyData.initialize();
+    });
     </script>
+
+
+
+
 
 
 </body>

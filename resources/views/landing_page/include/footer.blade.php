@@ -4,27 +4,27 @@
              <div>
                  <a href="#" class="flex items-center mb-6">
                      <i class="fas fa-building text-saffron text-2xl mr-2"></i>
-                     <span class="text-xl font-heading font-bold">Lucknow Hitech <span
-                             class="text-saffron">Developers</span></span>
+                     <span class="text-xl font-heading font-bold text-white" class="footer-company-name">Lucknow Hitech
+                         <span class="text-saffron">Developers</span></span>
                  </a>
-                 <p class="text-gray-400 mb-6">India's premier real estate platform offering curated properties
-                     across major Lucknow areas.</p>
+                 <p class="text-gray-400 mb-6">India' s premier real estate platform offering curated properties across
+                     major Lucknow areas.</p>
                  <div class="flex space-x-4">
                      <a href="#"
                          class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
-                         <i class="fab fa-facebook-f"></i>
+                         <i class="fab fa-facebook-f text-white"></i>
                      </a>
                      <a href="#"
                          class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
-                         <i class="fab fa-twitter"></i>
+                         <i class="fab fa-twitter text-white"></i>
                      </a>
                      <a href="#"
                          class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
-                         <i class="fab fa-instagram"></i>
+                         <i class="fab fa-instagram text-white"></i>
                      </a>
                      <a href="#"
                          class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
-                         <i class="fab fa-linkedin-in"></i>
+                         <i class="fab fa-linkedin-in text-white"></i>
                      </a>
                  </div>
              </div>
@@ -91,7 +91,11 @@
              </div>
          </div>
          <div class="pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-             <p>© 2025 Lucknow Hitech Developers Properties . All Rights Reserved. RERA Registered.</p>
+             <p>© 2025 All Rights Reserved . Lucknow Hitech Developers Properties
+                 .<a href="https://groscope.com/" class="text-saffron">
+                     Designed By Groscope Technology Pvt. Ltd.
+                 </a>
+             </p>
          </div>
      </div>
  </footer>
