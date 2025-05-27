@@ -32,7 +32,7 @@
 
     $verticalMenuJson = null;
 
-if (Auth::check()) {
+    if (Auth::check()) {
     if (auth()->user()->hasRole('super-admin')) {
         $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenu.json'));
     } else {
@@ -43,15 +43,13 @@ if (Auth::check()) {
     $decodedMenu = json_decode($verticalMenuJson);
 
     $menuData = [
-        (object)[
-            'menu' => $decodedMenu->menu
-        ]
-    ];
+            (object)[
+                'menu' => $decodedMenu->menu
+            ]
+        ];
 
-  
-}
-
-
+    
+    }
     
     @endphp
 
