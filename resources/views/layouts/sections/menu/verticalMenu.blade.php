@@ -33,6 +33,7 @@
     $verticalMenuJson = null;
 
     if (Auth::check()) {
+<<<<<<< HEAD
 
 
     if (auth()->user()->hasRole('super-admin')) {
@@ -48,6 +49,28 @@
     $menuData = compact($menuData);
 
     }
+=======
+    if (auth()->user()->hasRole('super-admin')) {
+    $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenu.json'));
+    } else {
+    $verticalMenuJson = file_get_contents(base_path('resources/menu/verticalMenuSeller.json'));
+    }
+
+    // Decode JSON and wrap in the correct structure
+    $decodedMenu = json_decode($verticalMenuJson);
+
+    $menuData = [
+    (object)[
+    'menu' => $decodedMenu->menu
+    ]
+    ];
+
+
+    }
+
+
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     @endphp
 
     <ul class="menu-inner py-1">

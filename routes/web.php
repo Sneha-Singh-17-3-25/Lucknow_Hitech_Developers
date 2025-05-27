@@ -50,6 +50,10 @@ use App\Http\Controllers\RolesPermissionsController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentPanel\AddPropertiesController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\PostPropertyController;
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 use Illuminate\Support\Facades\Auth;
 
 // Main Page Route
@@ -157,6 +161,10 @@ Route::get('landing/contact', [aboutController::class, 'landing_contact'])->name
 Route::get('landing/agents', [aboutController::class, 'landing_agents'])->name('landing_agents');
 Route::get('landing/termsconditions', [aboutController::class, 'landing_termsconditions'])->name('landing_termsconditions');
 Route::get('landing/privacypolicy', [aboutController::class, 'landing_privacypolicy'])->name('landing_privacypolicy');
+<<<<<<< HEAD
+=======
+Route::get('landing/postproperty', [PostPropertyController::class, 'postproperty'])->name('landing_postproperty');
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
 
 Route::post('landing/register', [registerController::class, 'landing_register'])->name('landing_register');

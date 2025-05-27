@@ -4,7 +4,10 @@
              <!-- Company Logo -->
              <img src="{{ asset('images/Alogo.png') }}" alt="Company Logo" class="h-8 w-auto mix-blend-normal" />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
              <!-- Company Name -->
              <span class="text-xl font-heading font-bold text-white">
                  Lucknow <span class="text-saffron">Hitech</span> <span class="text-white">Developers</span>
@@ -28,7 +31,11 @@
                  class="px-5 py-2 bg-saffron hover:bg-saffron-dark text-white rounded-md transition-colors duration-300 flex items-center">
                  <i class="fas fa-sign-in-alt mr-2"></i> Login
              </a>
+<<<<<<< HEAD
              <a href="#"
+=======
+             <a href="{{route('landing_postproperty')}}"
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                  class="px-5 py-2 bg-saffron hover:bg-saffron-dark text-white rounded-md transition-colors duration-300 flex items-center">
                  <i class="fas fa-plus-circle mr-2"></i> Post Property
              </a>

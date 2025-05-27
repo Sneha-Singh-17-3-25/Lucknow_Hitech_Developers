@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,6 +85,9 @@
     }
 
     /* Custom loader */
+=======
+<style>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     .loader {
         border: 4px solid rgba(255, 153, 51, 0.3);
         border-radius: 50%;
@@ -137,7 +141,11 @@
         right: 10px;
     }
 
+<<<<<<< HEAD
     .contact-input {
+=======
+    */ .contact-input {
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
         transition: all 0.3s ease;
         border-color: #E2E8F0;
     }
@@ -228,12 +236,21 @@
     .btn-hover-slide:hover::before {
         left: 0;
     }
+<<<<<<< HEAD
     </style>
 </head>
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- Navigation Bar -->
     @include('landing_page/include/navbar')
+=======
+</style>
+
+@extends('layouts/users/app')
+
+<body class="font-sans text-slate bg-gray-50">
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
 
     <!-- Contact Hero Section -->
@@ -279,7 +296,11 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
+=======
+                <div class="bg-white rounded-lg shadow-md p-6 contact-info-card">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="w-16 h-16 rounded-full contact-icon flex items-center justify-center mb-4 mx-auto">
                         <i class="fas fa-map-marker-alt text-2xl"></i>
                     </div>
@@ -288,7 +309,11 @@
                         Lucknow 226010</p>
                 </div>
 
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
+=======
+                <div class="bg-white rounded-lg shadow-md p-6 contact-info-card">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="w-16 h-16 rounded-full contact-icon flex items-center justify-center mb-4 mx-auto">
                         <i class="fas fa-phone-alt text-2xl"></i>
                     </div>
@@ -297,7 +322,11 @@
                     <p class="text-gray-600 text-center">+91 8299370217</p>
                 </div>
 
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg p-6 contact-info-card">
+=======
+                <div class="bg-white rounded-lg shadow-md p-6 contact-info-card">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="w-16 h-16 rounded-full contact-icon flex items-center justify-center mb-4 mx-auto">
                         <i class="fas fa-envelope text-2xl"></i>
                     </div>
@@ -307,8 +336,13 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 <div class="bg-white rounded-lg shadow-lg p-8 slide-in">
+=======
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-white">
+                <div class="bg-white rounded-lg shadow-md p-8 slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <h3 class="text-2xl font-heading font-bold text-slate mb-6">Send us a <span
                             class="text-saffron">Message</span></h3>
                     <form id="contact-form" class="space-y-6">
@@ -387,7 +421,11 @@
                     </div>
 
 
+<<<<<<< HEAD
                     <div class="bg-white rounded-lg shadow-lg p-6 slide-in">
+=======
+                    <div class="bg-white rounded-lg shadow-md p-6 slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                         <h3 class="text-xl font-semibold mb-4">Office <span class="text-saffron">Hours</span></h3>
                         <ul class="space-y-3">
                             <li class="flex justify-between items-center py-2 border-b border-gray-100">
@@ -421,7 +459,11 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden slide-in">
+=======
+                <div class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="h-48 overflow-hidden">
                         <img src="https://img.freepik.com/premium-photo/young-elegant-businesswoman-sitting-by-desk-corner-modern-office-looking-computer-screen-pandemic-period_274679-15360.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740"
                             alt="Mumbai Office" class="w-full h-full object-cover">
@@ -444,7 +486,11 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden slide-in">
+=======
+                <div class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="h-48 overflow-hidden">
                         <img src="https://img.freepik.com/free-photo/empty-office-workplace-with-table-chair-computer_1170-1959.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740"
                             alt="Delhi Office" class="w-full h-full object-cover">
@@ -466,7 +512,11 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden slide-in">
+=======
+                <div class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                     <div class="h-48 overflow-hidden">
                         <img src="https://img.freepik.com/premium-photo/casual-colleagues-smiling_107420-34326.jpg?ga=GA1.1.1533442590.1746749268&semt=ais_hybrid&w=740"
                             alt="Bangalore Office" class="w-full h-full object-cover">
@@ -571,11 +621,19 @@
                         <div class="flex space-x-4">
                             <a href="#"
                                 class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
+<<<<<<< HEAD
                                 <i class="fab fa-instagram"></i>
                             </a>
                             <a href="#"
                                 class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
                                 <i class="fab fa-linkedin-in"></i>
+=======
+                                <i class="fab fa-instagram text-white"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-saffron transition-colors duration-300">
+                                <i class="fab fa-linkedin-in text-white"></i>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
                             </a>
                         </div>
                     </div>
@@ -652,6 +710,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     <!-- Footer Start-->
     @include('landing_page.include.footer');
     <!-- Footer End-->
@@ -741,3 +800,88 @@
 </body>
 
 </html>
+=======
+
+    <!-- Script for scroll effects and nav background -->
+    <script>
+        // Show/hide navigation background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate');
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('bg-slate');
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Initialize scroll animations when the page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check if GSAP ScrollTrigger is available
+            if (typeof ScrollTrigger !== 'undefined') {
+                // Initialize GSAP ScrollTrigger
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Animate slide-in elements
+                const slideInElements = document.querySelectorAll('.slide-in');
+                slideInElements.forEach(element => {
+                    ScrollTrigger.create({
+                        trigger: element,
+                        start: "top 80%",
+                        onEnter: () => element.classList.add('appear')
+                    });
+                });
+            } else {
+                // Fallback for browsers without GSAP
+                const slideInElements = document.querySelectorAll('.slide-in');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('appear');
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                slideInElements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+
+            // Form validation (basic example)
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Basic validation
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const message = document.getElementById('message').value;
+
+                    if (!name || !email || !phone || !message) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    // Add animation to show form is submitting
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+                    submitButton.innerHTML = '<div class="loader mx-auto"></div>';
+                    submitButton.disabled = true;
+
+                    // Simulate form submission (replace with actual ajax submission)
+                    setTimeout(() => {
+                        alert('Thank you for contacting us! We will get back to you soon.');
+                        contactForm.reset();
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c

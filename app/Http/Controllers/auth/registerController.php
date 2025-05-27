@@ -61,6 +61,7 @@ class registerController extends Controller
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+<<<<<<< HEAD
             // $user = User::where('email', $request->email);
             $redirectPath = Auth::user()->is_admin == 1
                 ? route('dashboard-analytics')
@@ -72,6 +73,26 @@ class registerController extends Controller
             //     $redirectPath = route('landing_index');
             // }
             // Auth::login($user);
+=======
+
+            $user = Auth::user();
+
+
+            if ($user->is_admin == 1) {
+                $redirectPath = route('dashboard-analytics');
+            } else {
+                $redirectPath = route('landing_index');
+            }
+
+            // if ($user->hasRole('super-admin')) {
+            //     $redirectPath = route('dashboard-analytics');
+            // } elseif ($user->hasRole('seller')) {
+            //     $redirectPath = route('dashboard-analytics');
+            // } else {
+            //     $redirectPath = route('landing_index');
+            // }
+
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
             return response()->json([
                 'status' => 'success',
@@ -98,4 +119,8 @@ class registerController extends Controller
             'message' => 'Logout successful'
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c

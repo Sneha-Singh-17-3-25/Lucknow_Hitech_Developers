@@ -140,10 +140,16 @@
     }
     </style>
 </head>
+<<<<<<< HEAD
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- Navigation Bar -->
     @include('landing_page/include/navbar')
+=======
+@extends('layouts/users/app')
+
+<body class="font-sans text-slate bg-gray-50">
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
 
     <!-- About Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[50vh] overflow-hidden">
@@ -377,7 +383,11 @@
 
 
     <!-- Footer Start-->
+<<<<<<< HEAD
     @include('landing_page.include.footer')
+=======
+    <!-- @include('landing_page.include.footer') -->
+>>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     <!-- Footer End-->
 
 
