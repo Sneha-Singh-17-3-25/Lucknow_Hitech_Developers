@@ -581,6 +581,22 @@
         }
     </script>
 
+ <!-- JavaScript for navbar scroll effect -->
+    <script>window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-navy', 'bg-opacity-95', 'shadow-md');
+            navbar.classList.remove('py-4');
+            navbar.classList.add('py-3');
+        } else {
+            navbar.classList.remove('bg-navy', 'bg-opacity-95', 'shadow-md');
+            navbar.classList.remove('py-3');
+            navbar.classList.add('py-4');
+        }
+    });
+</script>
+
 
 </body>
 

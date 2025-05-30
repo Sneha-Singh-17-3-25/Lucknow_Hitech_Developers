@@ -50,7 +50,7 @@ use App\Http\Controllers\RolesPermissionsController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentPanel\AddPropertiesController;
-use App\Http\Controllers\PostPropertyController;
+use App\Http\Controllers\user\PostPropertyController;
 use Illuminate\Support\Facades\Auth;
 
 // Main Page Route
@@ -162,6 +162,7 @@ Route::get('landing/postproperty', [PostPropertyController::class, 'postproperty
 
 
 Route::post('landing/register', [registerController::class, 'landing_register'])->name('landing_register');
+Route::get('landing/login', [registerController::class, 'landing_login'])->name('landing_login');
 Route::post('landing/login', [registerController::class, 'landing_login'])->name('landing_login');
 Route::get('landing/logout', [registerController::class, 'landing_logout'])->name('landing_logout');
 
@@ -171,3 +172,8 @@ Route::any('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+
+
+
+Route::post('/submit-residential-property', [PostPropertyController::class, 'storeResidentialProperty']);
+

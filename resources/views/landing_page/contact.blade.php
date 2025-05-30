@@ -1,58 +1,9 @@
+@extends('layouts/users/app')
+
+@push('style')
 <style>
-    .loader {
-        border: 4px solid rgba(255, 153, 51, 0.3);
-        border-radius: 50%;
-        border-top: 4px solid #FF9933;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }
 
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .badge {
-        position: absolute;
-        top: 10px;
-        padding: 4px 12px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: 600;
-        z-index: 10;
-    }
-
-    .badge-premium {
-        background-color: #FF9933;
-        color: white;
-        left: 10px;
-    }
-
-    .badge-new {
-        background-color: #138808;
-        color: white;
-        left: 10px;
-    }
-
-    .badge-hot {
-        background-color: #e74c3c;
-        color: white;
-        left: 10px;
-    }
-
-    .badge-type {
-        background-color: #0C2461;
-        color: white;
-        right: 10px;
-    }
-
-    */ .contact-input {
+     .contact-input {
         transition: all 0.3s ease;
         border-color: #E2E8F0;
     }
@@ -144,12 +95,11 @@
         left: 0;
     }
 </style>
+@endpush
 
-@extends('layouts/users/app')
 
+@section('content')
 <body class="font-sans text-slate bg-gray-50">
-
-
 
     <!-- Contact Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[50vh] overflow-hidden">
@@ -567,7 +517,7 @@
         </div>
     </section>
 
-
+@push('script')
     <!-- Script for scroll effects and nav background -->
     <script>
         // Show/hide navigation background on scroll
@@ -649,4 +599,6 @@
             }
         });
     </script>
+    @endpush
 </body>
+@endsection
