@@ -26,7 +26,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script> -->
 
 
     <script>
@@ -519,7 +519,8 @@
 
     <!-- logout script -->
     <script>
-        document.getElementById('logout').addEventListener('click', function(e) {
+        if (document.getElementById('logout') != null) {
+               document.getElementById('logout').addEventListener('click', function(e) {
 
             e.preventDefault();
 
@@ -549,6 +550,8 @@
                     console.error(err);
                 });
         });
+        }
+     
     </script>
 
 

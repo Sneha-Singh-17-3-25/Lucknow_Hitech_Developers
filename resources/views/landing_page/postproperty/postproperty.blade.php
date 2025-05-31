@@ -211,11 +211,6 @@
                             <i class="fas fa-building mr-2"></i>
                             <span>Commercial</span>
                         </button>
-                        <!-- <button type="button" id="agricultural-btn"
-                            class="property-type-btn flex items-center justify-center px-4 py-3 border-2 rounded-md border-gray-200 hover:border-saffron transition-all">
-                            <i class="fas fa-tree mr-2"></i>
-                            <span>Agricultural</span>
-                        </button> -->
                     </div>
 
                     <!-- Residential Sub-options -->
@@ -246,33 +241,13 @@
                                     <i class="fas {{ $Ctype->icon_class }}"></i>
                                 </div>
                                 <span class="text-sm">{{$Ctype->property_type}}</span>
-                                <input type="hidden" class="hidden-input" id="idcommertype" name="commer-property-type" value="{{$Ctype->property_type}}">
+
                             </div>
                             @endforeach
                         </div>
                     </div>
+                    <input type="hidden" class="hidden-input" id="idcommertype" name="commer-property-type-hidden" value="{{$Ctype->property_type}}">
 
-                    <!-- Agricultural Sub-options (Hidden by default) -->
-                    <!-- <div id="agricultural-options" class="property-sub-options hidden">
-                        <label class="block text-gray-700 text-sm mb-2">Property Category</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
-                            <div
-                                class="sub-property-option border rounded-md p-3 cursor-pointer hover:bg-saffron/5 transition-all text-center">
-                                <div class="text-saffron mb-1"><i class="fas fa-seedling"></i></div>
-                                <span class="text-sm">Agricultural Land</span>
-                            </div>
-                            <div
-                                class="sub-property-option border rounded-md p-3 cursor-pointer hover:bg-saffron/5 transition-all text-center">
-                                <div class="text-saffron mb-1"><i class="fas fa-tractor"></i></div>
-                                <span class="text-sm">Farm House</span>
-                            </div>
-                            <div
-                                class="sub-property-option border rounded-md p-3 cursor-pointer hover:bg-saffron/5 transition-all text-center">
-                                <div class="text-saffron mb-1"><i class="fas fa-tree"></i></div>
-                                <span class="text-sm">Plantation</span>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
 
                 <!-- Property Location -->
@@ -817,12 +792,12 @@
                             <div class="flex">
                                 <div class="flex items-center mr-10">
                                     <input class="w-4 h-4 mr-2 bg-amber-500 border-gray-300 focus:ring-amber-500"
-                                        type="radio" name="commer_perwashroom" id="washroomYes" />
+                                        type="radio" name="commer_perwashroom" id="washroomYes" value="Yes" />
                                     <label class="text-gray-700" for="washroomYes">Yes</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input class="w-4 h-4 mr-2 bg-amber-500 border-gray-300 focus:ring-amber-500"
-                                        type="radio" name="commer_perwashroom" id="washroomNo" />
+                                        type="radio" name="commer_perwashroom" id="washroomNo" value="No" />
                                     <label class="text-gray-700" for="washroomNo">No</label>
                                 </div>
                             </div>
@@ -834,17 +809,17 @@
                             <div class="flex items-center">
                                 <div class="flex items-center mr-6">
                                     <input class="w-4 h-4 mr-2 text-amber-500 border-gray-300 focus:ring-amber-500"
-                                        type="radio" name="commer_pantry" id="pantryDry">
+                                        type="radio" name="commer_pantry" id="pantryDry" value="Dry">
                                     <label class="text-gray-700" for="pantryDry">Dry</label>
                                 </div>
                                 <div class="flex items-center mr-6">
                                     <input class="w-4 h-4 mr-2 text-amber-500 border-gray-300 focus:ring-amber-500"
-                                        type="radio" name="commer_pantry" id="pantryWet">
+                                        type="radio" name="commer_pantry" id="pantryWet" value="Wet">
                                     <label class="text-gray-700" for="pantryWet">Wet</label>
                                 </div>
                                 <div class="flex items-center mr-6">
                                     <input class="w-4 h-4 mr-2 text-amber-500 border-gray-300 focus:ring-amber-500"
-                                        type="radio" name="commer_pantry" id="pantryNone">
+                                        type="radio" name="commer_pantry" id="pantryNone" value="NA">
                                     <label class="text-gray-700" for="pantryNone">Not Available</label>
                                 </div>
                                 <span class="text-gray-500 cursor-help"
@@ -872,13 +847,13 @@
                                         <!-- No of open sides -->
                                         <div class="col-md-6">
                                             <label class="form-label text-dark fw-medium">No of open sides</label>
-                                            <select id="common_no_open_sides"
+                                            <select id="common_no_open_sides" name="common_no_open_sides"
                                                 class="form-select focus-ring-amber hover-amber focus:ring-2 focus:ring-saffron  focus:border-saffron">
                                                 <option selected>Select</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
                                             </select>
                                         </div>
 
@@ -917,7 +892,7 @@
                                             <div class="d-flex gap-4 mr-100">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="common_cornerplot"
-                                                        id="cornerYes"
+                                                        id="cornerYes" value="Yes"
                                                         style="background-color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b;"
                                                         checked>
                                                     <label class="form-check-label text-dark"
@@ -925,7 +900,7 @@
                                                 </div>
                                                 <div class="form-check ">
                                                     <input class="form-check-input" type="radio" name="common_cornerplot"
-                                                        id="cornerNo"
+                                                        id="cornerNo" value="No"
                                                         style=" background-color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b;"
                                                         checked>
                                                     <label class="form-check-label text-dark" for="cornerNo">No</label>
@@ -941,7 +916,7 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="form-check-input checked:bg-saffron checked:border-saffron"
-                                                        type="radio" name="common_construction" id="constructionYes"
+                                                        type="radio" name="common_construction" id="constructionYes" value="Yes"
                                                         style="background-color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b;"
                                                         checked>
                                                     <label class="form-check-label text-dark"
@@ -950,7 +925,7 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="form-check-input checked:bg-saffron checked:border-saffron"
-                                                        type="radio" name="common_construction" id="constructionNo" style="background-color: #f59e0b;
+                                                        type="radio" name="common_construction" id="constructionNo" value="No" style="background-color: #f59e0b;
                                                     border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b;">
                                                     <label class="form-check-label text-dark"
                                                         for="constructionNo">No</label>
@@ -966,7 +941,7 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="form-check-input checked:bg-amber-500 checked:border-amber-500"
-                                                        type="radio" name="common_boundaryWall" id="boundaryYes"
+                                                        type="radio" name="common_boundaryWall" id="boundaryYes" value="Yes"
                                                         style="background-color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b;"
                                                         checked>
                                                     <label class="form-check-label text-dark"
@@ -975,7 +950,7 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="form-check-input checked:bg-amber-500 checked:border-amber-500"
-                                                        type="radio" name="common_boundaryWall" id="boundaryNo"
+                                                        type="radio" name="common_boundaryWall" id="boundaryNo" value="No"
                                                         style="background-color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b;">
                                                     <label class="form-check-label text-dark"
                                                         for="boundaryNo">No</label>
@@ -1234,10 +1209,12 @@
 
                     document.getElementById('plot-land-form').classList.remove('hidden');
                     residentialForm.style.display = "none";
+                    commercialForm.style.display = "none";
 
                 } else {
 
                     residentialForm.style.display = "block";
+                    commercialForm.style.display = "none";
                     document.getElementById('plot-land-form').classList.add('hidden');
 
                 }
@@ -1252,18 +1229,22 @@
             option.addEventListener('click', function() {
                 const type = this.getAttribute('data-com-type');
 
+                const plotForm = document.getElementById('plot-land-form');
+                const residentialForm = document.getElementById("residential-common-form");
+                const commercialForm = document.getElementById("commercial-common-form");
 
                 plotForm.classList.add('hidden');
-
 
                 if (type === 'industrial land' || type === 'commercial land/plot' || type ===
                     'agricultural land') {
 
                     document.getElementById('plot-land-form').classList.remove('hidden');
                     commercialForm.style.display = "none";
+                    residentialForm.style.display = "none";
                 } else {
 
                     commercialForm.style.display = "block";
+                    residentialForm.style.display = "none";
                     document.getElementById('plot-land-form').classList.add('hidden');
                 }
             });
@@ -1358,117 +1339,116 @@
     <script>
         function submitResidentialProperty() {
 
-            // alert(document.querySelector('input[name="res-property-type_hidden"]').value);
-            // e.preventDefault();
             const formData = new FormData();
-
-            let propertyCategory = ''; // This will tell controller what to expect
-
+            let propertyCategory = '';
 
             const resPropertyType = document.querySelector('input[name="res-property-type_hidden"]')?.value;
-            // const commerPropertyType = document.querySelector('input[name="commer-property-type"]').value;
+            const commerPropertyType = document.querySelector('input[name="commer-property-type-hidden"]')?.value;
 
             console.log(resPropertyType);
-            // console.log(commerPropertyType);
+            console.log(commerPropertyType);
 
-            // Collect field values
-            // formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
-            // formData.append('res_property_type', document.querySelector('input[name="res-property-type"]').value);
-            // formData.append('commer_property_type', document.querySelector('input[name="commer-property-type"]').value);
-            // formData.append('pincode', document.getElementById('pincode').value);
-            // formData.append('city', document.getElementById('city').value);
-            // formData.append('state', document.getElementById('state').value);
-            // formData.append('address', document.getElementById('address').value);
-            // formData.append('possession_status', document.querySelector('input[name="possession-status"]:checked')?.value);
-            // formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
-            // formData.append('expect_price', document.getElementById('expect-price').value);
+            if (resPropertyType == 'Flat/Apartment' || resPropertyType == 'Residential House' || resPropertyType == 'Villa' || resPropertyType == 'Independent House' || resPropertyType == 'Farm House' || resPropertyType == 'Pent House') {
+                propertyCategory = 'residential';
+                formData.append('property_category', propertyCategory);
+                formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
+                formData.append('res_property_type_hidden', document.querySelector('input[name="res-property-type_hidden"]')?.value);
+                formData.append('pincode', document.getElementById('pincode').value);
+                formData.append('city', document.getElementById('city').value);
+                formData.append('state', document.getElementById('state').value);
+                formData.append('address', document.getElementById('address').value);
+                formData.append('possession_status', document.querySelector('input[name="possession-status"]:checked')?.value);
 
-            // for residential form
+                formData.append('res_plot_area', document.getElementById('res-plot-area').value);
+                formData.append('res_plot_area_unit', document.getElementById('res-plot-area-unit').value);
+                formData.append('res_super_area', document.getElementById('res-super-area').value);
+                formData.append('res_super_area_unit', document.getElementById('res-super-area-unit').value);
+                formData.append('res_bedrooms', document.querySelector('input[name="res-bedrooms"]:checked')?.value);
+                formData.append('res_balconies', document.querySelector('input[name="res-balconies"]:checked')?.value);
+                formData.append('res_rooms', document.querySelector('input[name="res-rooms"]:checked')?.value);
+                formData.append('res_total_floors', document.querySelector('input[name="res-total-floors"]:checked')?.value);
+                formData.append('res_furnished', document.querySelector('input[name="res-furnished"]:checked')?.value);
+                formData.append('res_bathrooms', document.querySelector('input[name="res-bathrooms"]:checked')?.value);
+                formData.append('res_no_open_sides', document.getElementById('res-no-open-sides').value);
+                formData.append('res_road_facing_plot', document.getElementById('res-road-facing-plot').value);
+                formData.append('res_road_facing_plot_unit', document.getElementById('res-road-facing-plot-unit').value);
 
+                formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
+                formData.append('expect_price', document.getElementById('expect-price').value);
 
-            // propertyCategory = 'residential';
+                 for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
 
-            // formData.append('property_category', propertyCategory);
-            formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
-            formData.append('res_property_type_hidden', document.querySelector('input[name="res-property-type_hidden"]')?.value);
-            formData.append('pincode', document.getElementById('pincode').value);
-            formData.append('city', document.getElementById('city').value);
-            formData.append('state', document.getElementById('state').value);
-            formData.append('address', document.getElementById('address').value);
-            formData.append('possession_status', document.querySelector('input[name="possession-status"]:checked')?.value);
-
-            formData.append('res_plot_area', document.getElementById('res-plot-area').value);
-            formData.append('res_plot_area_unit', document.getElementById('res-plot-area-unit').value);
-            formData.append('res_super_area', document.getElementById('res-super-area').value);
-            formData.append('res_super_area_unit', document.getElementById('res-super-area-unit').value);
-            formData.append('res_bedrooms', document.querySelector('input[name="res-bedrooms"]:checked')?.value);
-            formData.append('res_balconies', document.querySelector('input[name="res-balconies"]:checked')?.value);
-            formData.append('res_rooms', document.querySelector('input[name="res-rooms"]:checked')?.value);
-            formData.append('res_total_floors', document.querySelector('input[name="res-total-floors"]:checked')?.value);
-            formData.append('res_furnished', document.querySelector('input[name="res-furnished"]:checked')?.value);
-            formData.append('res_bathrooms', document.querySelector('input[name="res-bathrooms"]:checked')?.value);
-            formData.append('res_no_open_sides', document.getElementById('res-no-open-sides').value);
-            formData.append('res_road_facing_plot', document.getElementById('res-road-facing-plot').value);
-            formData.append('res_road_facing_plot_unit', document.getElementById('res-road-facing-plot-unit').value);
-
-            formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
-            formData.append('expect_price', document.getElementById('expect-price').value);
-
-
+            }
 
 
 
             // for commercial form 
-            // if (['Office Space', 'Shop/Showroom', 'Warehouse/Godown', 'Industrial Building'].includes(commerPropertyType)) {
-            //     propertyCategory = 'commercial';
+            if (commerPropertyType == 'Office Space' || commerPropertyType == 'Shop/Showroom' || commerPropertyType == 'Warehouse/Godown' || commerPropertyType == 'Industrial Building') {
 
-            //     formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
-            //     formData.append('res_property_type', document.querySelector('input[name="res-property-type"]').value);
-            //     formData.append('pincode', document.getElementById('pincode').value);
-            //     formData.append('city', document.getElementById('city').value);
-            //     formData.append('state', document.getElementById('state').value);
-            //     formData.append('address', document.getElementById('address').value);
-            //     formData.append('possession_status', document.querySelector('input[name="possession-status"]:checked')?.value);
+                propertyCategory = 'commercial';
 
-            //     formData.append('commer_plot_are', document.getElementById('commer-plot-area').value);
-            //     formData.append('commer_plot_are_unit', document.getElementById('commer-plot-area').value);
-            //     formData.append('commer_super_are', document.getElementById('commer-super-area').value);
-            //     formData.append('commer_super_are_unit', document.getElementById('commer-super-area').value);
-            //     formData.append('commer_floor_no', documnet.querySelector('input[name="commer_floor_no"]:checked')?.value);
-            //     formData.append('commer_total_floor', documnet.querySelector('input[name="commer_total_floor"]:checked')?.value);
-            //     formData.append('commer_furnished_status', documnet.querySelector('input[name="commer_furnished_status"]:checked')?.value);
-            //     formData.append('commer_washrooms', documnet.querySelector('input[name="commer_washrooms"]:checked')?.value);
-            //     formData.append('commer_perwashroom', documnet.querySelector('input[name="commer_perwashroom"]:checked')?.value);
-            //     formData.append('commer_pantry', documnet.querySelector('input[name="commer_pantry"]:checked')?.value);
+                formData.append('property_category', propertyCategory);
+                formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
+                formData.append('commer_property_type', document.querySelector('input[name="commer-property-type-hidden"]')?.value);
+                formData.append('pincode', document.getElementById('pincode').value);
+                formData.append('city', document.getElementById('city').value);
+                formData.append('state', document.getElementById('state').value);
+                formData.append('address', document.getElementById('address').value);
+                formData.append('possession_status', document.querySelector('input[name="possession-status"]:checked')?.value);
 
-            //     formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
-            //     formData.append('expect_price', document.getElementById('expect-price').value);
+                formData.append('commer_plot_area', document.getElementById('commer-plot-area').value);
+                formData.append('commer_plot_area_unit', document.getElementById('commer-plot-area').value);
+                formData.append('commer_super_area', document.getElementById('commer-super-area').value);
+                formData.append('commer_super_area_unit', document.getElementById('commer-super-area').value);
+                formData.append('commer_floor_no', document.querySelector('input[name="commer_floor_no"]:checked')?.value);
+                formData.append('commer_total_floor', document.querySelector('input[name="commer_total_floor"]:checked')?.value);
+                formData.append('commer_furnished_status', document.querySelector('input[name="commer_furnished_status"]:checked')?.value);
+                formData.append('commer_washrooms', document.querySelector('input[name="commer_washrooms"]:checked')?.value);
+                formData.append('commer_perwashroom', document.querySelector('input[name="commer_perwashroom"]:checked')?.value);
+                formData.append('commer_pantry', document.querySelector('input[name="commer_pantry"]:checked')?.value);
 
+                formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
+                formData.append('expect_price', document.getElementById('expect-price').value);
+
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+            }
+
+
+            // for common form
+            // if (resPropertyType == 'Residential Plot/Land' || commerPropertyType == 'Industrial Land' || commerPropertyType == 'Commercial Land/Plot' || commerPropertyType == 'Agricultural Land') {
+
+            //     propertyCategory = 'plotland';
+
+            //     const commonPropertyType = document.querySelector('input[name="res-property-type_hidden"]')?.value ||
+            //         document.querySelector('input[name="commer-property-type-hidden"]')?.value || '';
+
+            //     formData.append('property_category', propertyCategory);
+            //     formData.append('property_type', commonPropertyType);
+            //     formData.append('common_no_open_sides', document.querySelector('input[name="common_no_open_sides"]')?.value);
+            //     formData.append('common_w_road_facing', document.querySelector('input[name="common_w_road_facing"]')?.value);
+            //     formData.append('common_w_road_facing_unit', document.querySelector('input[name="common_w_road_facing_unit"]')?.value);
+            //     formData.append('common_cornerplot', document.querySelector('input[name="common_cornerplot"]')?.value);
+            //     formData.append('common_construction', document.querySelector('input[name="common_construction"]')?.value);
+            //     formData.append('common_boundaryWall', document.querySelector('input[name="common_boundaryWall"]')?.value);
+            //     formData.append('common_plotland_area', document.querySelector('input[name="common_plotland_area"]')?.value);
+            //     formData.append('common_plotland_area_unit', document.querySelector('input[name="common_plotland_area_unit"]')?.value);
+            //     formData.append('common_plotland_length', document.querySelector('input[name="common_plotland_length"]')?.value);
+            //     formData.append('common_plotland_length_unit', document.querySelector('input[name="common_plotland_length_unit"]')?.value);
+            //     formData.append('common_plotland_breath', document.querySelector('input[name="common_plotland_breath"]')?.value);
+            //     formData.append('common_plotland_breath_unit', document.querySelector('input[name="common_plotland_breath_unit"]')?.value);
 
 
             //     for (let [key, value] of formData.entries()) {
             //         console.log(`${key}: ${value}`);
             //     }
+
+
             // }
 
-            // for common form
-            // if (['Residential Plot/Land', 'Industrial Land', 'Commercial Land/Plot', 'Agricultural Land'].includes(propertyType)) {
-            //     propertyCategory = 'land';
-            // formData.append('common_no_open_sides', documne.getElementById('common_no_open_sides').value);
-            // formData.append('common_w_road_facing', documnet.querySelector('input[name="common_w_road_facing"]')?.value);
-            // formData.append('common_w_road_facing_unit', documnet.querySelector('input[name="common_w_road_facing_unit"]')?.value);
-            // formData.append('common_cornerplot', documnet.querySelector('input[name="common_cornerplot"]')?.value);
-            // formData.append('common_construction', documnet.querySelector('input[name="common_construction"]')?.value);
-            // formData.append('common_boundaryWall', documnet.querySelector('input[name="common_boundaryWall"]')?.value);
-            // formData.append('common_plotland_area', documnet.querySelector('input[name="common_plotland_area"]')?.value);
-            // formData.append('common_plotland_area_unit', documnet.querySelector('input[name="common_plotland_area_unit"]')?.value);
-            // formData.append('common_plotland_length', documnet.querySelector('input[name="common_plotland_length"]')?.value);
-            // formData.append('common_plotland_length_unit', documnet.querySelector('input[name="common_plotland_length_unit"]')?.value);
-            // formData.append('common_plotland_breath', documnet.querySelector('input[name="common_plotland_breath"]')?.value);
-            // formData.append('common_plotland_breath_unit', documnet.querySelector('input[name="common_plotland_breath_unit"]')?.value);
-            // }
-
-            // formData.append('property_category', propertyCategory);
 
 
             fetch('/submit-residential-property', {
