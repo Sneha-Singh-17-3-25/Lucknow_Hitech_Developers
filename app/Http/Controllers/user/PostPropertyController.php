@@ -20,142 +20,10 @@ class PostPropertyController extends Controller
         // dd('hi');
         $ResidentialProperty = DB::table('property_types')->where('property_category_id', 1)->get();
         $CommercialProperty = DB::table('property_types')->where('property_category_id', 2)->get();
+        $PlotLandProperty = DB::table('property_types')->where('property_category_id', 3)->get();
         // dd($ResidentialProperty);
-        return view('landing_page/postproperty/postproperty', compact('ResidentialProperty', 'CommercialProperty'));
+        return view('landing_page/postproperty/postproperty', compact('ResidentialProperty', 'CommercialProperty', 'PlotLandProperty'));
     }
-
-
-
-    // public function storeResidentialPropertyy(Request $request)
-    // {
-
-
-    //     // $validate = $request->validate([
-    //     //     'pincode' => 'required|string|max:10',
-    //     //     'city' => 'required|string|max:100',
-    //     //     'state' => 'required|string|max:100',
-    //     //     'address' => 'required|string',
-    //     //     'want_for' => 'required|string',
-    //     //     'res_property_type' => 'required|string',
-    //     //     // 'commer_property_type' => 'required|string',
-    //     //     'possession_status' => 'required|string',
-    //     //     'res_plot_area' => 'nullable|numeric',
-    //     //     'res_plot_area_unit' => 'nullable|string',
-    //     //     'res_super_area' => 'nullable|numeric',
-    //     //     'res_super_area_unit' => 'nullable|string',
-    //     //     'res_bedrooms' => 'nullable|integer',
-    //     //     'res_balconies' => 'nullable|integer',
-    //     //     'res_rooms' => 'nullable|integer',
-    //     //     'res_total_floors' => 'nullable|integer',
-    //     //     'res_furnished' => 'nullable|string',
-    //     //     'res_bathrooms' => 'nullable|integer',
-    //     //     'res_no_open_sides' => 'nullable|integer',
-    //     //     'res_road_facing_plot' => 'nullable|numeric',
-    //     //     'res_road_facing_plot_unit' => 'nullable|string',
-
-    //     //     'currleasedout' => 'required|string',
-    //     //     'expect_price' => 'required|numeric',
-    //     //     'photos.*' => 'image|max:5120',
-
-    //     // ]);
-
-
-
-
-    //     // Validate required fields
-    //     // $validate = $request->validate([
-    //     //     'pincode' => 'required|string|max:10',
-    //     //     'city' => 'required|string|max:100',
-    //     //     'state' => 'required|string|max:100',
-    //     //     'address' => 'required|string',
-    //     //     'want_for' => 'required|string',
-    //     //     'res_property_type' => 'required|string',
-    //     //     'commer_property_type' => 'required|string',
-
-
-    //     //     'possession_status' => 'required|string',
-    //     //     'res_plot_area' => 'nullable|numeric',
-    //     //     'res_plot_area_unit' => 'nullable|string',
-    //     //     'res_super_area' => 'nullable|numeric',
-    //     //     'res_super_area_unit' => 'nullable|string',
-    //     //     'res_bedrooms' => 'nullable|integer',
-    //     //     'res_balconies' => 'nullable|integer',
-    //     //     'res_rooms' => 'nullable|integer',
-    //     //     'res_total_floors' => 'nullable|integer',
-    //     //     'res_furnished' => 'nullable|string',
-    //     //     'res_bathrooms' => 'nullable|integer',
-    //     //     'res_no_open_sides' => 'nullable|integer',
-    //     //     'res_road_facing_plot' => 'nullable|numeric',
-    //     //     'res_road_facing_plot_unit' => 'nullable|string',
-
-
-    //     //     'commer_plot_area' => 'required|numeric|min:0',
-    //     //     'commer_plot_are_unit' => 'required|string',
-    //     //     'commer_super_area' => 'nullable|numeric|min:0',
-    //     //     'commer_super_are_unit' => 'nullable|string',
-    //     //     'commer_floor_no' => 'required|string',
-    //     //     'commer_total_floor' => 'required|string',
-    //     //     'commer_furnished_status' => 'required|string',
-    //     //     'commer_washrooms' => 'required|string',
-    //     //     'commer_perwashroom' => 'required|string',
-    //     //     'commer_pantry' => 'required|string',
-
-
-    //     //     'currleasedout' => 'required|string',
-    //     //     'expect_price' => 'required|numeric',
-    //     //     'photos.*' => 'image|max:5120',
-
-
-
-
-
-
-
-
-    //     // $resPropertyType = $request->input('res_property_type');
-    //     // $commerPropertyType = $request->input('commer_property_type');
-
-    //     $category = $request->property_category;
-
-    //     // 1. Save Location
-    //     $location = Locations::create([
-    //         'pincode' => $request->input('pincode'),
-    //         'city' => $request->input('city'),
-    //         'state' => $request->input('state'),
-    //         'address' => $request->input('address'),
-    //     ]);
-
-    //     // 2. Save Residential Property
-    //     if ($category == 'residential') {
-    //         ResidentialProperty::create([
-    //             'location_id' => $location->id,
-    //             'want_for' => $request->input('want_for'),
-    //             'property_type' => $request->input('res_property_type'),
-    //             'poss_status' => $request->input('possession_status'),
-    //             'plot_area' => $request->input('res_plot_area'),
-    //             'plot_area_unit' => $request->input('res_plot_area_unit'),
-    //             'super_area' => $request->input('res_super_area'),
-    //             'super_area_unit' => $request->input('res_super_area_unit'),
-    //             'bedrooms' => $request->input('res_bedrooms'),
-    //             'balconies' => $request->input('res_balconies'),
-    //             'total_rooms' => $request->input('res_rooms'),
-    //             'total_floors' => $request->input('res_total_floors'),
-    //             'furnished_status' => $request->input('res_furnished'),
-    //             'bathrooms' => $request->input('res_bathrooms'),
-    //             'open_sides' => $request->input('res_no_open_sides'),
-    //             'w_road_facing' => $request->input('res_road_facing_plot'),
-    //             'w_road_facing_unit' => $request->input('res_road_facing_plot_unit'),
-    //             'leased_out' => $request->input('currleasedout') == 'yes' ? true : false,
-    //             'property_price' => $request->input('expect_price'),
-    //         ]);
-    //     }
-
-
-    //     return response()->json([
-    //         'message' => 'Property saved successfully!',
-    //         'status' => 'success',
-    //     ]);
-    // }
 
 
     public function storeResidentialProperty(Request $request)
@@ -175,17 +43,17 @@ class PostPropertyController extends Controller
 
             // residential
             'res_property_type_hidden' => 'string',
-            'res_plot_area' => 'numeric|min:0',
+            'res_plot_area' => 'numeric',
             'res_plot_area_unit' => 'string',
-            'res_super_area' => 'nullable|numeric|min:0',
+            'res_super_area' => 'numeric|min:0',
             'res_super_area_unit' => 'nullable',
-            'res_bedrooms' => 'nullable|regex:/^\d+$/',
-            'res_balconies' => 'nullable|regex:/^\d+$/',
-            'res_rooms' => 'nullable|regex:/^\d+$/',
-            'res_total_floors' => 'nullable|regex:/^\d+$/',
-            'res_bathrooms' => 'nullable|regex:/^\d+$/',
+            'res_bedrooms' => 'string',
+            'res_balconies' => 'string',
+            'res_rooms' => 'string',
+            'res_total_floors' => 'string',
+            'res_bathrooms' => 'string',
             'res_furnished' => 'nullable|string',
-            'res_no_open_sides' => 'nullable|integer',
+            'res_no_open_sides' => 'nullable',
             'res_road_facing_plot' => 'nullable|numeric',
             'res_road_facing_plot_unit' => 'nullable',
 
@@ -197,10 +65,10 @@ class PostPropertyController extends Controller
             'commer_plot_area_unit' => 'string',
             'commer_super_area' => 'nullable|numeric|min:0',
             'commer_super_area_unit' => 'nullable',
-            'commer_floor_no' => 'nullable|regex:/^\d+$/',
-            'commer_total_floor' => 'nullable|regex:/^\d+$/',
+            'commer_floor_no' => 'string',
+            'commer_total_floor' => 'string',
             'commer_furnished_status' => 'nullable',
-            'commer_washrooms' => 'nullable|regex:/^\d+$/',
+            'commer_washrooms' => 'string',
             'commer_perwashroom' => 'string',
             'commer_pantry' => 'nullable',
             'created_at' => now(),
@@ -208,18 +76,19 @@ class PostPropertyController extends Controller
 
 
             // common    
-            // 'common_no_open_sides' => 'string',
-            // 'common_w_road_facing' => 'numeric',
-            // 'common_w_road_facing_unit' => 'string',
-            // 'common_cornerplot' => 'string',
-            // 'common_construction' => 'string',
-            // 'common_boundaryWall' => 'string',
-            // 'common_plotland_area' => 'numeric|min:0',
-            // 'common_plotland_area_unit' => 'string',
-            // 'common_plotland_length' => 'nullable|numeric|min:0',
-            // 'common_plotland_length_unit' => 'string',
-            // 'common_plotland_breath' => 'nullable|numeric|min:0',
-            // 'common_plotland_breath_unit' => 'string',
+            'plotland_property_type' => 'string',
+            'common_no_open_sides' => 'string',
+            'common_w_road_facing' => 'numeric',
+            'common_w_road_facing_unit' => 'string',
+            'common_cornerplot' => 'string',
+            'common_construction' => 'string',
+            'common_boundaryWall' => 'string',
+            'common_plotland_area' => 'numeric|min:0',
+            'common_plotland_area_unit' => 'string',
+            'common_plotland_length' => 'nullable|numeric|min:0',
+            'common_plotland_length_unit' => 'string',
+            'common_plotland_breath' => 'nullable|numeric|min:0',
+            'common_plotland_breath_unit' => 'string',
 
         ]);
 
@@ -295,28 +164,29 @@ class PostPropertyController extends Controller
             ]);
         }
 
-        // if ($category == 'plotland') {
-        //     $plotLandProperty = PlotLandProperty::create([
-        //         'location_id'              => $location->id,
-        //         'want_for'                 => $validated['want_for'],
-        //         'poss_status'              => $validated['possession_status'],
-        //         'leased_out'               => $validated['currleasedout'],
-        //         'price'                    => $validated['expect_price'],
+        if ($category == 'plotland') {
+            $plotLandProperty = PlotLandProperty::create([
+                'location_id'              => $location->id,
+                'want_for'                 => $validated['want_for'],
+                'poss_status'              => $validated['possession_status'],
+                'leased_out'               => $validated['currleasedout'],
+                'price'                    => $validated['expect_price'],
 
-        //         'no_open_sides'            => $validated['common_no_open_sides'],
-        //         'road_facing_width'        => $validated['common_w_road_facing'],
-        //         'road_facing_width_unit'   => $validated['common_w_road_facing_unit'],
-        //         'is_corner_plot'           => $validated['common_cornerplot'],
-        //         'has_construction'         => $validated['common_construction'],
-        //         'has_boundary_wall'        => $validated['common_boundaryWall'],
-        //         'plot_area'                => $validated['common_plotland_area'],
-        //         'plot_area_unit'           => $validated['common_plotland_area_unit'],
-        //         'plot_length'              => $validated['common_plotland_length'],
-        //         'plot_length_unit'         => $validated['common_plotland_length_unit'],
-        //         'plot_breath'              => $validated['common_plotland_breath'],
-        //         'plot_breath_unit'         => $validated['common_plotland_breath_unit'],
-        //     ]);
-        // }
+                'property_type'            => $validated['plotland_property_type'],
+                'no_open_sides'            => $validated['common_no_open_sides'],
+                'w_road_facing'            => $validated['common_w_road_facing'],
+                'w_road_facing_unit'       => $validated['common_w_road_facing_unit'],
+                'corner_plot'              => $validated['common_cornerplot'],
+                'const_plot'                => $validated['common_construction'],
+                'boundary_wall_made'        => $validated['common_boundaryWall'],
+                'plot_land_area'                => $validated['common_plotland_area'] ?? 0,
+                'plot_land_area_unit'           => $validated['common_plotland_area_unit'],
+                'plot_land_length'              => $validated['common_plotland_length'],
+                'plot_land_length_unit'         => $validated['common_plotland_length_unit'],
+                'plot_land_breath'              => $validated['common_plotland_breath'],
+                'plot_land_breath_unit'         => $validated['common_plotland_breath_unit'],
+            ]);
+        }
 
 
         return response()->json([

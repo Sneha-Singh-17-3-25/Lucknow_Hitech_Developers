@@ -200,18 +200,24 @@
                 <!-- Property Category Selection -->
                 <div class="mb-8">
                     <label class="block text-gray-700 font-medium mb-3">Property Category</label>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <button type="button" id="residential-btn"
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <button type="button" id="residential-btn" data-category="residential"
                             class="property-type-btn active flex items-center justify-center px-4 py-3 border-2 rounded-md border-gray-200 hover:border-saffron transition-all">
                             <i class="fas fa-home mr-2"></i>
                             <span>Residential</span>
                         </button>
-                        <button type="button" id="commercial-btn"
+                        <button type="button" id="commercial-btn" data-category="commercial"
                             class="property-type-btn flex items-center justify-center px-4 py-3 border-2 rounded-md border-gray-200 hover:border-saffron transition-all">
                             <i class="fas fa-building mr-2"></i>
                             <span>Commercial</span>
                         </button>
+                        <button type="button" id="plotland-btn" data-category="plotland"
+                            class="property-type-btn flex items-center justify-center px-4 py-3 border-2 rounded-md border-gray-200 hover:border-saffron transition-all">
+                            <i class="fas fa-building mr-2"></i>
+                            <span>Plot\Land</span>
+                        </button>
                     </div>
+
 
                     <!-- Residential Sub-options -->
                     <div id="residential-options" class="property-sub-options">
@@ -247,6 +253,24 @@
                         </div>
                     </div>
                     <input type="hidden" class="hidden-input" id="idcommertype" name="commer-property-type-hidden" value="{{$Ctype->property_type}}">
+
+                    <!-- plot/land Sub-options (Hidden by default) -->
+                    <div id="plotland-options" class="property-sub-options hidden">
+                        <label class="block text-gray-700 text-sm mb-2">Property Category</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
+                            @foreach($PlotLandProperty as $Ptype)
+                            <div class="sub-property-option plotland-option border rounded-md p-3 cursor-pointer hover:bg-saffron/5 transition-all text-center"
+                                data-plot-type="{{ strtolower($Ptype->property_type) }}"
+                                onclick="document.getElementById('idplotlandtype').value = '{{ $Ptype->property_type }}'">
+                                <div class="text-saffron mb-1">
+                                    <i class="fas {{ $Ptype->icon_class }}"></i>
+                                </div>
+                                <span class="text-sm">{{ $Ptype->property_type }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" class="hidden-input" id="idplotlandtype" name="plotland-property-type-hidden" value="{{$Ptype->property_type}}">
 
                 </div>
 
@@ -869,7 +893,7 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="input-group">
-                                                        <select class="form-select focus-ring-amber hover-amber" name="common_no_road_facing_unit">
+                                                        <select class="form-select focus-ring-amber hover-amber" name="common_w_road_facing_unit">
                                                             <option selected value="Meters">Meters</option>
                                                             <option value="Feet">Feet</option>
                                                         </select>
@@ -981,7 +1005,7 @@
                                                 <div class="col-4">
                                                     <div class="input-group">
                                                         <select class="form-select focus-ring-amber hover-amber" name="common_plotland_area_unit">
-                                                            <option selected>Sq-ft</option>
+                                                            <option value="Sq-ft">Sq-ft</option>
                                                             <option value="Sq-m">Sq-m</option>
                                                             <option value="Sq-yrd">Sq-yrd</option>
                                                             <option value="Acres">Acres</option>
@@ -1014,7 +1038,7 @@
                                                 <div class="col-4">
                                                     <div class="input-group">
                                                         <select class="form-select focus-ring-amber hover-amber" name="common_plotland_length_unit">
-                                                            <option selected value="ft">ft</option>
+                                                            <option value="ft">ft</option>
                                                             <option value="m">m</option>
                                                             <option value="yrd">yrd</option>
                                                         </select>
@@ -1041,7 +1065,7 @@
                                                 <div class="col-4">
                                                     <div class="input-group">
                                                         <select class="form-select focus-ring-amber hover-amber" name="common_plotland_breath_unit">
-                                                            <option selected value="ft">ft</option>
+                                                            <option value="ft">ft</option>
                                                             <option value="m">m</option>
                                                             <option value="yrd">yrd</option>
                                                         </select>
@@ -1133,7 +1157,9 @@
     @push('script')
     <!-- external postproperty script -->
     <script src="{{asset('js/postproperty.js')}}"></script>
-
+    <script>
+        var PropertyChoosen;
+    </script>
     <!-- JavaScript for interactions -->
     <!-- <script>
         document.getElementById('property-form').addEventListener('submit', function(e) {
@@ -1193,63 +1219,114 @@
     </script>
 
 
-    <!-- this script for open plot/land form for residensial -->
+
+
+    <!-- script for open residential , commercial and plotland forms on clicking the button -->
     <script>
-        document.querySelectorAll('.residential-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const type = this.getAttribute('data-res-type');
+        document.addEventListener('DOMContentLoaded', function() {
 
-                const plotForm = document.getElementById('plot-land-form');
-                const residentialForm = document.getElementById("residential-common-form");
-                const commercialForm = document.getElementById("commercial-common-form");
+            const buttons = {
+                residential: document.getElementById('residential-btn'),
+                commercial: document.getElementById('commercial-btn'),
+                plotland: document.getElementById('plotland-btn'),
+            };
 
-                plotForm.classList.add('hidden');
+            const optionBlocks = {
+                residential: document.getElementById('residential-options'),
+                commercial: document.getElementById('commercial-options'),
+                plotland: document.getElementById('plotland-options'),
+            };
 
-                if (type === 'residential plot/land') {
+            const forms = {
+                residential: document.getElementById('residential-common-form'),
+                commercial: document.getElementById('commercial-common-form'),
+                plotland: document.getElementById('plot-land-form'),
+            };
 
-                    document.getElementById('plot-land-form').classList.remove('hidden');
-                    residentialForm.style.display = "none";
-                    commercialForm.style.display = "none";
+            const allButtons = document.querySelectorAll('.property-type-btn');
+            const allOptionBlocks = document.querySelectorAll('.property-sub-options');
+            let activeCategory = 'residential'; // default
 
-                } else {
+            function disableFormFields(form) {
+                if (!form) return;
+                form.querySelectorAll('input, select, textarea, button[type="submit"]').forEach(field => {
+                    // console.log("field");
 
-                    residentialForm.style.display = "block";
-                    commercialForm.style.display = "none";
-                    document.getElementById('plot-land-form').classList.add('hidden');
+                    field.disabled = true;
+                    if (field.name) {
+                        // console.log("removing name");
+                        field.dataset.originalName = field.name;
+                        field.removeAttribute('name');
+                    }
+                    field.style.opacity = '0.5';
+                    field.style.pointerEvents = 'none';
+                });
+            }
 
-                }
+            function enableFormFields(form) {
+                if (!form) return;
+                form.querySelectorAll('input, select, textarea, button[type="submit"]').forEach(field => {
+                    field.disabled = false;
+                    if (field.dataset.originalName) {
+                        field.name = field.dataset.originalName;
+                    }
+                    field.style.opacity = '1';
+                    field.style.pointerEvents = 'auto';
+                });
+            }
+
+            function showCategory(type) {
+                activeCategory = type;
+                PropertyChoosen = type;
+
+                // Deactivate all buttons and hide all option blocks
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                allOptionBlocks.forEach(block => block.classList.add('hidden'));
+
+                // Disable all forms and hide them
+                Object.entries(forms).forEach(([formType, form]) => {
+                    // console.log(formType);
+                    // console.log(form);
+                    if (!form) return;
+                    if (formType === type) {
+                        form.style.display = 'block';
+                        enableFormFields(form);
+                    } else {
+                        form.style.display = 'none';
+                        disableFormFields(form);
+                    }
+                });
+
+                // Show correct options and activate button
+                if (buttons[type]) buttons[type].classList.add('active');
+                if (optionBlocks[type]) optionBlocks[type].classList.remove('hidden');
+            }
+
+            // Prevent submission of non-active forms
+            Object.entries(forms).forEach(([formType, form]) => {
+                if (!form) return;
+                form.addEventListener('submit', function(e) {
+                    if (formType !== activeCategory) {
+                        e.preventDefault();
+                        alert(`Only the "${activeCategory}" form is allowed to submit.`);
+                    }
+                });
             });
+
+            // Attach event listeners to category buttons
+            buttons.residential?.addEventListener('click', () => showCategory('residential'));
+            buttons.commercial?.addEventListener('click', () => showCategory('commercial'));
+            buttons.plotland?.addEventListener('click', () => showCategory('plotland'));
+
+            // Initialize with default category
+            showCategory('residential');
         });
     </script>
 
 
-    <!-- this script for open plot/land form for Commercial -->
-    <script>
-        document.querySelectorAll('.commercial-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const type = this.getAttribute('data-com-type');
 
-                const plotForm = document.getElementById('plot-land-form');
-                const residentialForm = document.getElementById("residential-common-form");
-                const commercialForm = document.getElementById("commercial-common-form");
 
-                plotForm.classList.add('hidden');
 
-                if (type === 'industrial land' || type === 'commercial land/plot' || type ===
-                    'agricultural land') {
-
-                    document.getElementById('plot-land-form').classList.remove('hidden');
-                    commercialForm.style.display = "none";
-                    residentialForm.style.display = "none";
-                } else {
-
-                    commercialForm.style.display = "block";
-                    residentialForm.style.display = "none";
-                    document.getElementById('plot-land-form').classList.add('hidden');
-                }
-            });
-        });
-    </script>
 
 
     <!-- pincode api -->
@@ -1272,11 +1349,9 @@
                     })
                     .catch(error => {
                         console.error("Error fetching pincode data:", error);
-                        // alert("Something went wrong. Please try again later.");
                         showToast('Error', 'Something went wrong. Please try again later.', 'bx bx-error', 'bg-danger');
                     });
             } else {
-                // alert("Please enter a valid 6-digit pincode.");
                 showToast('Error', 'Please enter a valid 6-digit pincode.', 'bx bx-error', 'bg-danger');
             }
         });
@@ -1342,13 +1417,19 @@
             const formData = new FormData();
             let propertyCategory = '';
 
-            const resPropertyType = document.querySelector('input[name="res-property-type_hidden"]')?.value;
-            const commerPropertyType = document.querySelector('input[name="commer-property-type-hidden"]')?.value;
+            const selectedUnit = document.querySelector('select[name="common_plotland_breath_unit"]')?.value;
+            console.log("Selected breadth unit:", selectedUnit);
 
-            console.log(resPropertyType);
-            console.log(commerPropertyType);
 
-            if (resPropertyType == 'Flat/Apartment' || resPropertyType == 'Residential House' || resPropertyType == 'Villa' || resPropertyType == 'Independent House' || resPropertyType == 'Farm House' || resPropertyType == 'Pent House') {
+
+            // console.log(resPropertyType);
+            // console.log(commerPropertyType);
+            // console.log(plotlandPropertyType);
+
+            // console.log(resPropertyType);
+            // console.log(commerPropertyType);
+
+            if (PropertyChoosen == 'residential') {
                 propertyCategory = 'residential';
                 formData.append('property_category', propertyCategory);
                 formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
@@ -1376,16 +1457,16 @@
                 formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
                 formData.append('expect_price', document.getElementById('expect-price').value);
 
-                 for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
+                // for (let [key, value] of formData.entries()) {
+                //     console.log(`${key}: ${value}`);
+                // }
 
             }
 
 
 
             // for commercial form 
-            if (commerPropertyType == 'Office Space' || commerPropertyType == 'Shop/Showroom' || commerPropertyType == 'Warehouse/Godown' || commerPropertyType == 'Industrial Building') {
+            if (PropertyChoosen == 'commercial') {
 
                 propertyCategory = 'commercial';
 
@@ -1419,35 +1500,41 @@
 
 
             // for common form
-            // if (resPropertyType == 'Residential Plot/Land' || commerPropertyType == 'Industrial Land' || commerPropertyType == 'Commercial Land/Plot' || commerPropertyType == 'Agricultural Land') {
+            if (PropertyChoosen == 'plotland') {
 
-            //     propertyCategory = 'plotland';
+                propertyCategory = 'plotland';
 
-            //     const commonPropertyType = document.querySelector('input[name="res-property-type_hidden"]')?.value ||
-            //         document.querySelector('input[name="commer-property-type-hidden"]')?.value || '';
+                formData.append('property_category', propertyCategory);
 
-            //     formData.append('property_category', propertyCategory);
-            //     formData.append('property_type', commonPropertyType);
-            //     formData.append('common_no_open_sides', document.querySelector('input[name="common_no_open_sides"]')?.value);
-            //     formData.append('common_w_road_facing', document.querySelector('input[name="common_w_road_facing"]')?.value);
-            //     formData.append('common_w_road_facing_unit', document.querySelector('input[name="common_w_road_facing_unit"]')?.value);
-            //     formData.append('common_cornerplot', document.querySelector('input[name="common_cornerplot"]')?.value);
-            //     formData.append('common_construction', document.querySelector('input[name="common_construction"]')?.value);
-            //     formData.append('common_boundaryWall', document.querySelector('input[name="common_boundaryWall"]')?.value);
-            //     formData.append('common_plotland_area', document.querySelector('input[name="common_plotland_area"]')?.value);
-            //     formData.append('common_plotland_area_unit', document.querySelector('input[name="common_plotland_area_unit"]')?.value);
-            //     formData.append('common_plotland_length', document.querySelector('input[name="common_plotland_length"]')?.value);
-            //     formData.append('common_plotland_length_unit', document.querySelector('input[name="common_plotland_length_unit"]')?.value);
-            //     formData.append('common_plotland_breath', document.querySelector('input[name="common_plotland_breath"]')?.value);
-            //     formData.append('common_plotland_breath_unit', document.querySelector('input[name="common_plotland_breath_unit"]')?.value);
+                formData.append('want_for', document.querySelector('input[name="intent"]:checked')?.value);
+                formData.append('plotland_property_type', document.querySelector('input[name="plotland-property-type-hidden"]')?.value);
+                formData.append('pincode', document.getElementById('pincode').value);
+                formData.append('city', document.getElementById('city').value);
+                formData.append('state', document.getElementById('state').value);
+                formData.append('address', document.getElementById('address').value);
+                formData.append('possession_status', document.querySelector('input[name="possession-status"]:checked')?.value);
 
+                formData.append('common_no_open_sides', document.querySelector('select[name="common_no_open_sides"]')?.value);
+                formData.append('common_w_road_facing', document.querySelector('input[name="common_w_road_facing"]')?.value);
+                formData.append('common_w_road_facing_unit', document.querySelector('select[name="common_w_road_facing_unit"]')?.value);
+                formData.append('common_cornerplot', document.querySelector('input[name="common_cornerplot"]')?.value);
+                formData.append('common_construction', document.querySelector('input[name="common_construction"]')?.value);
+                formData.append('common_boundaryWall', document.querySelector('input[name="common_boundaryWall"]')?.value);
+                formData.append('common_plotland_area', document.querySelector('input[name="common_plotland_area"]')?.value);
+                formData.append('common_plotland_area_unit', document.querySelector('select[name="common_plotland_area_unit"]')?.value);
+                formData.append('common_plotland_length', document.querySelector('input[name="common_plotland_length"]')?.value);
+                formData.append('common_plotland_length_unit', document.querySelector('select[name="common_plotland_length_unit"]')?.value);
+                formData.append('common_plotland_breath', document.querySelector('input[name="common_plotland_breath"]')?.value);
+                formData.append('common_plotland_breath_unit', document.querySelector('select[name="common_plotland_breath_unit"]')?.value);
 
-            //     for (let [key, value] of formData.entries()) {
-            //         console.log(`${key}: ${value}`);
-            //     }
+                formData.append('currleasedout', document.querySelector('input[name="currleasedout"]:checked')?.value);
+                formData.append('expect_price', document.getElementById('expect-price').value);
 
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
 
-            // }
+            }
 
 
 
@@ -1467,7 +1554,6 @@
                     console.error('Error:', error);
                     alert('Failed to save property!');
                 });
-
 
         }
     </script>
