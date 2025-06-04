@@ -104,6 +104,8 @@ class PostPropertyController extends Controller
 
         $validated = $validator->validated();
 
+        $user = auth()->user();
+
 
         $location = Locations::create([
             'pincode' => $validated['pincode'],
@@ -115,6 +117,7 @@ class PostPropertyController extends Controller
         if ($category == 'residential') {
             $residentialProperty = ResidentialProperty::create([
                 'location_id'           => $location->id,
+                'user_id'               =>$user->id ?? 0,
                 'want_for'              => $validated['want_for'],
                 'property_type'         => $validated['res_property_type_hidden'],
                 'poss_status'           => $validated['possession_status'],
@@ -143,6 +146,7 @@ class PostPropertyController extends Controller
         if ($category == 'commercial') {
             $commercialProperty = CommercialProperty::create([
                 'location_id'      => $location->id,
+                'user_id'          =>$user->id,
                 'want_for'         => $validated['want_for'],
                 'poss_status'      => $validated['possession_status'],
                 'leased_out'       => $validated['currleasedout'],
@@ -167,6 +171,7 @@ class PostPropertyController extends Controller
         if ($category == 'plotland') {
             $plotLandProperty = PlotLandProperty::create([
                 'location_id'              => $location->id,
+                'user_id'                  =>$user->id,
                 'want_for'                 => $validated['want_for'],
                 'poss_status'              => $validated['possession_status'],
                 'leased_out'               => $validated['currleasedout'],

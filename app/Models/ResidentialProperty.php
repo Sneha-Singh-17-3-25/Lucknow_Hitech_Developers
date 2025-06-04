@@ -16,6 +16,7 @@ class ResidentialProperty extends Model
     protected $fillable = [
         'location_id',
         'property_type',
+        'user_id',
         'want_for',
         'poss_status',
         'plot_area',

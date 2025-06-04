@@ -1,462 +1,336 @@
-<style>
-div.dataTables_wrapper div.dataTables_length label {
-    margin-left: 10px;
-}
-
-div.dataTables_wrapper div.dataTables_info {
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
-
-div.dataTables_wrapper div.dataTables_filter label {
-    margin-right: 10px;
-}
-
-button:not(:disabled),
-[type=button]:not(:disabled),
-[type=reset]:not(:disabled),
-[type=submit]:not(:disabled) {
-    margin-right: 10px;
-}
-
-
-div.dataTables_wrapper div.dataTables_paginate ul.pagination {
-    margin-right: 20px;
-    margin-top: 10px;
-}
-</style>
-
-
-
-
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Tables - Properties Table')
+@section('title', 'Permissions Management')
 
+@section('vendor-style')
+<style>
+    /* Add vertical padding to the row */
+    #permissionsTable_length,
+    #permissionsTable_filter {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* Align search input to the end of the column */
+    #permissionsTable_filter {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .swal-toast-zindex {
+        z-index: 9999 !important;
+    }
+
+    .reject-input:checked {
+        background-color: red;
+        border-color: red;
+    }
+</style>
+
+@endsection
 
 @section('content')
-<!-- <h4 class="py-3 mb-4">
-    <span class="text-muted fw-light">Tables /</span> Users Table
-</h4> -->
-
-<!-- Bootstrap DataTable -->
-<div class="card">
-    <!-- Table will have its header inserted by DataTables initComplete -->
-    <div class="card-datatable table-responsive">
-        <table class="table border-top dt-responsive nowrap" id="projectTable">
-            <thead>
-                <tr>
-                    <th>Project</th>
-                    <th>Client</th>
-                    <th>Users</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-                <tr>
-                    <td><i class="bx bxl-angular bx-sm text-danger me-3"></i> <span class="fw-medium">Angular
-                            Project</span></td>
-                    <td>Albert Cook</td>
-                    <td>
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                <img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                <img src="{{asset('assets/img/avatars/6.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Christina Parker">
-                                <img src="{{asset('assets/img/avatars/7.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                        </ul>
-                    </td>
-                    <td><span class="badge bg-label-primary me-1">Active</span></td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"><i
-                                        class="fa-solid fa-pen fa-beat"></i>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i
-                                        class="fa-solid fa-trash fa-beat"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i class="bx bxl-react bx-sm text-info me-3"></i> <span class="fw-medium">React Project</span>
-                    </td>
-                    <td>Barry Hunter</td>
-                    <td>
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                <img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                <img src="{{asset('assets/img/avatars/6.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Christina Parker">
-                                <img src="{{asset('assets/img/avatars/7.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                        </ul>
-                    </td>
-                    <td><span class="badge bg-label-success me-1">Completed</span></td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i>
-                                    Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
-                                    Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i class="bx bxl-vuejs bx-sm text-success me-3"></i> <span class="fw-medium">VueJs
-                            Project</span></td>
-                    <td>Trevor Baker</td>
-                    <td>
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                <img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                <img src="{{asset('assets/img/avatars/6.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Christina Parker">
-                                <img src="{{asset('assets/img/avatars/7.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                        </ul>
-                    </td>
-                    <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i>
-                                    Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
-                                    Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i class="bx bxl-bootstrap bx-sm text-primary me-3"></i> <span class="fw-medium">Bootstrap
-                            Project</span></td>
-                    <td>Jerry Milton</td>
-                    <td>
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                <img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                <img src="{{asset('assets/img/avatars/6.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="Christina Parker">
-                                <img src="{{asset('assets/img/avatars/7.png')}}" alt="Avatar" class="rounded-circle">
-                            </li>
-                        </ul>
-                    </td>
-                    <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i>
-                                    Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
-                                    Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <form id="propertyForm" class="needs-validation" novalidate>
-                <div class="modal-header">
-                    <h5 class="modal-title">Add New Property</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Permissions Management Card -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <h5 class="card-title mb-0">Roles Management</h5>
+                    <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#addRolesModal">
+                        <i class="fa-solid fa-plus me-2"></i>
+                        <span>Add Role</span>
+                    </button>
                 </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="rolesTable"
+                            class="table table-hover table-striped align-middle dt-responsive nowrap w-100">
+                            <thead class="table-light">
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Property Type</th>
+                                    <th>Want For</th>
+                                    <th>Status</th>
+                                    <th>Plot Area</th>
+                                    <th>Furnished</th>
+                                    <th>price</th>
+                                    <th>Approved Status</th>
+                                    <!-- <th>Reject Status</th> -->
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                $sr = 1;
+                                @endphp
+                                @foreach($allProperties as $property)
+                                <tr>
+                                    <td> {{$sr++}}</td>
+                                    <td>{{$property->name}}</td>
+                                    <td>{{$property->email}}</td>
+                                    <td>{{$property->phone}}</td>
+                                    <td>{{$property->property_type}}</td>
+                                    <td>{{$property->want_for}}</td>
+                                    <td>{{$property->poss_status}}</td>
+                                    <td>{{$property->plot_area}}</td>
+                                    <td>{{$property->furnished}}</td>
+                                    <td>{{$property->price}}</td>
+                                    <td class="text-center">
+                                        <select class="form-select w-auto status-select" data-location-id="{{ $property->location_id }}" data-property-type="{{ $property->property_type }}">
+                                            <option selected disabled>Select Status</option>
+                                            <option value="approve">Approve</option>
+                                            <option value="reject">Reject</option>
+                                            <option value="pending">Pending</option>
+                                        </select>
+                                    </td>
 
-                <div class="modal-body">
+                                    <td class="text-center">
+                                        <div class="d-inline-flex">
+                                            <button type="button" class="btn btn-sm btn-icon btn-outline-primary me-2"
+                                                data-bs-toggle="modal" data-bs-target="#EditRoleModal"
 
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="propertyName" class="form-label">Property Name <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" id="propertyName" class="form-control" placeholder="Enter property name"
-                                required>
-                            <div class="invalid-feedback">Please enter the property name.</div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="propertyPrice" class="form-label">Price (₹) <span
-                                    class="text-danger">*</span></label>
-                            <input type="number" id="propertyPrice" class="form-control" placeholder="Enter price"
-                                required min="1">
-                            <div class="invalid-feedback">Please enter a valid price greater than 0.</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Features</label>
-                            <div id="featuresWrapper">
-                                <div class="input-group mb-2">
-                                    <input type="text" name="features[]" class="form-control"
-                                        placeholder="Enter a feature">
-                                    <button type="button" class="btn btn-secondary addFeatureBtn">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Property Images</label>
-                            <div id="imagesWrapper">
-                                <div class="input-group mb-2">
-                                    <input type="file" name="images[]" class="form-control" accept="image/*">
-                                    <button type="button" class="btn btn-secondary addImageBtn">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 🆕 Property Title Field -->
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="propertyTitle" class="form-label">Property Title <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" id="propertyTitle" class="form-control"
-                                placeholder="Enter property title" required>
-                            <div class="invalid-feedback">Property title is required.</div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="propertyDescription" class="form-label">Description</label>
-                            <textarea id="propertyDescription" class="form-control" rows="3"
-                                placeholder="Enter description (optional)"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="propertyAddress" class="form-label">Address <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" id="propertyAddress" class="form-control" placeholder="Enter address"
-                                required>
-                            <div class="invalid-feedback">Address is required.</div>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-4 mb-3">
-                            <label for="propertyCity" class="form-label">City <span class="text-danger">*</span></label>
-                            <input type="text" id="propertyCity" class="form-control" placeholder="Enter city" required>
-                            <div class="invalid-feedback">City is required.</div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="propertyState" class="form-label">State <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" id="propertyState" class="form-control" placeholder="Enter state"
-                                required>
-                            <div class="invalid-feedback">State is required.</div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="propertyPincode" class="form-label">Pincode <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" id="propertyPincode" class="form-control"
-                                placeholder="Enter 6-digit pincode" required pattern="^\d{6}$">
-                            <div class="invalid-feedback">Please enter a valid 6-digit pincode.</div>
-                        </div>
+                                                onclick="openEditRoleModal(this)">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-icon btn-outline-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-secondary">Save Property</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 
+@endsection
 
+@section('vendor-script')
+<!-- SweetAlert2 JS -->
 
+@endsection
 
+@section('page-script')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // DataTable initialization
-    const projectTable = new DataTable('#projectTable', {
-        processing: true,
-        responsive: true,
-        // Default ordering (sorting)
-        order: [
-            [0, 'asc']
-        ],
-        // Search, pagination, and info display
-        searching: true,
-        paging: true,
-        info: true,
-        pageLength: 10,
-        lengthMenu: [5, 10, 25, 50, 75, 100],
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize DataTable with advanced options
+        const permissionsTable = document.getElementById('rolesTable');
+        const dataTable = new DataTable(permissionsTable, {
+            responsive: false,
+            scrollX: true,
 
-        // DOM layout configuration
-        dom: '<"card-header d-flex flex-column flex-md-row align-items-center justify-content-between"' +
-            '<"head-label text-center"><"dt-action-buttons text-end"B>>' +
-            '<"row"' +
-            '<"col-sm-12 col-md-6"l>' +
-            '<"col-sm-12 col-md-6"f>>' +
-            '<"table-responsive"t>' +
-            '<"row"' +
-            '<"col-sm-12 col-md-6"i>' +
-            '<"col-sm-12 col-md-6"p>>',
-
-        // Buttons definition
-        buttons: [{
-            extend: 'collection',
-            className: 'btn btn-label-primary dropdown-toggle me-2',
-            text: '<i class="bx bx-export me-1"></i> Export',
-            buttons: [{
-                    extend: 'print',
-                    text: '<i class="bx bx-printer me-1"></i> Print',
-                    className: 'dropdown-item'
-                },
-                {
-                    extend: 'csv',
-                    text: '<i class="bx bx-file me-1"></i> CSV',
-                    className: 'dropdown-item'
-                },
-                {
-                    extend: 'excel',
-                    text: '<i class="bx bx-file me-1"></i> Excel',
-                    className: 'dropdown-item'
-                },
-                {
-                    extend: 'pdf',
-                    text: '<i class="bx bx-file-pdf me-1"></i> PDF',
-                    className: 'dropdown-item'
+            order: [
+                [0, 'asc']
+            ],
+            language: {
+                search: '<i class="fa-solid fa-search"></i>',
+                searchPlaceholder: 'Search roles...',
+                emptyTable: '<div class="text-center p-4"><i class="fa-solid fa-database fa-2x text-muted mb-3"></i><p>No roles found</p></div>',
+                paginate: {
+                    first: '<i class="fa-solid fa-angles-left"></i>',
+                    previous: '<i class="fa-solid fa-angle-left"></i>',
+                    next: '<i class="fa-solid fa-angle-right"></i>',
+                    last: '<i class="fa-solid fa-angles-right"></i>'
                 }
-            ]
-        }],
+            },
+            lengthMenu: [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, 'All']
+            ],
+            dom: '<"row align-items-center"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rtip',
 
-        // Initialized the header title
-        initComplete: function() {
-            const headerTitle = document.querySelector('.head-label');
-            if (headerTitle) {
-                headerTitle.innerHTML = '<h5 class="card-title mb-0">Properties Table</h5>';
+        });
+
+        // We'll create buttons later when appending to container
+
+        // Add the export buttons to the proper container
+        const buttonsContainer = document.querySelector('#permissionsTable_wrapper .col-md-6:nth-child(1)');
+
+        // Create buttons and get their container node
+        const buttons = new DataTable.Buttons(dataTable, {
+            buttons: [{
+                extend: 'collection',
+                text: '<i class="fa-solid fa-download me-1"></i> Export',
+                className: 'btn btn-sm btn-outline-primary ms-2',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ]
+            }]
+        });
+
+        // The .container() method returns a jQuery object in DataTables, so we need to 
+        // access its DOM node in vanilla JS
+        const buttonNode = buttons.container();
+
+        // Check if we have a valid node to append
+        if (buttonsContainer && buttonNode && buttonNode.nodeType === Node.ELEMENT_NODE) {
+            buttonsContainer.appendChild(buttonNode);
+        } else if (buttonsContainer && buttonNode && buttonNode[0]) {
+            // If buttonNode is a jQuery object or array-like object
+            buttonsContainer.appendChild(buttonNode[0]);
+        }
+
+    });
+
+
+
+    // Confirm delete role
+    function confirmRoleDelete(id, name) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You are about to delete role: "${name}"`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteRole(id, name);
             }
+        });
+    }
 
-            // Add User button
-            const addUserBtn = document.createElement('button');
-            addUserBtn.innerHTML =
-                '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add New User</span>';
-            addUserBtn.className = 'btn btn-primary';
-            addUserBtn.addEventListener('click', function() {
-                const myModal = new bootstrap.Modal(document.getElementById(
-                    'addUserModal'));
-                myModal.show();
+    // Delete role
+    function deleteRole(id, name) {
+        fetch("{{ url('roles/delete') }}/" + id, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    const dataTable = $('#rolesTable').DataTable();
+                    const deleteButton = document.querySelector(
+                        `button[onclick="confirmRoleDelete('${response.role.id}', '${response.role.name}')"]`
+                    );
+
+                    if (deleteButton) {
+                        const row = deleteButton.closest('tr');
+                        dataTable.row(row).remove().draw();
+                    }
+
+                    showToast('Success', 'Role deleted successfully.', 'bx bx-check', 'bg-success');
+                } else {
+                    showToast('Error', 'Failed to delete role.', 'bx bx-error', 'bg-danger');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Error', 'Something went wrong. Please try again.', 'bx bx-error', 'bg-danger');
             });
+    }
 
-            const buttonsContainer = document.querySelector('.dt-action-buttons');
-            if (buttonsContainer) {
-                buttonsContainer.prepend(addUserBtn);
-            }
-        }
+
+    // function toshow the toast-----------------------------------------
+    function showToast(title, message, iconClass, bgColor) {
+        const toastHTML = `
+        <div class="bs-toast toast fade show ${bgColor} text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header ${bgColor} text-white">
+                <i class='${iconClass} me-2'></i>
+                <strong class="me-auto">${title}</strong>
+           .     <small>Just now</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                ${message}
+            </div>
+        </div>
+    `;
+
+        document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
+
+        const toastEl = document.querySelector('#toast-container .toast:last-child');
+        const bsToast = new bootstrap.Toast(toastEl, {
+            delay: 3000
+        });
+        bsToast.show();
+    }
+
+
+
+
+    // Custom styling for DataTables
+    window.addEventListener('load', function() {
+        // Style search box
+        const searchInputs = document.querySelectorAll('.dataTables_filter input');
+        searchInputs.forEach(input => {
+            input.classList.add('form-control-sm', 'rounded-pill', 'px-3');
+            input.setAttribute('placeholder', 'Search permissions...');
+        });
+
+        const searchLabels = document.querySelectorAll('.dataTables_filter label');
+        searchLabels.forEach(label => {
+            label.classList.add('d-flex', 'align-items-center', 'gap-2');
+        });
+
+        // Style length menu
+        const lengthSelects = document.querySelectorAll('.dataTables_length select');
+        lengthSelects.forEach(select => {
+            select.classList.add('form-select', 'form-select-sm', 'rounded-pill', 'ms-2');
+        });
+
+        const lengthLabels = document.querySelectorAll('.dataTables_length label');
+        lengthLabels.forEach(label => {
+            label.classList.add('d-flex', 'align-items-center');
+        });
+
+        // Style pagination
+        const paginationDivs = document.querySelectorAll('.dataTables_paginate');
+        paginationDivs.forEach(div => {
+            div.classList.add('mt-3');
+        });
+
+        const paginateButtons = document.querySelectorAll('.paginate_button');
+        paginateButtons.forEach(button => {
+            button.classList.add('px-3', 'py-1', 'rounded-2');
+        });
     });
 
-    // Initialize tooltips for the table
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
+
+    // script for approved status 
+    document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', function() {
+            const LocationId = this.dataset.locationId;
+            const propertyType = this.dataset.propertyType;
+            const status = this.value;
+
+            // AJAX POST request to Laravel route
+            fetch(`/update-property-status/${LocationId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        locationId:LocationId,
+                        status: status,
+                        property_type: propertyType
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Status updated:', data.message);
+                })
+                .catch(error => {
+                    console.error('Error updating status:', error);
+                });
+        });
     });
-});
 </script>
-<!--/ Bootstrap DataTable -->
-
-<!-- script for modal validation -->
-<script>
-(function() {
-    'use strict';
-    const form = document.getElementById('propertyForm');
-    form.addEventListener('submit', function(event) {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            alert('Form is valid and ready to submit!');
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
-            modal.hide();
-        }
-        form.classList.add('was-validated');
-    }, false);
-})();
-</script>
-
-
-<!-- features and images input fields script -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Add more features
-    document.querySelector('#featuresWrapper').addEventListener('click', function(e) {
-        if (e.target.classList.contains('addFeatureBtn')) {
-            const newFeature = document.createElement('div');
-            newFeature.classList.add('input-group', 'mb-2');
-            newFeature.innerHTML = `
-                <input type="text" name="features[]" class="form-control" placeholder="Enter a feature">
-                <button type="button" class="btn btn-danger removeFeatureBtn">−</button>
-            `;
-            this.appendChild(newFeature);
-        } else if (e.target.classList.contains('removeFeatureBtn')) {
-            e.target.parentElement.remove();
-        }
-    });
-
-    // Add more images
-    document.querySelector('#imagesWrapper').addEventListener('click', function(e) {
-        if (e.target.classList.contains('addImageBtn')) {
-            const newImage = document.createElement('div');
-            newImage.classList.add('input-group', 'mb-2');
-            newImage.innerHTML = `
-                <input type="file" name="images[]" class="form-control" accept="image/*">
-                <button type="button" class="btn btn-danger removeImageBtn">−</button>
-            `;
-            this.appendChild(newImage);
-        } else if (e.target.classList.contains('removeImageBtn')) {
-            e.target.parentElement.remove();
-        }
-    });
-});
-</script>
-
-
-
-
-
 @endsection

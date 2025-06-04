@@ -13,6 +13,7 @@ class CommercialProperty extends Model
 
      protected $fillable = [
         'location_id',
+        'user_id',
         'property_type',
         'want_for',
         'poss_status',

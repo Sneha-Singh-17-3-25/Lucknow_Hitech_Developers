@@ -177,3 +177,5 @@ Route::any('/logout', function () {
 
 Route::post('/submit-residential-property', [PostPropertyController::class, 'storeResidentialProperty']);
 
+Route::post('/update-property-status/{id}', [PropertiesController::class, 'updatePropertyStatus']);
+
