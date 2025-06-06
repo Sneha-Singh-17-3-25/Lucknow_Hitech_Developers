@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('property_images');
+        Schema::dropIfExists('properties_images');
     }
 };

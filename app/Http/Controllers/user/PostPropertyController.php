@@ -194,11 +194,18 @@ class PostPropertyController extends Controller
 
 
         // Add photos to job
-        $photos = $request->file('photos', []); // multiple file inputs
+        $photoPaths = [];
 
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $filename = time() . '_' . $photo->getClientOriginalName();
+                $photo->move(public_path('image/temp'), $filename); // Save temporarily
+                $photoPaths[] = 'image/temp/' . $filename;
+            }
+        }
 
         // Dispatch job
-        StorePropertyJob::dispatch($validated, $category, $user,$photos);
+        StorePropertyJob::dispatch($validated, $category, $user, $photoPaths);
 
         return response()->json([
             'status' => true,

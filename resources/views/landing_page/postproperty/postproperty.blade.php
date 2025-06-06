@@ -1362,54 +1362,62 @@
 
     <!-- script for add photos ------------------------------------------------------------->
     <script>
+        let selectedPhotos = []; // 🔴 This stores all files user added
+
         function triggerPhotoPicker() {
             document.getElementById('photoInput').click();
         }
 
         function handlePhotoSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const photoContainer = document.getElementById("photo-container");
-                const addTile = document.getElementById("add-photo-tile");
+            const photoContainer = document.getElementById("photo-container");
+            const addTile = document.getElementById("add-photo-tile");
 
-                const tile = document.createElement("div");
-                tile.className =
-                    "w-40 h-48 border border-gray-200 rounded-md p-2 bg-white shadow-sm relative flex flex-col justify-between";
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                selectedPhotos.push(file); // 🔴 Add to global array
 
-                tile.innerHTML = `
-                <div class="absolute top-1 left-1">
-                    <input type="radio" name="defaultPhoto" class="mr-1"> <small class="text-sm">Set as Default</small>
-                </div>
-                <img src="${e.target.result}" class="mx-auto mt-5 h-24 w-32 object-cover" />
-                <div class="flex justify-between items-center mt-2">
-                    <button class="text-xs text-red-500 hover:underline remove-photo-btn">Remove</button>
-                    <span class="text-[10px] text-gray-500">Under Screening</span>
-                </div>
-            `;
-                photoContainer.insertBefore(tile, addTile);
-                bindRemoveButtons();
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const tile = document.createElement("div");
+                    tile.className =
+                        "w-40 h-48 border border-gray-200 rounded-md p-2 bg-white shadow-sm relative flex flex-col justify-between";
 
-                event.target.value = '';
-            };
+                    tile.innerHTML = `
+                    <div class="absolute top-1 left-1">
+                        <!-- You can remove this default photo section -->
+                    </div>
+                    <img src="${e.target.result}" class="mx-auto mt-5 h-24 w-32 object-cover" />
+                    <div class="flex justify-between items-center mt-2">
+                        <button class="text-xs text-red-500 hover:underline remove-photo-btn">Remove</button>
+                        <span class="text-[10px] text-gray-500">Under Screening</span>
+                    </div>
+                `;
+                    photoContainer.insertBefore(tile, addTile);
+                    bindRemoveButtons();
+                };
+                reader.readAsDataURL(file);
+            }
 
-            reader.readAsDataURL(file);
+            event.target.value = ''; // Clear input so same file can be added again if needed
         }
 
         function bindRemoveButtons() {
             const removeButtons = document.querySelectorAll('.remove-photo-btn');
-            removeButtons.forEach(btn => {
+            removeButtons.forEach((btn, index) => {
                 btn.onclick = function() {
                     const photoTile = this.closest('div.w-40');
                     if (photoTile) {
                         photoTile.remove();
+                        selectedPhotos.splice(index, 1); // 🔴 remove from array
                     }
                 };
             });
         }
     </script>
+
 
 
 
@@ -1529,10 +1537,12 @@
 
             }
 
-            const photoInput = document.getElementById('photoInput');
-            console.log(photo);
-            for (let i = 0; i < photoInput.files.length; i++) {
-                formData.append('photos[]', photoInput.files[i]);
+            for (let i = 0; i < selectedPhotos.length; i++) {
+                formData.append('photos[]', selectedPhotos[i]);
+            }
+
+            for (let pair of formData.entries()) {
+                console.log(pair[0], pair[1]);
             }
 
             fetch('/submit-residential-property', {

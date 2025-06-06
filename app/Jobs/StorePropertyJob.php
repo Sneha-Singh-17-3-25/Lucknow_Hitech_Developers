@@ -14,6 +14,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use App\Models\JobError;
 use Exception;
 
@@ -24,14 +25,14 @@ class StorePropertyJob implements ShouldQueue
     protected $validated;
     protected $category;
     protected $user;
-    protected $photos;
+    protected $photoPaths;
 
-    public function __construct($validated, $category, $user, $photos = [])
+    public function __construct($validated, $category, $user, $photoPaths = [])
     {
         $this->validated = $validated;
         $this->category = $category;
         $this->user = $user;
-        $this->photos = $photos;
+        $this->photoPaths = $photoPaths;
     }
 
     public function handle(): void
@@ -119,15 +120,45 @@ class StorePropertyJob implements ShouldQueue
                 ]);
             }
 
-            foreach ($this->photos as $photo) {
-                $imageName = time() . '_' . uniqid() . '.' . $photo->getClientOriginalExtension();
-                $photo->move(public_path('images'), $imageName); // save to public/images
 
-                PropertiesImages::create([
-                    'location_id' => $location->id, // assuming this foreign key
-                    'image_path' => 'images/' . $imageName,
-                ]);
+            // Ensure destination folder exists
+            $imageDir = public_path('image');
+            if (!File::exists($imageDir)) {
+                File::makeDirectory($imageDir, 0755, true);
             }
+
+            foreach ($this->photoPaths as $index => $path) {
+                try {
+                    $filename = basename($path);
+                    $oldFull = public_path($path);
+                    $newName = 'image/' . $filename;
+                    $newFull = public_path($newName);
+
+                    if (!file_exists($oldFull)) {
+                        Log::warning("StorePropertyJob: File not found", ['path' => $oldFull]);
+                        continue;
+                    }
+
+                    if (!rename($oldFull, $newFull)) {
+                        Log::error("StorePropertyJob: Failed to move file", ['from' => $oldFull, 'to' => $newFull]);
+                        continue;
+                    }
+
+                    $img = PropertiesImages::create([
+                        'location_id' => $location->id, // Or $residential->id based on schema
+                        'image' => $newName,
+                        'is_default' => $index === 0,
+                    ]);
+
+                    Log::info("Image saved", ['id' => $img->id]);
+                } catch (\Exception $e) {
+                    Log::error("Error saving image", [
+                        'error' => $e->getMessage(),
+                        'path' => $path,
+                    ]);
+                }
+            }
+
 
             DB::commit(); // Commit if all good
         } catch (Exception $e) {
