@@ -65,7 +65,7 @@
              </div>
 
              <!-- Post Property Button -->
-             <a href="#"
+             <a href="{{route('landing_postproperty')}}"
                  class="px-5 py-2 bg-saffron hover:bg-saffron-dark text-white rounded-md transition-colors duration-300 flex items-center">
                  <i class="fas fa-plus-circle mr-2"></i> Post Property
              </a>

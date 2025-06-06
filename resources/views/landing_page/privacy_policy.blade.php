@@ -1,67 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - SELL SQUARE Properties India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'saffron': '#FF9933',
-                        'saffron-light': '#FFB266',
-                        'saffron-dark': '#E68A00',
-                        'navy': '#0C2461',
-                        'navy-light': '#1e3799',
-                        'emerald': '#138808',
-                        'slate': '#1E293B',
-                    },
-                    fontFamily: {
-                        'sans': ['Poppins', 'Arial', 'sans-serif'],
-                        'heading': ['Montserrat', 'serif'],
-                    },
-                }
-            },
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@extends('layouts/users/app')
 
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+@push('style')
+<style>
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-        .slide-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
+    .slide-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+    }
 
-        .slide-in.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .slide-in.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-        .policy-section {
-            border-left: 4px solid #FF9933;
-        }
+    .policy-section {
+        border-left: 4px solid #FF9933;
+    }
 
-        .policy-section:hover {
-            background-color: rgba(255, 153, 51, 0.05);
-        }
-    </style>
-</head>
+    .policy-section:hover {
+        background-color: rgba(255, 153, 51, 0.05);
+    }
+</style>
+@endpush
 
+
+@section('content')
 <body class="font-sans text-slate bg-gray-50">
-    <!-- Navigation Bar Placeholder -->
-    @include('landing_page/include/navbar')
-    <!-- Privacy Policy Hero Section -->
+   
     <section class="relative flex justify-center items-center text-center h-[40vh] overflow-hidden">
         <!-- Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
@@ -644,9 +614,6 @@
         </div>
     </section>
 
-    <!-- Footer Placeholder -->
-    @include('landing_page.include.footer')
-
 
     <!-- Back to Top Button -->
     <button id="backToTop"
@@ -654,6 +621,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    @push('script')
     <!-- Animation Script for Slide-In Elements -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -718,6 +686,6 @@
             });
         });
     </script>
+    @endpush
 </body>
-
-</html>
+@endsection

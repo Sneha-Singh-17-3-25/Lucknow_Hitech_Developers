@@ -1,4 +1,6 @@
 @extends('layouts/users/app')
+
+@push('style')
 <!-- style for marquee -->
 <style>
     @keyframes marquee {
@@ -15,6 +17,10 @@
         animation: marquee 20s linear infinite;
     }
 </style>
+@endpush
+
+
+@section('content')
 
 <body class="font-sans text-slate bg-gray-50">
     <!-- this div for showToast -->
@@ -341,7 +347,7 @@
                 </div>
                 <!-- Logo 4 -->
                 <div class="w-32 md:w-40">
-                    <img src="{{asset('images/omaxe.png')}}" 1 alt="Keller Williams"
+                    <img src="{{asset('images/omaxe.png')}}" alt="Keller Williams"
                         class="w-20 h-14 opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
                 <!-- Logo 5 -->
@@ -353,12 +359,12 @@
         </div>
     </section>
 
+
     <!-- JavaScript for interactive elements -->
 
-
-
-    <script src="{{ asset('js/indexpage.js') }}"></script>
+    @push('script')
+    <script src="{{asset('js/indexpage.js')}}"></script>
+    @endpush
 
 </body>
-
-</html>
+@endsection

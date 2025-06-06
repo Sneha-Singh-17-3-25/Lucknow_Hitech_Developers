@@ -26,7 +26,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script> -->
 
 
     <script>
@@ -241,7 +241,7 @@
 
         /* login and registration css End */
     </style>
-    @yield('style')
+    @stack('style')
 </head>
 
 <body>
@@ -430,7 +430,7 @@
         </div>
     </div>
 
-    @yield('script')
+    @stack('script')
 
 
     <!-- registeration js --------------------------------->
@@ -519,7 +519,8 @@
 
     <!-- logout script -->
     <script>
-        document.getElementById('logout').addEventListener('click', function(e) {
+        if (document.getElementById('logout') != null) {
+               document.getElementById('logout').addEventListener('click', function(e) {
 
             e.preventDefault();
 
@@ -549,6 +550,8 @@
                     console.error(err);
                 });
         });
+        }
+     
     </script>
 
 
@@ -580,6 +583,22 @@
 
         }
     </script>
+
+ <!-- JavaScript for navbar scroll effect -->
+    <script>window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-navy', 'bg-opacity-95', 'shadow-md');
+            navbar.classList.remove('py-4');
+            navbar.classList.add('py-3');
+        } else {
+            navbar.classList.remove('bg-navy', 'bg-opacity-95', 'shadow-md');
+            navbar.classList.remove('py-3');
+            navbar.classList.add('py-4');
+        }
+    });
+</script>
 
 
 </body>

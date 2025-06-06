@@ -1,37 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/users/app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions - SELLSQUAREProperties India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'saffron': '#FF9933',
-                    'saffron-light': '#FFB266',
-                    'saffron-dark': '#E68A00',
-                    'navy': '#0C2461',
-                    'navy-light': '#1e3799',
-                    'emerald': '#138808',
-                    'slate': '#1E293B',
-                },
-                fontFamily: {
-                    'sans': ['Poppins', 'Arial', 'sans-serif'],
-                    'heading': ['Montserrat', 'serif'],
-                },
-            }
-        },
-    }
-    </script>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@push('style')
+<style>
 
     .text-shadow {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -161,12 +131,14 @@
     .hover-link:hover::after {
         width: 100%;
     }
-    </style>
-</head>
+</style>
+@endpush
 
+
+
+@section('content')
 <body class="font-sans text-slate bg-gray-50">
-    <!-- Navigation Bar -->
-    @include('landing_page/include/navbar')
+   
 
     <!-- Terms & Conditions Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[40vh] overflow-hidden">
@@ -671,82 +643,83 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    @push('script')
     <!-- Script for interactions -->
     <script>
-    // Show/hide navigation background on scroll
-    window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
-        const backToTopBtn = document.getElementById('back-to-top-btn');
+        // Show/hide navigation background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTopBtn = document.getElementById('back-to-top-btn');
 
-        // Show/hide back to top button
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
+            // Show/hide back to top button
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
 
-        // Add background to navbar when scrolled
-        if (navbar && window.scrollY > 50) {
-            navbar.classList.add('bg-slate');
-            navbar.classList.add('shadow-lg');
-        } else if (navbar) {
-            navbar.classList.remove('bg-slate');
-            navbar.classList.remove('shadow-lg');
-        }
-    });
-
-    // Back to top button functionality
-    document.getElementById('back-to-top-btn').addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+            // Add background to navbar when scrolled
+            if (navbar && window.scrollY > 50) {
+                navbar.classList.add('bg-slate');
+                navbar.classList.add('shadow-lg');
+            } else if (navbar) {
+                navbar.classList.remove('bg-slate');
+                navbar.classList.remove('shadow-lg');
+            }
         });
-    });
 
-    // Initialize scroll animations when the page loads
-    window.addEventListener('DOMContentLoaded', function() {
-        // Check if GSAP ScrollTrigger is available
-        if (typeof ScrollTrigger !== 'undefined') {
-            // Initialize GSAP ScrollTrigger
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Animate slide-in elements
-            const slideInElements = document.querySelectorAll('.slide-in');
-            slideInElements.forEach(element => {
-                ScrollTrigger.create({
-                    trigger: element,
-                    start: "top 80%",
-                    onEnter: () => element.classList.add('appear')
-                });
-            });
-        } else {
-            // Fallback for browsers without GSAP
-            const slideInElements = document.querySelectorAll('.slide-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('appear');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            slideInElements.forEach(element => {
-                observer.observe(element);
-            });
-        }
-
-        // Accordion functionality
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', function() {
-                const accordionItem = this.parentElement;
-                accordionItem.classList.toggle('active');
+        // Back to top button functionality
+        document.getElementById('back-to-top-btn').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
-    });
+
+        // Initialize scroll animations when the page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check if GSAP ScrollTrigger is available
+            if (typeof ScrollTrigger !== 'undefined') {
+                // Initialize GSAP ScrollTrigger
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Animate slide-in elements
+                const slideInElements = document.querySelectorAll('.slide-in');
+                slideInElements.forEach(element => {
+                    ScrollTrigger.create({
+                        trigger: element,
+                        start: "top 80%",
+                        onEnter: () => element.classList.add('appear')
+                    });
+                });
+            } else {
+                // Fallback for browsers without GSAP
+                const slideInElements = document.querySelectorAll('.slide-in');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('appear');
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                slideInElements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+
+            // Accordion functionality
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const accordionItem = this.parentElement;
+                    accordionItem.classList.toggle('active');
+                });
+            });
+        });
     </script>
+    @endpush
 </body>
-
-</html>
+@endsection

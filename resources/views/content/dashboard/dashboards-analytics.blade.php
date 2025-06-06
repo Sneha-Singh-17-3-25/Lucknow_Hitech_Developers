@@ -482,7 +482,5 @@
             </div>
         </div>
     </div>
-    <!--/ Property Transactions -->
-
 </div>
 @endsection

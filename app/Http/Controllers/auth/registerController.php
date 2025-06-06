@@ -4,9 +4,11 @@ namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+
+
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -26,12 +28,12 @@ class registerController extends Controller
 
     public function landing_register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validated::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'mobile' => 'required|unique:users|regex:/^[6-9][0-9]{9}$/',
 
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
             'userType' => 'required|in:buyer,seller,agent',
         ]);
 
@@ -58,10 +60,10 @@ class registerController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-
+        
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-
+           
+            // return 'hello';
             $user = Auth::user();
 
 
