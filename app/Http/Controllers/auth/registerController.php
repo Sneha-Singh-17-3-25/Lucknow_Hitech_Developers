@@ -64,7 +64,6 @@ class registerController extends Controller
 
             $user = Auth::user();
 
-
             if ($user->is_admin == 1) {
                 $redirectPath = route('dashboard-analytics');
             } else {

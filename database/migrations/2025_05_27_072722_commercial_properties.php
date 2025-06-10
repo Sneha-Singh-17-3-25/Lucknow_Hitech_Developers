@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('per_washrooms')->nullable();
             $table->boolean('pantry_cafeteria')->default(false); // Use underscore, not slash
             $table->boolean('leased_out')->default(false);
-            $table->decimal('price', 15, 2)->nullable();
+            $table->decimal('property_price', 15, 2)->nullable();
             $table->timestamps();
 
             // Foreign key constraint

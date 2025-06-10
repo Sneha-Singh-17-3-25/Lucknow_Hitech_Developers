@@ -6,6 +6,48 @@
     font-weight: 400;
     font-style: normal;
 }
+
+/* Enhanced active menu item styles */
+.menu-item.active {
+    background-color: transparent !important;
+    /* border-radius: 0.375rem; */
+}
+
+.menu-item.active > .menu-link {
+    color: #696cff !important;
+    font-weight: 600;
+}
+
+.menu-item.active > .menu-link i {
+    color: #696cff !important;
+    transform: scale(1.1);
+}
+
+.menu-item.active .menu-icon {
+    color: #696cff !important;
+}
+
+/* Submenu active item styles */
+.menu-sub .menu-item.active {
+    /* background-color: none !important; */
+}
+
+.menu-sub .menu-item.active > .menu-link {
+    color: #696cff !important;
+    font-weight: 500;
+}
+
+/* Hover effect for menu items */
+.menu-item:not(.active):hover {
+    background-color: rgba(105, 108, 255, 0.08);
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+/* Transition effects for smoother interactions */
+.menu-item, .menu-link, .menu-icon {
+    transition: all 0.3s ease;
+}
 </style>
 
 
@@ -22,7 +64,7 @@
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            <i class="fa-solid fa-chevron-left align-middle"></i>
         </a>
     </div>
 
@@ -43,7 +85,6 @@
     $decodedMenu = json_decode($verticalMenuJson);
 
     $menuData = [
-<<<<<<< HEAD
             (object)[
                 'menu' => $decodedMenu->menu
             ]
@@ -52,18 +93,6 @@
     
     }
     
-=======
-    (object)[
-    'menu' => $decodedMenu->menu
-    ]
-    ];
-
-
-    }
-
-
-
->>>>>>> f86465329cac696875aedcdf017dcf499179cd7c
     @endphp
 
     <ul class="menu-inner py-1">
@@ -83,24 +112,67 @@
         @php
         $activeClass = null;
         $currentRouteName = Route::currentRouteName();
+        $currentUrl = request()->path();
 
+        // Check if the current route matches this menu item
         if ($currentRouteName === $menu->slug) {
-        $activeClass = 'active';
+            $activeClass = 'active';
         }
+        // Check if the current URL matches this menu item
+        elseif (isset($menu->url) && ltrim($menu->url, '/') === $currentUrl) {
+            $activeClass = 'active';
+        }
+        // Check if any submenu is active
         elseif (isset($menu->submenu)) {
-        if (gettype($menu->slug) === 'array') {
-        foreach($menu->slug as $slug){
-        if (str_contains($currentRouteName,$slug) and strpos($currentRouteName,$slug) === 0) {
-        $activeClass = 'active open';
-        }
-        }
-        }
-        else{
-        if (str_contains($currentRouteName,$menu->slug) and strpos($currentRouteName,$menu->slug) === 0) {
-        $activeClass = 'active open';
-        }
-        }
-
+            // Check submenu items for active state
+            $hasActiveSubmenu = false;
+            
+            foreach ($menu->submenu as $submenu) {
+                // Check if submenu route matches
+                if (isset($submenu->slug) && $currentRouteName === $submenu->slug) {
+                    $hasActiveSubmenu = true;
+                    break;
+                }
+                
+                // Check if submenu URL matches
+                if (isset($submenu->url) && ltrim($submenu->url, '/') === $currentUrl) {
+                    $hasActiveSubmenu = true;
+                    break;
+                }
+                
+                // Check nested submenus if they exist
+                if (isset($submenu->submenu)) {
+                    foreach ($submenu->submenu as $nestedSubmenu) {
+                        if (isset($nestedSubmenu->slug) && $currentRouteName === $nestedSubmenu->slug) {
+                            $hasActiveSubmenu = true;
+                            break 2;
+                        }
+                        
+                        if (isset($nestedSubmenu->url) && ltrim($nestedSubmenu->url, '/') === $currentUrl) {
+                            $hasActiveSubmenu = true;
+                            break 2;
+                        }
+                    }
+                }
+            }
+            
+            if ($hasActiveSubmenu) {
+                $activeClass = ' open';
+            }
+            // Original slug-based check for backward compatibility
+            elseif (gettype($menu->slug) === 'array') {
+                foreach($menu->slug as $slug){
+                    if (str_contains($currentRouteName, $slug) && strpos($currentRouteName, $slug) === 0) {
+                        $activeClass = 'active open';
+                        break;
+                    }
+                }
+            }
+            else {
+                if (str_contains($currentRouteName, $menu->slug) && strpos($currentRouteName, $menu->slug) === 0) {
+                    $activeClass = 'active open';
+                }
+            }
         }
         @endphp
 
@@ -110,7 +182,7 @@
                 class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target)
                 and !empty($menu->target)) target="_blank" @endif>
                 @isset($menu->icon)
-                <i class="{{ $menu->icon }}"></i>
+                <i class="{{ $menu->icon }} text-primary"></i>
                 @endisset
                 <div>{{ isset($menu->name) ? __($menu->name) : '' }}</div>
                 @isset($menu->badge)

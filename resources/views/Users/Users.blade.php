@@ -1,123 +1,262 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Permissions Management')
+@section('title', 'Users Management')
 
 @section('vendor-style')
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 <style>
-/* Add vertical padding to the row */
-#permissionsTable_length,
-#permissionsTable_filter {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.card {
+    border-radius: 0.25rem !important;
+   box-shadow: 0 0.125rem 0.25rem rgba(105, 108, 255, 0.1) !important;
+    margin: 0;
 }
 
-/* Align search input to the end of the column */
-#permissionsTable_filter {
-    display: flex;
-    justify-content: flex-end;
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.25rem 1.5rem;
+}
+
+.filter-card {
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.filter-card .card-body {
+    padding: 1rem 1.5rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+#usersTable {
+    width: 100% !important;
+    margin-bottom: 0;
+}
+
+#usersTable th, #usersTable td {
+    padding: 1rem 1rem;
+    vertical-align: middle;
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+
+.status-badge {
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 500;
+    border-radius: 50rem;
+}
+
+.search-input-wrapper {
+    position: relative;
+    max-width: 300px;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #697a8d;
+}
+
+.search-input {
+    padding-left: 35px;
+    border-radius: 0.375rem;
+}
+
+.filter-dropdown {
+    min-width: 200px;
 }
 
 .swal-toast-zindex {
     z-index: 9999 !important;
 }
-</style>
 
+   
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dataTables_filter {
+    display: none !important;
+}
+</style>
 @endsection
 
 @section('content')
-<!-- Users Management Card -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                    <h5 class="card-title mb-0">Users Management</h5>
-                    <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#addRolesModal">
-                        <i class="fa-solid fa-plus me-2"></i>
-                        <span>Add Role</span>
-                    </button>
+<!-- Filter Section -->
+<div class="container-fluid">
+    <div class="card filter-card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    {{-- <label for="filter-name" class="form-label">Name</label> --}}
+                    <input type="text" id="filter-name" onchange="applyFilters()" class="form-control" placeholder="Filter by name">
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="usersTable"
-                            class="table table-hover table-striped align-middle dt-responsive nowrap w-100">
-                            <thead class="table-light">
-                                <tr>
-                                    <th width="5%">#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Mobile</th>
-                                    <th width="20%">Created At</th>
-                                    <th width="10%" class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $sr =1;
-                                @endphp
-                                @foreach($users as $user)
-                                <tr>
-                                    <td>{{ $sr++ }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->mobile }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                    <td class="text-center">
-                                        <div class="d-inline-flex">
-                                            <button type="button" class="btn btn-sm btn-icon btn-outline-primary me-2"
-                                                data-bs-toggle="modal" data-bs-target="#EditUserModal"
-                                                data-id="{{ $user->id }}" data-name="{{ $user->name }}"
-                                                data-email="{{$user->email}}" data-mobile="{{$user->mobile}}"
-                                                onclick="openEditUserModal(this)">
-                                                <i class="fa-solid fa-pen"></i>
-                                            </button>
-                                            <button type="button"
-                                                class="btn btn-sm btn-icon btn-outline-danger btn-delete-user"
-                                                onclick="confirmUsersDelete('{{ $user->id }}', '{{ $user->name }}')">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="col-12 col-md-6 col-lg-2 mb-3 mb-md-0">
+                    {{-- <label for="filter-email" class="form-label">Email</label> --}}
+                    <input type="text" id="filter-email" class="form-control" placeholder="Filter by email">
                 </div>
+                <div class="col-12 col-md-6 col-lg-2 mb-3 mb-lg-0">
+                    {{-- <label for="filter-mobile" class="form-label">Mobile</label> --}}
+                    <input type="text" id="filter-mobile" class="form-control" placeholder="Filter by mobile">
+                </div>
+            <div class="col-12 col-md-6 col-lg-5  d-flex align-items-end">
+    <div class="row w-100 g-2">
+        <div class="col-6">
+            <button type="button" id="apply-filters" class="btn btn-primary w-100">
+                <i class="fa-solid fa-filter me-2"></i>Apply Filters
+            </button>
+        </div>
+        <div class="col-6">
+            <button type="button" id="reset-filters" class="btn btn-outline-secondary w-100">
+                <i class="fa-solid fa-rotate me-2"></i>Reset
+            </button>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Users Management Card -->
+<div class="container-fluid">
+    <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h5 class="card-title mb-0">Users Management</h5>
+            <div class="header-actions">
+                <div id="length-control-container"></div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-download me-2"></i>Export
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+                        <li><a class="dropdown-item" href="#" id="export-csv"><i class="fa-solid fa-file-csv me-2"></i>CSV</a></li>
+                        <li><a class="dropdown-item" href="#" id="export-excel"><i class="fa-solid fa-file-excel me-2"></i>Excel</a></li>
+                        <li><a class="dropdown-item" href="#" id="export-pdf"><i class="fa-solid fa-file-pdf me-2"></i>PDF</a></li>
+                        <li><a class="dropdown-item" href="#" id="export-print"><i class="fa-solid fa-print me-2"></i>Print</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="fa-solid fa-plus me-2"></i>
+                    <span>Add User</span>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="usersTable" class="table table-hover table-striped align-middle dt-responsive nowrap w-100">
+                    <thead class="table-light">
+                        <tr>
+                            <th width="5%">#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th width="20%">Created At</th>
+                            <th width="10%" class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $sr =1;
+                        @endphp
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{ $sr++ }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-sm me-3">
+                                        <div class="avatar-initial rounded-circle bg-label-primary">{{ substr($user->name, 0, 1) }}</div>
+                                    </div>
+                                    <div>
+                                        <span class="fw-medium">{{ $user->name }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->mobile }}</td>
+                            <td>{{ $user->created_at }}</td>
+                            <td class="text-center">
+                                <div class="d-inline-flex">
+                                    <button type="button" class="btn btn-sm btn-icon btn-outline-primary me-2"
+                                        data-bs-toggle="modal" data-bs-target="#EditUserModal"
+                                        data-id="{{ $user->id }}" data-name="{{ $user->name }}"
+                                        data-email="{{$user->email}}" data-mobile="{{$user->mobile}}"
+                                        onclick="openEditUserModal(this)" title="Edit User">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-sm btn-icon btn-outline-danger btn-delete-user"
+                                        onclick="confirmUsersDelete('{{ $user->id }}', '{{ $user->name }}')" 
+                                        title="Delete User">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Add Users Modal -->
-<div class="modal fade" id="addRolesModal" tabindex="-1" aria-hidden="true">
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add New Role</h5>
+                <h5 class="modal-title">Add New User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addRoleForm">
+                <form id="addUserForm">
                     <div class="mb-3">
-                        <label for="roleInput" class="form-label">Role Name</label>
-                        <input type="text" id="roleInput" class="form-control" placeholder="Enter role name">
-                        <div class="invalid-feedback">Please enter a valid role name.</div>
+                        <label for="nameInput" class="form-label">Name</label>
+                        <input type="text" id="nameInput" class="form-control" placeholder="Enter user name">
+                        <div class="invalid-feedback">Please enter a valid name.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Email</label>
+                        <input type="email" id="emailInput" class="form-control" placeholder="Enter email address">
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobileInput" class="form-label">Mobile</label>
+                        <input type="text" id="mobileInput" class="form-control" placeholder="Enter mobile number">
+                        <div class="invalid-feedback">Please enter a valid mobile number.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">Password</label>
+                        <input type="password" id="passwordInput" class="form-control" placeholder="Enter password">
+                        <div class="invalid-feedback">Please enter a valid password.</div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveRoleBtn">
+                <button type="button" class="btn btn-primary" id="saveUserBtn">
                     <i class="fa-solid fa-save me-1"></i> Save
                 </button>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Edit User Modal -->
 <div class="modal fade" id="EditUserModal" tabindex="-1" aria-hidden="true">
@@ -157,164 +296,295 @@
     </div>
 </div>
 
-
+<!-- Toast Container -->
+<div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;"></div>
 
 @endsection
 
 @section('vendor-script')
 <!-- SweetAlert2 JS -->
-
+<script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 @endsection
 
 @section('page-script')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize DataTable with advanced options
-    const permissionsTable = document.getElementById('usersTable');
-    const dataTable = new DataTable(permissionsTable, {
+    const usersTable = document.getElementById('usersTable');
+    const usersDataTable = new DataTable(usersTable, {
         responsive: true,
         order: [
             [0, 'asc']
         ],
         language: {
-            search: '<i class="fa-solid fa-search"></i>',
-            searchPlaceholder: 'Search roles...',
-            emptyTable: '<div class="text-center p-4"><i class="fa-solid fa-database fa-2x text-muted mb-3"></i><p>No roles found</p></div>',
+            search: '',
+            searchPlaceholder: 'Search users...',
+            emptyTable: '<div class="text-center p-4"><i class="fa-solid fa-users fa-2x text-muted mb-3"></i><p>No users found</p></div>',
             paginate: {
                 first: '<i class="fa-solid fa-angles-left"></i>',
                 previous: '<i class="fa-solid fa-angle-left"></i>',
                 next: '<i class="fa-solid fa-angle-right"></i>',
                 last: '<i class="fa-solid fa-angles-right"></i>'
-            }
+            },
+            lengthMenu: 'Show _MENU_'
         },
         lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, 'All']
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, 'All']
         ],
-        dom: '<"row align-items-center"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rtip',
-
+        dom: '<"d-none"f><"#top-controls"l>rt<"row align-items-center"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'CSV',
+                className: 'btn btn-sm btn-outline-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'excel',
+                text: 'Excel',
+                className: 'btn btn-sm btn-outline-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'pdf',
+                text: 'PDF',
+                className: 'btn btn-sm btn-outline-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'print',
+                text: 'Print',
+                className: 'btn btn-sm btn-outline-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            }
+        ]
     });
 
-    // We 'll create buttons later when appending to container
+    // Make the dataTable globally accessible
+    window.usersDataTable = usersDataTable;
 
-    // Add the
-    // export buttons to the proper container
-    // const buttonsContainer = document.querySelector('#permissionsTable_wrapper .col-md-6:nth-child(1)');
+    // Move the length control to the header
+    const lengthControl = document.querySelector('.dataTables_length');
+    const lengthControlContainer = document.getElementById('length-control-container');
+    if (lengthControl && lengthControlContainer) {
+        lengthControlContainer.appendChild(lengthControl);
+    }
 
-    // // Create buttons and get their container node
-    // const buttons = new DataTable.Buttons(dataTable, {
-    //     buttons: [{
-    //         extend: 'collection',
-    //         text: '<i class="fa-solid fa-download me-1"></i> Export',
-    //         className: 'btn btn-sm btn-outline-primary ms-2',
-    //         buttons: [
-    //             'csv', 'excel', 'pdf', 'print'
-    //         ]
-    //     }]
-    // });
+    // Style length menu
+    const lengthSelects = document.querySelectorAll('.dataTables_length select');
+    lengthSelects.forEach(select => {
+        select.classList.add('form-select', 'form-select-sm', 'rounded-3');
+    });
 
-    // // The.container() method returns a jQuery object in DataTables, so we need to
-    // // access its DOM node in vanilla JS
-    // const buttonNode = buttons.container();
+    // Export buttons functionality
+    document.getElementById('export-csv').addEventListener('click', function(e) {
+        e.preventDefault();
+        usersDataTable.button('.buttons-csv').trigger();
+    });
 
-    // Check
-    // // if we have a valid node to append
-    // if (buttonsContainer && buttonNode && buttonNode.nodeType === Node.ELEMENT_NODE) {
-    //     buttonsContainer.appendChild(buttonNode);
-    // } else if (buttonsContainer && buttonNode && buttonNode[0]) {
-    //     // If buttonNode is a jQuery object or array-like object
-    //     buttonsContainer.appendChild(buttonNode[0]);
-    // }
+    document.getElementById('export-excel').addEventListener('click', function(e) {
+        e.preventDefault();
+        usersDataTable.button('.buttons-excel').trigger();
+    });
 
+    document.getElementById('export-pdf').addEventListener('click', function(e) {
+        e.preventDefault();
+        usersDataTable.button('.buttons-pdf').trigger();
+    });
 
-    // add new roles script-----------------------------------------------------------------------------
-    const saveRoleBtn = document.getElementById('saveRoleBtn');
-    if (saveRoleBtn) {
-        saveRoleBtn.addEventListener('click', function() {
-            const roleInput = document.getElementById('roleInput');
-            const roleName = roleInput.value.trim();
+    document.getElementById('export-print').addEventListener('click', function(e) {
+        e.preventDefault();
+        usersDataTable.button('.buttons-print').trigger();
+    });
+
+    // Filter functionality
+    document.getElementById('apply-filters').addEventListener('click', function() {
+        applyFilters();
+    });
+
+    document.getElementById('reset-filters').addEventListener('click', function() {
+        document.getElementById('filter-name').value = '';
+        document.getElementById('filter-email').value = '';
+        document.getElementById('filter-mobile').value = '';
+        usersDataTable.search('').columns().search('').draw();
+    });
+
+    function applyFilters() {
+        const nameFilter = document.getElementById('filter-name').value;
+        const emailFilter = document.getElementById('filter-email').value;
+        const mobileFilter = document.getElementById('filter-mobile').value;
+
+        // Apply column-specific filtering
+        usersDataTable.column(1).search(nameFilter);
+        usersDataTable.column(2).search(emailFilter);
+        usersDataTable.column(3).search(mobileFilter);
+        
+        usersDataTable.draw();
+    }
+
+    // Add new user script
+    const saveUserBtn = document.getElementById('saveUserBtn');
+    if (saveUserBtn) {
+        saveUserBtn.addEventListener('click', function() {
+            const nameInput = document.getElementById('nameInput');
+            const emailInput = document.getElementById('emailInput');
+            const mobileInput = document.getElementById('mobileInput');
+            const passwordInput = document.getElementById('passwordInput');
+            
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const mobile = mobileInput.value.trim();
+            const password = passwordInput.value.trim();
 
             // Validate input
-            if (!roleName) {
-                roleInput.classList.add('is-invalid');
-                return;
+            let valid = true;
+            
+            if (!name) {
+                nameInput.classList.add('is-invalid');
+                valid = false;
             } else {
-                roleInput.classList.remove('is-invalid');
+                nameInput.classList.remove('is-invalid');
             }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                emailInput.classList.add('is-invalid');
+                valid = false;
+            } else {
+                emailInput.classList.remove('is-invalid');
+            }
+            
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+                mobileInput.classList.add('is-invalid');
+                valid = false;
+            } else {
+                mobileInput.classList.remove('is-invalid');
+            }
+            
+            if (!password || password.length < 6) {
+                passwordInput.classList.add('is-invalid');
+                valid = false;
+            } else {
+                passwordInput.classList.remove('is-invalid');
+            }
+
+            if (!valid) return;
 
             // Show loading state
             const originalText = this.innerHTML;
-            this.innerHTML =
-                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
+            this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
             this.disabled = true;
 
-            // Send fetch request
-            fetch("{{ route('roles_store') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": '{{ csrf_token() }}',
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        name: roleName
-                    })
+            // Add your user creation API call here
+            // This is a placeholder for the user creation API call
+            // Replace with your actual API endpoint
+            fetch("", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    mobile: mobile,
+                    password: password
                 })
-                .then(response => response.json())
-                .then(response => {
-                    if (response.success) {
-                        // Close modal and reset form
-                        const modalElement = document.getElementById('addRolesModal');
-                        if (modalElement) {
-                            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
-                            modalInstance.hide();
-                        }
-                        roleInput.value = '';
-
-                        // Add new row to DataTable
-                        const newRow = [
-                            dataTable.rows().count() + 1,
-                            response.role.name,
-                            response.role.created_at,
-                            response.role.updated_at,
-                            `<div class="d-inline-flex">
-                            <button type="button" class="btn btn-sm btn-icon btn-outline-primary me-2"
-                                data-bs-toggle="modal" data-bs-target="#EditPermissionModal"
-                                data-id="${response.role.id}" data-name="${response.role.name}"
-                                onclick="openEditModal(this)">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-icon btn-outline-danger" 
-                                onclick="confirmDelete(${response.role.id}, '${response.role.name}')">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>`
-                        ];
-
-                        dataTable.row.add(newRow).draw(false);
-                        showToast('Success', 'Role added successfully.', 'bx bx-check',
-                            'bg-success');
-                    } else {
-                        showToast('Error', 'Failed to add role.', 'bx bx-error', 'bg-danger');
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    // Close modal and reset form
+                    const modalElement = document.getElementById('addUserModal');
+                    if (modalElement) {
+                        const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+                        modalInstance.hide();
                     }
-                })
-                .catch(error => {
-                    showToast('Error', 'Something went wrong. Please try again.', 'bx bx-error',
-                        'bg-danger');
-                    console.error('Error:', error);
-                })
-                .finally(() => {
-                    // Reset button state
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                });
+                    
+                    // Reset form fields
+                    nameInput.value = '';
+                    emailInput.value = '';
+                    mobileInput.value = '';
+                    passwordInput.value = '';
+
+                    notyf.success('User added successfully.');
+                    
+                    // Add the new user to the DataTable
+                    const newRowData = createUserRowData(response.user);
+                    addRowToDataTable(newRowData);
+                } else {
+                    notyf.error('Failed to add user.');
+                }
+            })
+            .catch(error => {
+                notyf.error('Something went wrong. Please try again.');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Reset button state
+                this.innerHTML = originalText;
+                this.disabled = false;
+            });
         });
     }
 
+    // Style pagination
+    const paginationDivs = document.querySelectorAll('.dataTables_paginate');
+    paginationDivs.forEach(div => {
+        div.classList.add('mt-3');
+    });
 });
 
+// Helper function to create user row data
+function createUserRowData(user) {
+    // Get the current number of rows for serial number
+    const rowCount = window.usersDataTable.rows().count() + 1;
+    
+    return {
+        DT_RowId: `user-${user.id}`,
+        0: rowCount,
+        1: `<div class="d-flex align-items-center">
+                <div class="avatar avatar-sm me-3">
+                    <div class="avatar-initial rounded-circle bg-label-primary">${user.name.charAt(0)}</div>
+                </div>
+                <div>
+                    <span class="fw-medium">${user.name}</span>
+                </div>
+            </div>`,
+        2: user.email,
+        3: user.mobile,
+        4: user.created_at,
+        5: `<div class="d-inline-flex">
+                <button type="button" class="btn btn-sm btn-icon btn-outline-primary me-2"
+                    data-bs-toggle="modal" data-bs-target="#EditUserModal"
+                    data-id="${user.id}" data-name="${user.name}"
+                    data-email="${user.email}" data-mobile="${user.mobile}"
+                    onclick="openEditUserModal(this)" title="Edit User">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-delete-user"
+                    onclick="confirmUsersDelete('${user.id}', '${user.name}')" 
+                    title="Delete User">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>`
+    };
+}
 
-
+// Helper function to add a row to the DataTable
+function addRowToDataTable(rowData) {
+    window.usersDataTable.row.add(Object.values(rowData)).draw();
+}
 
 // Open User Edit Modal
 function openEditUserModal(element) {
@@ -370,71 +640,100 @@ function updateUser() {
 
     const btn = document.querySelector('#EditUserModal .btn-primary');
     const originalText = btn.innerHTML;
-    btn.innerHTML =
-        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating...';
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating...';
     btn.disabled = true;
 
     fetch("{{ route('users_update') }}", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                id,
-                name,
-                email,
-                mobile
-            })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            id,
+            name,
+            email,
+            mobile
         })
-        .then(response => response.json())
-        .then(response => {
-            if (response.success) {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('EditUserModal'));
-                modal.hide();
-                document.body.classList.remove('modal-open');
-                document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    })
+    .then(response => response.json())
+    .then(response => {
+        if (response.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('EditUserModal'));
+            modal.hide();
+            document.body.classList.remove('modal-open');
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
 
-
-                const rowButton = document.querySelector(`#usersTable button[data-id="${id}"]`);
-                if (rowButton) {
-                    const tr = rowButton.closest('tr');
-                    const dataTable = $('#usersTable').DataTable();
-
-                    const rowIndex = dataTable.row(tr).index();
-                    const rowData = dataTable.row(tr).data();
-
-                    rowData[1] = name; // Name
-                    rowData[2] = email;
-                    rowData[3] = mobile; // Mobile
-
-                    dataTable.row(rowIndex).data(rowData).draw(false);
-                }
-
-                showToast('Success', 'User updated successfully.', 'bx bx-check', 'bg-success');
-            } else {
-                showToast('Error', 'Failed to update user.', 'bx bx-error', 'bg-danger');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showToast('Error', 'Something went wrong. Please try again.', 'bx bx-error', 'bg-danger');
-        })
-        .finally(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        });
+            notyf.success('User updated successfully.');
+            
+            // Update the row in the DataTable
+            updateDataTableRow(id, name, email, mobile, response.user.updated_at);
+        } else {
+            notyf.error('Failed to update user.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        notyf.error('Something went wrong. Please try again.');
+    })
+    .finally(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    });
 }
 
+// Function to update a row in the DataTable
+function updateDataTableRow(id, name, email, mobile, updatedAt) {
+    // Find the row with the matching data-id
+    const rows = window.usersDataTable.rows().nodes();
+    for (let i = 0; i < rows.length; i++) {
+        const editButton = rows[i].querySelector(`button[data-id="${id}"]`);
+        if (editButton) {
+            const rowData = window.usersDataTable.row(rows[i]).data();
+            
+            // Update the name cell
+            rowData[1] = `<div class="d-flex align-items-center">
+                <div class="avatar avatar-sm me-3">
+                    <div class="avatar-initial rounded-circle bg-label-primary">${name.charAt(0)}</div>
+                </div>
+                <div>
+                    <span class="fw-medium">${name}</span>
+                </div>
+            </div>`;
+            
+            // Update email and mobile cells
+            rowData[2] = email;
+            rowData[3] = mobile;
+            
+            // Update the actions cell to reflect the new data
+            rowData[5] = `<div class="d-inline-flex">
+                <button type="button" class="btn btn-sm btn-icon btn-outline-primary me-2"
+                    data-bs-toggle="modal" data-bs-target="#EditUserModal"
+                    data-id="${id}" data-name="${name}"
+                    data-email="${email}" data-mobile="${mobile}"
+                    onclick="openEditUserModal(this)" title="Edit User">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-delete-user"
+                    onclick="confirmUsersDelete('${id}', '${name}')" 
+                    title="Delete User">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>`;
+            
+            // Redraw the row with the updated data
+            window.usersDataTable.row(rows[i]).data(rowData).draw(false);
+            break;
+        }
+    }
+}
 
-
-
-// Confirm delete role
+// Confirm delete user
 function confirmUsersDelete(id, name) {
     Swal.fire({
         title: 'Are you sure?',
-        text: `You are about to delete role: "${name}"`,
+        text: `You are about to delete user: "${name}"`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -448,108 +747,58 @@ function confirmUsersDelete(id, name) {
     });
 }
 
-// Delete role
+// Delete user
 function deleteUsers(id) {
     fetch("{{ url('users/delete') }}/" + id, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(response => {
-            console.log(response); // corrected: "consol.log" → "console.log"
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        if (response.success) {
+            notyf.success('User deleted successfully.');
 
-            if (response.success) {
-                const dataTable = $('#usersTable').DataTable();
-                const deleteButton = document.querySelector(
-                    `button[onclick="confirmUsersDelete('${response.user.id}', '${response.user.name}','${response.user.email}','${response.user.mobile}','${response.user.created_at}')"]`
-                );
-
-                const row = $(`#usersTable .btn-delete-user[data-id="${id}"]`).closest('tr');
-                dataTable.row(row).remove().draw();
-                showToast('Success', 'User deleted successfully.', 'bx bx-check', 'bg-success');
-
-                // 🔄 Refresh the page after short delay
-                setTimeout(() => {
-                    location.reload();
-                }, 400); // delay 1 second (optional, for showing toast)
-            } else {
-                showToast('Error', 'Failed to delete User.', 'bx bx-error', 'bg-danger');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showToast('Error', 'Something went wrong. Please try again.', 'bx bx-error', 'bg-danger');
-        });
+            // Remove the row from the DataTable
+            removeRowFromDataTable(id);
+        } else {
+            notyf.error('Failed to delete User.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        notyf.error('Something went wrong. Please try again.');
+    });
 }
 
-
-
-// function toshow the toast-----------------------------------------
-function showToast(title, message, iconClass, bgColor) {
-    const toastHTML = `
-        <div class="bs-toast toast fade show ${bgColor} text-white" role="alert" aria-live="assertive" aria-atomUic="true">
-            <div class="toast-header ${bgColor} text-white">
-                <i class='${iconClass} me-2'></i>
-                <strong class="me-auto">${title}</strong>
-           .     <small>Just now</small>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                ${message}
-            </div>
-        </div>
-    `;
-
-    document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
-
-    const toastEl = document.querySelector('#toast-container .toast:last-child');
-    const bsToast = new bootstrap.Toast(toastEl, {
-        delay: 3000
-    });
-    bsToast.show();
+// Function to remove a row from the DataTable
+function removeRowFromDataTable(id) {
+    // Find the row with the delete button that has the matching onclick attribute
+    const rows = window.usersDataTable.rows().nodes();
+    for (let i = 0; i < rows.length; i++) {
+        const deleteButton = rows[i].querySelector(`button[onclick*="confirmUsersDelete('${id}"]`);
+        if (deleteButton) {
+            // Remove the row
+            window.usersDataTable.row(rows[i]).remove().draw();
+            
+            // Update serial numbers
+            updateSerialNumbers();
+            break;
+        }
+    }
 }
 
-
-
-
-// Custom styling for DataTables
-window.addEventListener('load', function() {
-    // Style search box
-    const searchInputs = document.querySelectorAll('.dataTables_filter input');
-    searchInputs.forEach(input => {
-        input.classList.add('form-control-sm', 'rounded-pill', 'px-3');
-        input.setAttribute('placeholder', 'Search permissions...');
+// Function to update serial numbers after deletion
+function updateSerialNumbers() {
+    const rows = window.usersDataTable.rows();
+    rows.every(function(index) {
+        const data = this.data();
+        data[0] = index + 1;
+        this.data(data);
     });
-
-    const searchLabels = document.querySelectorAll('.dataTables_filter label');
-    searchLabels.forEach(label => {
-        label.classList.add('d-flex', 'align-items-center', 'gap-2');
-    });
-
-    // Style length menu
-    const lengthSelects = document.querySelectorAll('.dataTables_length select');
-    lengthSelects.forEach(select => {
-        select.classList.add('form-select', 'form-select-sm', 'rounded-pill', 'ms-2');
-    });
-
-    const lengthLabels = document.querySelectorAll('.dataTables_length label');
-    lengthLabels.forEach(label => {
-        label.classList.add('d-flex', 'align-items-center');
-    });
-
-    // Style pagination
-    const paginationDivs = document.querySelectorAll('.dataTables_paginate');
-    paginationDivs.forEach(div => {
-        div.classList.add('mt-3');
-    });
-
-    const paginateButtons = document.querySelectorAll('.paginate_button');
-    paginateButtons.forEach(button => {
-        button.classList.add('px-3', 'py-1', 'rounded-2');
-    });
-});
+    window.usersDataTable.draw(false);
+}
 </script>
 @endsection

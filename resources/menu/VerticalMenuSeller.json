@@ -3,13 +3,13 @@
         {
             "url": "/",
             "name": "Dashboard",
-            "icon": "menu-icon tf-icons bx bx-home-circle",
+            "icon": "menu-icon tf-icons fa-solid fa-gauge-high",
             "slug": "dashboard"
         },
         {
             "url": "/properties",
             "name": "Properties",
-            "icon": "menu-icon tf-icons bx bx-building-house",
+            "icon": "menu-icon tf-icons fa-solid fa-building",
             "slug": "properties"
         }
     ]

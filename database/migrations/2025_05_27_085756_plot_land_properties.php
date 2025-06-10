@@ -32,8 +32,8 @@ return new class extends Migration
             $table->boolean('boundary_wall_made')->default(false);
 
             // Area details
-            $table->decimal('plot_land_area', 10, 2);
-            $table->string('plot_land_area_unit');                  
+            $table->decimal('plot_area', 10, 2);
+            $table->string('plot_area_unit');                  
             $table->decimal('plot_land_length', 10, 2)->nullable();
             $table->string('plot_land_length_unit')->nullable();
 

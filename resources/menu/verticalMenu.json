@@ -3,11 +3,11 @@
     {
       "url": "/",
       "name": "Dashboard",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons fa-solid fa-gauge-high",
       "slug": "dashboard",
       "submenu": [
         {
-          "url": "/",
+          "url": "/dashboard",
           "name": "Analytics",
           "slug": "dashboard-analytics"
         }
@@ -15,7 +15,7 @@
     },
     {
       "name": "Members",
-      "icon": "menu-icon tf-icons bx bx-user",
+      "icon": "menu-icon tf-icons fa-solid fa-users",
       "slug": "members",
       "submenu": [
         {
@@ -27,7 +27,7 @@
     },
     {
       "name": "Roles & Permissions",
-      "icon": "menu-icon tf-icons bx bx-shield-quarter",
+      "icon": "menu-icon tf-icons fa-solid fa-shield-halved",
       "slug": "roles-permissions",
       "submenu": [
         {
@@ -44,7 +44,7 @@
     },
     {
       "name": "Properties",
-      "icon": "menu-icon tf-icons bx bx-building-house",
+      "icon": "menu-icon tf-icons fa-solid fa-building",
       "slug": "properties",
       "submenu": [
         {

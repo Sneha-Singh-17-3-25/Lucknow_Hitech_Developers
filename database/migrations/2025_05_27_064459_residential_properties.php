@@ -17,17 +17,17 @@ return new class extends Migration
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
 
             $table->string('property_type');
-            $table->string('want_for'); // e.g., 'buy' or 'rent'
-            $table->string('poss_status'); // e.g., 'ready_to_move', 'under_construction'
+            $table->string('want_for'); 
+            $table->string('poss_status'); 
             $table->decimal('plot_area', 10, 2)->nullable();
-            $table->string('plot_area_unit', 20)->nullable(); // e.g., sq-ft, sq-m, etc.
+            $table->string('plot_area_unit', 20)->nullable(); 
             $table->decimal('super_area', 10, 2)->nullable();
             $table->string('super_area_unit', 20)->nullable();
             $table->integer('bedrooms')->nullable();
             $table->integer('balconies')->nullable();
             $table->integer('total_rooms')->nullable();
             $table->integer('total_floors')->nullable();
-            $table->string('furnished_status')->nullable(); // e.g., 'furnished', 'semi-furnished'
+            $table->string('furnished_status')->nullable(); 
             $table->integer('bathrooms')->nullable();
             $table->integer('open_sides')->nullable();
             $table->decimal('w_road_facing', 10, 2)->nullable();

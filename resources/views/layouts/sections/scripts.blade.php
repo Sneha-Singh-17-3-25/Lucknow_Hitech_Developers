@@ -73,3 +73,12 @@
 <!-- BEGIN: Page JS-->
 @yield('page-script')
 <!-- END: Page JS-->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script>
+    // Make Notyf globally accessible
+    window.notyf = new Notyf({
+        duration: 3000,
+        position: { x: 'right', y: 'top' },
+    });
+</script>

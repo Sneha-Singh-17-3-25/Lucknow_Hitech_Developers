@@ -75,8 +75,16 @@ $navbarDetached = ($navbarDetached ?? '');
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-medium d-block">John Doe</span>
-                      <small class="text-muted">Admin</small>
+                      <span class="fw-medium d-block">{{auth()->user()->name}}</span>
+                      <small class="text-muted">
+                        @if(auth()->user()->hasRole('super-admin'))
+                        <span class="badge bg-label-primary">Admin</span>
+                        @elseif(auth()->user()->hasRole('agent'))
+                        <span class="badge bg-label-success">Agent</span>
+                        @else
+                        <span class="badge bg-label-secondary">User</span>
+                        @endif
+                      </small>
                     </div>
                   </div>
                 </a>

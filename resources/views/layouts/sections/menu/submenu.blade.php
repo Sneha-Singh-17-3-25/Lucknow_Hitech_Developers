@@ -7,23 +7,52 @@
       $activeClass = null;
       $active = 'active open';
       $currentRouteName = Route::currentRouteName();
+      $currentUrl = request()->path();
 
+      // Check if the current route matches this submenu item
       if ($currentRouteName === $submenu->slug) {
           $activeClass = 'active';
       }
+      // Check if the current URL matches this submenu item
+      elseif (isset($submenu->url) && ltrim($submenu->url, '/') === $currentUrl) {
+          $activeClass = 'active';
+      }
+      // Check if any nested submenu is active
       elseif (isset($submenu->submenu)) {
-        if (gettype($submenu->slug) === 'array') {
-          foreach($submenu->slug as $slug){
-            if (str_contains($currentRouteName,$slug) and strpos($currentRouteName,$slug) === 0) {
-                $activeClass = $active;
-            }
+          // Check nested submenu items for active state
+          $hasActiveNestedSubmenu = false;
+          
+          foreach ($submenu->submenu as $nestedSubmenu) {
+              // Check if nested submenu route matches
+              if (isset($nestedSubmenu->slug) && $currentRouteName === $nestedSubmenu->slug) {
+                  $hasActiveNestedSubmenu = true;
+                  break;
+              }
+              
+              // Check if nested submenu URL matches
+              if (isset($nestedSubmenu->url) && ltrim($nestedSubmenu->url, '/') === $currentUrl) {
+                  $hasActiveNestedSubmenu = true;
+                  break;
+              }
           }
-        }
-        else{
-          if (str_contains($currentRouteName,$submenu->slug) and strpos($currentRouteName,$submenu->slug) === 0) {
-            $activeClass = $active;
+          
+          if ($hasActiveNestedSubmenu) {
+              $activeClass = $active;
           }
-        }
+          // Original slug-based check for backward compatibility
+          elseif (gettype($submenu->slug) === 'array') {
+              foreach($submenu->slug as $slug){
+                  if (str_contains($currentRouteName, $slug) && strpos($currentRouteName, $slug) === 0) {
+                      $activeClass = $active;
+                      break;
+                  }
+              }
+          }
+          else {
+              if (str_contains($currentRouteName, $submenu->slug) && strpos($currentRouteName, $submenu->slug) === 0) {
+                  $activeClass = $active;
+              }
+          }
       }
     @endphp
 
