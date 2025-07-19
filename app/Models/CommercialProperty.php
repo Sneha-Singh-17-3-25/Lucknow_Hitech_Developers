@@ -37,8 +37,19 @@ class CommercialProperty extends Model
         return $this->belongsTo(Locations::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
     public function firstImage()
     {
         return $this->hasOne(PropertiesImages::class, 'location_id', 'location_id')->latest();
+    }
+
+    public function multipleImage()
+    {
+        return $this->hasMany(PropertiesImages::class, 'location_id', 'location_id');
     }
 }

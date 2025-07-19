@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Models\JobError;
 use Exception;
+ // Assuming JobA is defined in the same namespace
 
 class StorePropertyJob implements ShouldQueue
 {
@@ -65,7 +66,7 @@ class StorePropertyJob implements ShouldQueue
                     'bedrooms' => $this->validated['res_bedrooms'],
                     'balconies' => $this->validated['res_balconies'],
                     'total_rooms' => $this->validated['res_rooms'],
-                    'total_floors' => $this->validated['res_total_floors'],
+                    'total_floor' => $this->validated['res_total_floors'],
                     'furnished_status' => $this->validated['res_furnished'],
                     'bathrooms' => $this->validated['res_bathrooms'],
                     'open_sides' => $this->validated['res_no_open_sides'],
@@ -107,7 +108,7 @@ class StorePropertyJob implements ShouldQueue
                     'leased_out' => $this->validated['currleasedout'],
                     'property_price' => $this->validated['expect_price'],
                     'property_type' => $this->validated['plotland_property_type'],
-                    'no_open_sides' => $this->validated['common_no_open_sides'],
+                    'open_sides' => $this->validated['common_no_open_sides'],
                     'w_road_facing' => $this->validated['common_w_road_facing'],
                     'w_road_facing_unit' => $this->validated['common_w_road_facing_unit'],
                     'corner_plot' => $this->validated['common_cornerplot'],

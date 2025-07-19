@@ -15,20 +15,21 @@ class PropertiesController extends Controller
       $residential = DB::table('residential_properties as rp')
          ->join('users as u', 'rp.user_id', '=', 'u.id')
          ->select(
+             
             'u.name as name',
             'u.email as email',
             'u.mobile as phone',
             'rp.property_type',
             'rp.location_id',
+            'rp.user_id',
             'rp.want_for',
-            'poss_status',
+            'rp.poss_status',
             'rp.plot_area',
-            'rp.approved_status',
-            
-            'rp.plot_area_unit',
+            'rp.plot_area_unit',            
             'rp.furnished_status as furnished',
             'rp.leased_out',
-            'rp.property_price as price'
+            'rp.property_price as price',
+            'rp.approved_status',
          );
 
       $commercial = DB::table('commercial_properties as cp')
@@ -39,14 +40,15 @@ class PropertiesController extends Controller
             'u.mobile as phone',
             'cp.property_type',
             'cp.location_id',
-            'cp.approved_status',
+            'cp.user_id',          
             'cp.want_for',
             'cp.poss_status',
-            DB::raw('NULL as plot_area'),
+            'cp.plot_area',
             'cp.plot_area_unit',
             'cp.furnished_status as furnished',
             'cp.leased_out',
-            'cp.price'
+            'cp.property_price as price',
+            'cp.approved_status',
          );
 
       $plotland = DB::table('plot_land_properties as pp')
@@ -55,16 +57,17 @@ class PropertiesController extends Controller
             'u.name as name',
             'u.email as email',
             'u.mobile as phone',
-            'pp.property_type',
-            'pp.approved_status',
+            'pp.property_type',          
             'pp.location_id',
+            'pp.user_id',
             'pp.want_for',
-            'pp.poss_status',
-            'pp.plot_land_area as plot_area',
-            'pp.plot_land_area_unit as plot_area_unit',
-            DB::raw('NULL as furnished'),
+            'pp.poss_status',         
+            'pp.plot_area',
+            'pp.plot_area_unit',
+            DB::raw("'N/A' as furnished"),
             'pp.leased_out',
-            'pp.property_price as price'
+            'pp.property_price as price',
+            'pp.approved_status'
          );
 
       $allProperties = $residential

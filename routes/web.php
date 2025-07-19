@@ -50,7 +50,10 @@ use App\Http\Controllers\RolesPermissionsController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentPanel\AddPropertiesController;
+use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\User\MyPropertyController;
 use App\Http\Controllers\user\PostPropertyController;
+use App\Http\Controllers\user\PostPropertyDetailsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -58,11 +61,11 @@ use Illuminate\Support\Facades\Auth;
 | Public Landing Page Routes
 |--------------------------------------------------------------------------
 */
+
 Route::group(['middleware' => ['web']], function () {
     // Main landing page
     Route::get('/', [indexController::class, 'landing_index'])->name('landing_index');
-    ROute::get('login', function()
-    {
+    ROute::get('login', function () {
         if (Auth::check()) {
             return redirect()->route('dashboard-analytics');
         }
@@ -87,13 +90,13 @@ Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
     Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
     Route::get('/auth/forgot-password-basic', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password-basic');
-    
+
     // Auth routes
     // Route::get('/register', [registerController::class, 'register'])->name('register');
     // Route::get('/login', [registerController::class, 'login'])->name('login');
-    
+
     // Landing auth routes
-    Route::get('landing/login', [registerController::class, 'landing_login'])->name('landing_login');
+    // Route::get('landing/login', [registerController::class, 'landing_login'])->name('landing_login');
     Route::post('landing/login', [registerController::class, 'landing_login'])->name('landing_login');
     Route::post('landing/register', [registerController::class, 'landing_register'])->name('landing_register');
 });
@@ -106,15 +109,11 @@ Route::group(['middleware' => ['web', 'guest']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
     // Dashboard
     Route::get('dashboard', [Analytics::class, 'index'])->name('dashboard-analytics');
-    
-    // Logout
-    Route::any('/logout', function () {
-        Auth::logout();
-        return redirect('/');
-    })->name('logout');
-    
+
+
+
     Route::get('landing/logout', [registerController::class, 'landing_logout'])->name('landing_logout');
-    
+
     /*
     |--------------------------------------------------------------------------
     | Layout Routes
@@ -127,7 +126,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/container', [Container::class, 'index'])->name('layouts-container');
         Route::get('/blank', [Blank::class, 'index'])->name('layouts-blank');
     });
-    
+
     /*
     |--------------------------------------------------------------------------
     | Page Routes
@@ -140,7 +139,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/misc-error', [MiscError::class, 'index'])->name('pages-misc-error');
         Route::get('/misc-under-maintenance', [MiscUnderMaintenance::class, 'index'])->name('pages-misc-under-maintenance');
     });
-    
+
     /*
     |--------------------------------------------------------------------------
     | Property Management Routes
@@ -156,9 +155,23 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     });
 
     Route::post('/submit-residential-property', [PostPropertyController::class, 'storeResidentialProperty'])
-    ->middleware('role:super-admin|seller|buyer');
+        ->middleware('role:super-admin|seller|buyer');
 
+    Route::get('/postpropertydetails', [PostPropertyDetailsController::class, 'postpropertydetails'])->name('post-propertydetails');
     
+    Route::post('/submit-buyer-contact',[PostPropertyDetailsController::class, 'buyercontactinsert'])->name('buyercontactinsert');
+
+    Route::get('buyer-contact',[ContactsController::class, 'buyercontact'])->name('buyercontact');
+
+    Route::delete('/buyer-contacts/delete/{id}', [ContactsController::class, 'deleteBuyerContact'])->name('buyercontact.delete');
+    Route::get('/my-property', [MyPropertyController::class, 'myproperty'])->name('my-property');
+
+    Route::delete('/my-property', [MyPropertyController::class, 'destroy_myproperty'])->name('myproperty-destroy');
+    Route::get('/search-properties', [indexController::class, 'searchproperties'])->name('search-properties');
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | User Management Routes (Admin Only)
@@ -169,7 +182,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('/users/update', [UserController::class, 'UsersEditUpdate'])->name('users_update');
         Route::delete('/users/delete/{id}', [UserController::class, 'delete_users'])->name('delete_users');
     });
-    
+
     /*
     |--------------------------------------------------------------------------
     | Roles & Permissions Routes (Super super-admin Only)
@@ -181,7 +194,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('/roles/store', [RolesPermissionsController::class, 'roles_store'])->name('roles_store');
         Route::post('/roles/update', [RolesPermissionsController::class, 'rolesEditUpdate'])->name('roles_update');
         Route::delete('/roles/delete/{id}', [RolesPermissionsController::class, 'delete_roles'])->name('roles_delete');
-        
+
         // Permissions
         Route::get('/permissions', [RolesPermissionsController::class, 'permissions_index'])->name('permissions');
         Route::post('/permissions/store', [RolesPermissionsController::class, 'permission_store'])->name('permissions_store');
@@ -225,3 +238,9 @@ if (app()->environment('local', 'testing')) {
 Route::fallback(function () {
     return view('errors.404');
 });
+
+    // Logout
+    Route::any('/logout', function () {
+        Auth::logout();
+        return redirect('/');
+    })->name('logout');

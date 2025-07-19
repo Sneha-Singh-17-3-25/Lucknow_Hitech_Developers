@@ -16,7 +16,7 @@ class PlotLandProperty extends Model
         'property_type',
         'want_for',
         'poss_status',
-        'no_open_sides',
+        'open_sides',
         'w_road_facing',
         'w_road_facing_unit',
         'corner_plot',
@@ -36,9 +36,19 @@ class PlotLandProperty extends Model
     {
         return $this->belongsTo(Locations::class);
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-     public function firstImage()
+
+    public function firstImage()
     {
         return $this->hasOne(PropertiesImages::class, 'location_id', 'location_id')->latest();
+    }
+    public function multipleImage()
+    {
+        return $this->hasMany(PropertiesImages::class, 'location_id', 'location_id');
     }
 }

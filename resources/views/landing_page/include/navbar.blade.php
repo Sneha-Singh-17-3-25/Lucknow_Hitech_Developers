@@ -71,8 +71,8 @@
                          class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
                      @endif
                      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
-                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Properties</a>
-                     <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
+                     <a href="{{route('my-property')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Properties</a>
+                     <a href="{{route('logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
                  </div>
              </div>
              @endauth
@@ -84,3 +84,21 @@
          </button>
      </div>
  </nav>
+@auth
+    <script>
+        function trackAuth() {
+           
+        }
+    </script>
+@endauth
+
+@guest
+<script>
+    function trackAuth(event) {
+        if (event) event.preventDefault();
+        // alert('User is not authenticated');
+        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+    }
+</script>
+@endguest

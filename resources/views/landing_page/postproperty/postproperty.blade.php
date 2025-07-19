@@ -147,7 +147,7 @@
                 <div class="animated-line"></div>
             </div>
 
-            <form>
+            <form id="form">
                 <!-- Intent Sele ction -->
                 <div class="mb-8">
                     <label class="block text-gray-700 font-medium mb-3">I want for</label>
@@ -220,20 +220,20 @@
 
 
                     <!-- Residential Sub-options -->
-                    <div id="residential-options" class="property-sub-options">
-                        <label class="block text-gray-700 text-sm mb-2">Property Type</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
-                            @foreach($ResidentialProperty as $Rtype)
-                            <div class="sub-property-option residential-option h-20 active border rounded-md p-3 cursor-pointer hover:bg-saffron/8 transition-all text-center"
-                                data-res-type="{{ strtolower($Rtype->property_type) }}"
-                                onclick="document.getElementById('idrestype').value = '{{$Rtype->property_type}}'">
+<div id="residential-options" class="property-sub-options">
+    <label class="block text-gray-700 text-sm mb-2">Property Type</label>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
+        @foreach($ResidentialProperty as $Rtype)
+        <div class="sub-property-option residential-option active border rounded-md p-3 cursor-pointer hover:bg-saffron/8 transition-all text-center flex flex-col justify-center min-h-[5rem] break-words px-2"
+            data-res-type="{{ strtolower($Rtype->property_type) }}"
+            onclick="document.getElementById('idrestype').value = '{{$Rtype->property_type}}'">
 
-                                <div class="text-saffron mb-1"><i class="fas {{ $Rtype->icon_class }}"></i></div>
-                                <span class="text-sm" id="res-property-type">{{$Rtype->property_type}}</span>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
+            <div class="text-saffron mb-1"><i class="fas {{ $Rtype->icon_class }}"></i></div>
+            <span class="text-sm" id="res-property-type">{{$Rtype->property_type}}</span>
+        </div>
+        @endforeach
+    </div>
+</div>
                     <input type="hidden" class="hidden-input" id="idrestype" name="res-property-type_hidden" value="{{$Rtype->property_type}}">
 
                     <!-- Commercial Sub-options (Hidden by default) -->
@@ -389,6 +389,8 @@
                                             class="appearance-none w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron">
                                             <option value="Sq-ft">Sq-ft</option>
                                             <option value="Sq-m">Sq-m</option>
+                                            <option value="Acres">Acres</option>
+                                            <option value="Hectares">Hectares</option>
                                         </select>
                                         <div
                                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -727,7 +729,7 @@
                                         {{ $i < 6 ? $i : '6+' }}
                                     </span>
                                     </label>
-                                    @endfor
+                                @endfor
                             </div>
                         </div>
 
@@ -1596,13 +1598,20 @@
                 .then(response => console.log(response.json())) // FIXED THIS LINE
                 .then(data => {
                     console.log(data);
+
                     // showToast('Success', data.message, 'bx bx-check-circle', 'bg-saffron');
-                    alert('Property Posted successfully!');
+                    // alert('Property Posted successfully!');
+                    document.getElementById('form').reset();
+                    notyf.success('Property Posted successfully!');
+
+                    setTimeout(() => {
+                      window.location.href = '/'; // or replace '/' with your actual homepage route
+                    }, 1000);
+
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Failed to Post property!');
-                    //  showToast('Success', 'Failed to Post property!', 'bx bx-check-circle', 'bg-red');
+                    notyf.error('Failed to Post property!');
                 });
 
         }

@@ -11,21 +11,28 @@ use App\Models\PlotLandProperty;
 
 class PropertyController extends Controller
 {
+
+    // this function for show all properties on index page 
     public function allProperties()
     {
-        $residential = ResidentialProperty::with(['location', 'firstImage'])->get();
-        $commercial = CommercialProperty::with(['location', 'firstImage'])->get();
-        $plotLand = PlotLandProperty::with(['location', 'firstImage'])->get();
+        $residential = ResidentialProperty::with(['location', 'firstImage'])->where('approved_status', 'approved')->get();
+        $commercial = CommercialProperty::with(['location', 'firstImage'])
+            ->where('approved_status', 'approved')
+            ->get();
+
+        $plotLand = PlotLandProperty::with(['location', 'firstImage'])->where('approved_status', 'approved')->get();
 
         // Combine all properties into one collection
         $allProperties = $residential->concat($commercial)->concat($plotLand);
 
+
         // Format for frontend: normalize keys (title, price, location, image, etc.)
         $formatted = $allProperties->map(function ($property) {
             return [
-                'id' => $property->id,
+                'id' => $property->location_id,
                 'title' => $property->property_type ?? $property->type ?? 'No Title',
                 'location' => $property->location->address . ', ' . $property->location->city . ',' . $property->location->pincode,
+                'city' => $property->location->city ?? 'N/A',
                 'price' => '₹' . ' ' . $property->property_price,
                 'bedrooms' => $property->bedrooms ?? null,
                 'bathrooms' => $property->bathrooms ?? null,

@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/users/app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions - SELLSQUAREProperties India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'saffron': '#FF9933',
-                    'saffron-light': '#FFB266',
-                    'saffron-dark': '#E68A00',
-                    'navy': '#0C2461',
-                    'navy-light': '#1e3799',
-                    'emerald': '#138808',
-                    'slate': '#1E293B',
-                },
-                fontFamily: {
-                    'sans': ['Poppins', 'Arial', 'sans-serif'],
-                    'heading': ['Montserrat', 'serif'],
-                },
-            }
-        },
-    }
-    </script>
-    <style>
+
+@section('page-css')
+<!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+@endsection
+
+@push('style')
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
     .text-shadow {
@@ -161,12 +141,12 @@
     .hover-link:hover::after {
         width: 100%;
     }
-    </style>
-</head>
+</style>
+@endpush
+
+@section('content')
 
 <body class="font-sans text-slate bg-gray-50">
-    <!-- Navigation Bar -->
-    @include('landing_page/include/navbar')
 
     <!-- Terms & Conditions Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[40vh] overflow-hidden">
@@ -661,18 +641,18 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    @include('landing_page.include.footer')
-
     <!-- Back to Top Button -->
     <button id="back-to-top-btn"
         class="back-to-top fixed bottom-6 right-6 w-12 h-12 rounded-full bg-saffron text-white flex items-center justify-center shadow-lg z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
+</body>
+@endsection
 
-    <!-- Script for interactions -->
-    <script>
+
+@push('script')
+<!-- Script for interactions -->
+<script>
     // Show/hide navigation background on scroll
     window.addEventListener('scroll', function() {
         const navbar = document.getElementById('navbar');
@@ -746,7 +726,5 @@
             });
         });
     });
-    </script>
-</body>
-
-</html>
+</script>
+@endpush

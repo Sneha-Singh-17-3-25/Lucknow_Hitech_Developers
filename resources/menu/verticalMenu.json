@@ -51,11 +51,18 @@
           "url": "properties",
           "name": "All Properties",
           "slug": "properties-all"
-        },
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "icon": "menu-icon tf-icons fa-solid fa-phone",
+      "slug": "contacts",
+      "submenu": [
         {
-          "url": "addProperties",
-          "name": "Add Property",
-          "slug": "properties-add"
+          "url": "/buyer-contact",
+          "name": "Buyer Contacts",
+          "slug": "buyercontact"
         }
       ]
     }

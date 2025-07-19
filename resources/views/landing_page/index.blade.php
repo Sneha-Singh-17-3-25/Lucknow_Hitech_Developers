@@ -55,10 +55,10 @@
                     <i class="fas fa-search text-white/70 mr-3"></i>
                     <input type="text"
                         class="w-full py-4 bg-transparent border-none text-white text-base focus:outline-none placeholder-white/70"
-                        placeholder="Search by location, property type, or features">
+                        placeholder="Search by location, property type, or features" id="searchKeyword">
                 </div>
                 <div class="flex-shrink-0 flex">
-                    <select class="bg-white/10 backdrop-blur-md border-none text-white py-4 px-6 focus:outline-none">
+                    <select class="bg-white/10 backdrop-blur-md border-none text-black py-4 px-6 focus:outline-none" id="searchCity">
                         <option value="">City</option>
                         <option value="mumbai">Gomti Nagar</option>
                         <option value="delhi">Hazratganj</option>
@@ -67,9 +67,12 @@
                         <option value="bangalore">Mahanagar</option>
                         <option value="hyderabad">Vibhuti Khand</option>
                         <option value="pune">Chinhat</option>
+                        <option value="kanpur">Kanpur</option>
+                        <option value="lucknow">Lucknow</option>
+                        <option value="basti">Basti</option>
                     </select>
                     <button
-                        class="bg-saffron hover:bg-saffron-dark text-white py-4 px-8 flex items-center justify-center text-base font-medium transition-colors duration-300">
+                        class="bg-saffron hover:bg-saffron-dark text-white py-4 px-8 flex items-center justify-center text-base font-medium transition-colors duration-300" id="searchBtn">
                         Search
                     </button>
                 </div>
@@ -353,14 +356,12 @@
         </div>
     </section>
 
-    <!-- JavaScript for interactive elements -->
-
-
 
     <div id="properties-loading" class="text-center py-10 hidden">
         <div class="loader">Loading properties...</div>
     </div>
 
+    <!-- this div for show the properties -->
     <div id="properties-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
 
     <!-- For City Grid -->
@@ -369,19 +370,15 @@
     <!-- For Testimonials Grid -->
     <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
+    <!-- this div for toast -->
+    <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
 
+
+    <script>
+    window.isLoggedIn = @json(Auth::check());
+    </script>
 
     <script src="{{asset('js/indexpage.js')}}"></script>
-
-
-    <!-- Filter logic
-        if (this.currentFilter !== 'all') {
-            filteredProperties = this.properties.filter(property => {
-                if (this.currentFilter === 'premium') return property.isPremium;
-                if (this.currentFilter === 'new') return property.isNew;
-                return property.tags?.includes(this.currentFilter);
-            });
-        } -->
 
 </body>
 

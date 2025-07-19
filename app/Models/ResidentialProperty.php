@@ -26,7 +26,7 @@ class ResidentialProperty extends Model
         'bedrooms',
         'balconies',
         'total_rooms',
-        'total_floors',
+        'total_floor',
         'furnished_status',
         'bathrooms',
         'open_sides',
@@ -42,8 +42,19 @@ class ResidentialProperty extends Model
         return $this->belongsTo(Locations::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
     public function firstImage()
     {
         return $this->hasOne(PropertiesImages::class, 'location_id', 'location_id')->latest();
+    }
+    
+    public function multipleImage()
+    {
+        return $this->hasMany(PropertiesImages::class, 'location_id', 'location_id');
     }
 }

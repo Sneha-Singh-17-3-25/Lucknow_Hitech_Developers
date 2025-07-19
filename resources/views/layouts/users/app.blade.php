@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Lucknow Hitech Developers')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <!-- Bootstrap CSS -->
@@ -22,115 +25,23 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script> -->
 
+    <!-- notify links Start-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script>
-        // Initialize Notyf with custom configuration
-        window.notyf = new Notyf({
-            duration: 4000,
-            position: { x: 'right', y: 'bottom' },
-            dismissible: false,
-            ripple: true,
-            types: [
-                {
-                    type: 'success',
-                    background: 'white',
-                    color: '#10B981',
-                    icon: {
-                        className: 'notyf__icon--success',
-                        tagName: 'i',
-                        text: '',
-                        color: '#10B981'
-                    }
-                },
-                {
-                    type: 'error',
-                    background: 'white',
-                    color: '#EF4444',
-                    icon: {
-                        className: 'notyf__icon--error',
-                        tagName: 'i',
-                        text: '',
-                        color: '#EF4444'
-                    }
-                },
-                {
-                    type: 'warning',
-                    background: 'white',
-                    color: '#F59E0B',
-                    icon: {
-                        className: 'notyf__icon--warning',
-                        tagName: 'i',
-                        text: '',
-                        color: '#F59E0B'
-                    }
-                },
-                {
-                    type: 'info',
-                    background: 'white',
-                    color: '#3B82F6',
-                    icon: {
-                        className: 'notyf__icon--info',
-                        tagName: 'i',
-                        text: 'i',
-                        color: '#3B82F6'
-                    }
-                }
-            ]
-        });
+    <!-- notify links End-->
 
-        // Add custom CSS styles
-        const style = document.createElement('style');
-        style.textContent = `
-        
 
-            /* Custom Notyf styles for white background */
-            .notyf__toast {
-                background: white !important;
-               
-                border-radius: 4px !important;
-                box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-            }
+    <!-- this both link for postpropertydetailspage image swipe -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- this both link for postpropertydetailspage image swipe -->
 
-            .notyf__toast--success {
-              border-left: 4px solid #10B981 !important;
-                color: #10B981;
-            }
-
-            .notyf__toast--error {
-                border-left: 4px solid #EF4444 !important;
-                color: #EF4444;
-            }
-
-            .notyf__toast--warning {
-                border-left: 4px solid #F59E0B !important;
-                color: #F59E0B;
-            }
-
-            .notyf__toast--info {
-            border-left: 4px solid #3B82F6 !important;
-                color: #3B82F6;
-            }
-
-            .notyf__message {
-                font-weight: 600;
-            }
-
-            .notyf__icon {
-                font-size: 18px !important;
-                font-weight: bold !important;
-            }
-        `;
-        document.head.appendChild(style);
-
-     
-    </script>
+ 
 
     <script>
         tailwind.config = {
@@ -175,7 +86,7 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #FF9933, #FFB347, #FFD580, #FF9933);
+            background: linear-gradient(90deg, #0C2461, #1e3799, #0C2461);
             background-size: 200% 100%;
             width: 0%;
             transition: width 0.3s ease;
@@ -198,6 +109,7 @@
             0% {
                 left: -100%;
             }
+
             100% {
                 left: 100%;
             }
@@ -275,20 +187,6 @@
             }
         }
 
-        /* .loader {
-            width: 40px;
-            height: 20px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 50px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        } */
 
         .badge {
             position: absolute;
@@ -407,67 +305,67 @@
 
         /* login and registration css End */
     </style>
-    
+
     @stack('style')
 
 </head>
 
 <body>
-    
+
     <!-- Progress Bar -->
     <div id="progressBarContainer" class="progress-bar-container">
         <div id="progressBar" class="progress-bar"></div>
     </div>
-       <script>
-    const progressBarContainer = document.getElementById('progressBarContainer');
-    const progressBar = document.getElementById('progressBar');
-    let progressInterval;
+    <script>
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const progressBar = document.getElementById('progressBar');
+        let progressInterval;
 
-    function showProgressBar() {
-        progressBarContainer.classList.add('show');
+        function showProgressBar() {
+            progressBarContainer.classList.add('show');
 
-        let progress = 20; // start at 20%
-        progressBar.style.width = progress + '%';
+            let progress = 20; // start at 20%
+            progressBar.style.width = progress + '%';
 
-        progressInterval = setInterval(() => {
-            progress += Math.random() * 10;
-            if (progress < 90) {
-                progressBar.style.width = progress + '%';
-            } else {
-                clearInterval(progressInterval);
-            }
-        }, 200);
-    }
-
-    function completeProgressBar() {
-        clearInterval(progressInterval);
-        progressBar.style.width = '100%';
-        setTimeout(() => {
-            progressBarContainer.classList.remove('show');
-            progressBar.style.width = '0%';
-        }, 300);
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        showProgressBar();
-        setTimeout(completeProgressBar, 1000);
-    });
-
-    document.addEventListener('click', function(e) {
-        const link = e.target.closest('a');
-        if (link && link.href && !link.href.includes('#') && link.target !== '_blank') {
-            const url = new URL(link.href);
-            if (url.origin === window.location.origin) {
-                showProgressBar();
-            }
+            progressInterval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress < 90) {
+                    progressBar.style.width = progress + '%';
+                } else {
+                    clearInterval(progressInterval);
+                }
+            }, 200);
         }
-    });
 
-    window.showProgressBar = showProgressBar;
-    window.completeProgressBar = completeProgressBar;
-</script>
+        function completeProgressBar() {
+            clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                progressBarContainer.classList.remove('show');
+                progressBar.style.width = '0%';
+            }, 300);
+        }
 
-    
+        document.addEventListener('DOMContentLoaded', function() {
+            showProgressBar();
+            setTimeout(completeProgressBar, 1000);
+        });
+
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.href && !link.href.includes('#') && link.target !== '_blank') {
+                const url = new URL(link.href);
+                if (url.origin === window.location.origin) {
+                    showProgressBar();
+                }
+            }
+        });
+
+        window.showProgressBar = showProgressBar;
+        window.completeProgressBar = completeProgressBar;
+    </script>
+
+
     <!-- Navigation Bar -Start-->
     @include('landing_page/include/navbar')
     <!-- Navigation Bar  End -->
@@ -664,10 +562,10 @@
     <script>
         document.querySelector('#signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Show progress bar
             showProgressBar();
-
+            
             const formData = new FormData(this);
 
             fetch("{{ url('landing/register') }}", {
@@ -682,7 +580,7 @@
                 .then(data => {
                     // Complete progress bar
                     completeProgressBar();
-                    
+
                     if (data.errors) {
                         let messages = '';
                         for (let field in data.errors) {
@@ -707,16 +605,16 @@
     </script>
 
     <!-- login js ----------------------------------------------------------------->
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Show progress bar
-        showProgressBar();
-        
-        const loginBtn = document.getElementById('login_button');
-        loginBtn.disabled = true;
-        loginBtn.innerHTML = `<span style="
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show progress bar
+            showProgressBar();
+
+            const loginBtn = document.getElementById('login_button');
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = `<span style="
             display: inline-block;
             width: 22px;
             height: 22px;
@@ -725,63 +623,65 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             vertical-align: middle;
-        "></span> Logging in...`;
+        "></span>`;
 
-        // Add keyframes for spin animation if not already present
-        if (!document.getElementById('inline-spinner-style')) {
-            const style = document.createElement('style');
-            style.id = 'inline-spinner-style';
-            style.innerHTML = `
+            // Add keyframes for spin animation if not already present
+            if (!document.getElementById('inline-spinner-style')) {
+                const style = document.createElement('style');
+                style.id = 'inline-spinner-style';
+                style.innerHTML = `
                 @keyframes spin {
                     0% { transform: rotate(0deg);}
                     100% { transform: rotate(360deg);}
                 }
             `;
-            document.head.appendChild(style);
-        }
+                document.head.appendChild(style);
+            }
 
-        const formData = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value
-        };
+            const formData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
 
-        fetch('http://127.0.0.1:8000/landing/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Complete progress bar
-                completeProgressBar();
-                
-                if (data.status === 'success') {
-                    notyf.success(data.message);
-                    const modalEl = document.getElementById('loginModal');
-                    const modal = bootstrap.Modal.getInstance(modalEl);
-                    modal.hide();
-                    setTimeout(() => {
-                        window.location.href = data.redirect;
-                    }, 1500);
-                } else {
-                    notyf.error("Invalid email or password! Please try again.");
+            console.log('Form Data:', formData);
+
+            fetch("{{route('landing_login')}}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Complete progress bar
+                    completeProgressBar();
+
+                    if (data.status === 'success') {
+                        notyf.success(data.message);
+                        const modalEl = document.getElementById('loginModal');
+                        const modal = bootstrap.Modal.getInstance(modalEl);
+                        modal.hide();
+                        setTimeout(() => {
+                            window.location.href = data.redirect;
+                        }, 1500);
+                    } else {
+                        notyf.error("Invalid email or password! Please try again.");
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = 'Login';
+                    }
+                })
+                .catch(error => {
+                    completeProgressBar();
+                    console.error('Login error:', error);
+                    alert('Something went wrong.');
                     loginBtn.disabled = false;
                     loginBtn.innerHTML = 'Login';
-                }
-            })
-            .catch(error => {
-                completeProgressBar();
-                console.error('Login error:', error);
-                alert('Something went wrong.');
-                loginBtn.disabled = false;
-                loginBtn.innerHTML = 'Login';
-            });
-    });
-</script>
+                });
+        });
+    </script>
 
     <!-- logout script -->
     <script>
@@ -789,7 +689,7 @@
             document.getElementById('logout').addEventListener('click', function(e) {
 
                 e.preventDefault();
-                
+
                 // Show progress bar
                 showProgressBar();
 
@@ -806,17 +706,17 @@
                         completeProgressBar();
                         console.log(data);
                         if (data.status === 'success') {
-                        notyf.success(data.message);
+                            notyf.success(data.message);
                             setTimeout(() => {
                                 window.location.href = '/';
                             }, 1500);
                         } else {
-                           notyf.error(data.message);
+                            notyf.error(data.message);
                         }
                     })
                     .catch(err => {
                         completeProgressBar();
-                       notyf.error('Something went wrong. Please try again later.');
+                        notyf.error('Something went wrong. Please try again later.');
                         console.error(err);
                     });
             });
@@ -827,9 +727,9 @@
 
     <!-- function toshow the toast----------------------------------------- -->
     <script>
-        function showToast(title, message, iconClass, bgColor) {
-            const toastHTML = `
-        <div class="bs-toast toast fade show ${bgColor} text-white" role="alert" aria-live="assertive" aria-atomic="true">
+      function showToast(title, message, iconClass, bgColor) {
+    const toastHTML = `
+        <div class="bs-toast toast fade ${bgColor} text-white" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header ${bgColor} text-white">
                 <i class='${iconClass} me-2'></i>
                 <strong class="me-auto">${title}</strong>
@@ -842,15 +742,26 @@
         </div>
     `;
 
-            document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
+    // Append the toast HTML
+    document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
 
-            const toastEl = document.querySelector('#toast-container .toast:last-child');
-            const bsToast = new bootstrap.Toast(toastEl, {
-                delay: 3000
-            });
-            bsToast.show();
+    // Select the newly added toast
+    const toastEl = document.querySelector('#toast-container .toast:last-child');
 
-        }
+    // Initialize Bootstrap Toast
+    const bsToast = new bootstrap.Toast(toastEl, {
+        delay: 3000
+    });
+
+    // Clean up after it's hidden
+    toastEl.addEventListener('hidden.bs.toast', () => {
+        toastEl.remove();
+    });
+
+    // Show the toast
+    bsToast.show();
+}
+
     </script>
 
     <!-- JavaScript for navbar scroll effect -->
@@ -870,7 +781,107 @@
         });
     </script>
 
+   <script>
+        // Initialize Notyf with custom configuration
+        window.notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'bottom'
+            },
+            dismissible: false,
+            ripple: true,
+            types: [{
+                    type: 'success',
+                    background: 'white',
+                    color: '#10B981',
+                    icon: {
+                        className: 'notyf__icon--success',
+                        tagName: 'i',
+                        text: '',
+                        color: '#10B981'
+                    }
+                },
+                {
+                    type: 'error',
+                    background: 'white',
+                    color: '#EF4444',
+                    icon: {
+                        className: 'notyf__icon--error',
+                        tagName: 'i',
+                        text: '',
+                        color: '#EF4444'
+                    }
+                },
+                {
+                    type: 'warning',
+                    background: 'white',
+                    color: '#F59E0B',
+                    icon: {
+                        className: 'notyf__icon--warning',
+                        tagName: 'i',
+                        text: '',
+                        color: '#F59E0B'
+                    }
+                },
+                {
+                    type: 'info',
+                    background: 'white',
+                    color: '#3B82F6',
+                    icon: {
+                        className: 'notyf__icon--info',
+                        tagName: 'i',
+                        text: 'i',
+                        color: '#3B82F6'
+                    }
+                }
+            ]
+        });
 
+        // Add custom CSS styles
+        const style = document.createElement('style');
+        style.textContent = `
+        
+
+            /* Custom Notyf styles for white background */
+            .notyf__toast {
+                background: white !important;
+               
+                border-radius: 4px !important;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+            }
+
+            .notyf__toast--success {
+              border-left: 4px solid #10B981 !important;
+                color: #10B981;
+            }
+
+            .notyf__toast--error {
+                border-left: 4px solid #EF4444 !important;
+                color: #EF4444;
+            }
+
+            .notyf__toast--warning {
+                border-left: 4px solid #F59E0B !important;
+                color: #F59E0B;
+            }
+
+            .notyf__toast--info {
+            border-left: 4px solid #3B82F6 !important;
+                color: #3B82F6;
+            }
+
+            .notyf__message {
+                font-weight: 600;
+            }
+
+            .notyf__icon {
+                font-size: 18px !important;
+                font-weight: bold !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 
 </html>

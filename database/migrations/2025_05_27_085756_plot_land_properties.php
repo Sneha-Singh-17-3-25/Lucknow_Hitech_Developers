@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('poss_status')->nullable(); 
 
             // Plot specifics
-            $table->integer('no_open_sides')->nullable();
+            $table->integer('open_sides')->nullable();
             $table->decimal('w_road_facing', 10, 2)->nullable();     
             $table->string('w_road_facing_unit')->nullable();      
             $table->boolean('corner_plot')->default(false);

@@ -1,146 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SELLSQUAREProperties India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'saffron': '#FF9933',
-                    'saffron-light': '#FFB266',
-                    'saffron-dark': '#E68A00',
-                    'navy': '#0C2461',
-                    'navy-light': '#1e3799',
-                    'emerald': '#138808',
-                    'slate': '#1E293B',
-                },
-                fontFamily: {
-                    'sans': ['Poppins', 'Arial', 'sans-serif'],
-                    'heading': ['Montserrat', 'serif'],
-                },
-            }
-        },
-    }
-    </script>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
-
-    .text-shadow {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .property-card {
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-
-    .property-card::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); */
-        /* opacity: 0; */
-        border-radius: 0.5rem;
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        z-index: -1;
-    }
-
-    .property-card:hover {
-        transform: translateY(-10px);
-    }
-
-    .property-card:hover::after {
-        opacity: 1;
-    }
-
-    .slide-in {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s ease-out;
-    }
-
-    .slide-in.appear {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .hero-search-form {
-        backdrop-filter: blur(10px);
-        background-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .tab.active {
-        border-color: #FF9933;
-        color: #FF9933;
-        font-weight: 600;
-    }
-
-    /* Custom loader */
-    .loader {
-        border: 4px solid rgba(255, 153, 51, 0.3);
-        border-radius: 50%;
-        border-top: 4px solid #FF9933;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .badge {
-        position: absolute;
-        top: 10px;
-        padding: 4px 12px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: 600;
-        z-index: 10;
-    }
-
-    .badge-premium {
-        background-color: #FF9933;
-        color: white;
-        left: 10px;
-    }
-
-    .badge-new {
-        background-color: #138808;
-        color: white;
-        left: 10px;
-    }
-
-    .badge-hot {
-        background-color: #e74c3c;
-        color: white;
-        left: 10px;
-    }
-
-    .badge-type {
-        background-color: #0C2461;
-        color: white;
-        right: 10px;
-    }
-    </style>
-</head>
 @extends('layouts/users/app')
+
+@section('content')
 
 <body class="font-sans text-slate bg-gray-50">
 
@@ -374,16 +234,16 @@
         </div>
     </section>
 
-
-    <!-- Footer Start-->
-    <!-- @include('landing_page.include.footer') -->
-    <!-- Footer End-->
+</body>
+@endsection
 
 
 
 
-    <!-- Animation Script for Slide-In Elements -->
-    <script>
+
+@push('script')
+<!-- Animation Script for Slide-In Elements -->
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         // Slide-in animations
         const slideInElements = document.querySelectorAll('.slide-in');
@@ -412,7 +272,5 @@
             }
         });
     });
-    </script>
-</body>
-
-</html>
+</script>
+@endpush

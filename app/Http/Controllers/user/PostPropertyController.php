@@ -112,8 +112,8 @@ class PostPropertyController extends Controller
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
                 $filename = time() . '_' . $photo->getClientOriginalName();
-                $photo->move(public_path('image/temp'), $filename); // Save temporarily
-                $photoPaths[] = 'image/temp/' . $filename;
+                $photo->move(public_path('image/'), $filename); // Save temporarily
+                $photoPaths[] = 'image/' . $filename;
             }
         }
 

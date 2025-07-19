@@ -1,67 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/users/app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - SELL SQUARE Properties India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'saffron': '#FF9933',
-                        'saffron-light': '#FFB266',
-                        'saffron-dark': '#E68A00',
-                        'navy': '#0C2461',
-                        'navy-light': '#1e3799',
-                        'emerald': '#138808',
-                        'slate': '#1E293B',
-                    },
-                    fontFamily: {
-                        'sans': ['Poppins', 'Arial', 'sans-serif'],
-                        'heading': ['Montserrat', 'serif'],
-                    },
-                }
-            },
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+@section('page-css')
+<!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+@endsection
 
-        .slide-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
 
-        .slide-in.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@push('style')
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
-        .policy-section {
-            border-left: 4px solid #FF9933;
-        }
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-        .policy-section:hover {
-            background-color: rgba(255, 153, 51, 0.05);
-        }
-    </style>
-</head>
+    .slide-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+    }
+
+    .slide-in.appear {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .policy-section {
+        border-left: 4px solid #FF9933;
+    }
+
+    .policy-section:hover {
+        background-color: rgba(255, 153, 51, 0.05);
+    }
+</style>
+@endpush
+
+@section('content')
 
 <body class="font-sans text-slate bg-gray-50">
-    <!-- Navigation Bar Placeholder -->
-    @include('landing_page/include/navbar')
-    <!-- Privacy Policy Hero Section -->
     <section class="relative flex justify-center items-center text-center h-[40vh] overflow-hidden">
         <!-- Background with Overlay -->
         <div class="absolute top-0 left-0 w-full h-full">
@@ -644,80 +624,79 @@
         </div>
     </section>
 
-    <!-- Footer Placeholder -->
-    @include('landing_page.include.footer')
-
-
     <!-- Back to Top Button -->
     <button id="backToTop"
         class="fixed bottom-6 right-6 z-50 h-12 w-12 bg-saffron hover:bg-saffron-dark text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 opacity-0 invisible">
         <i class="fas fa-arrow-up"></i>
     </button>
+</body>
+@endsection
 
-    <!-- Animation Script for Slide-In Elements -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Slide-in animations
-            const slideInElements = document.querySelectorAll('.slide-in');
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('appear');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
 
-            slideInElements.forEach(element => {
-                observer.observe(element);
-            });
+@push('script')
+<!-- Animation Script for Slide-In Elements -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Slide-in animations
+        const slideInElements = document.querySelectorAll('.slide-in');
 
-            // Navbar background change on scroll
-            window.addEventListener('scroll', function() {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('bg-navy', 'shadow-lg');
-                } else {
-                    navbar.classList.remove('bg-navy', 'shadow-lg');
-                }
-
-                // Show/hide back to top button
-                const backToTop = document.getElementById('backToTop');
-                if (window.scrollY > 300) {
-                    backToTop.classList.remove('opacity-0', 'invisible');
-                } else {
-                    backToTop.classList.add('opacity-0', 'invisible');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
                 }
             });
+        }, {
+            threshold: 0.1
+        });
 
-            // Back to top functionality
-            document.getElementById('backToTop').addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+        slideInElements.forEach(element => {
+            observer.observe(element);
+        });
 
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-navy', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-navy', 'shadow-lg');
+            }
 
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+            // Show/hide back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+            }
+        });
 
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+        // Back to top functionality
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
-    </script>
-</body>
 
-</html>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+@endpush
