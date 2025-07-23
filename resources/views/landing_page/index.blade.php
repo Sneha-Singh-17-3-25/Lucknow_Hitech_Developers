@@ -33,7 +33,10 @@
         </div>
 
         <div class="w-11/12 max-w-screen-lg z-10">
-            <p class="text-white text-sm mb-3 tracking-wider font-light">RERA No. MH12345678</p>
+            <p class="hidden lg:block text-white text-sm mb-3 tracking-wider font-light">
+                RERA No. MH12345678
+            </p>
+
             <h1 class="text-4xl md:text-6xl mb-3 leading-tight font-heading font-bold text-white text-shadow">Discover
                 Your Dream <br><span class="text-saffron">Home in India</span></h1>
             <p class="text-white/80 max-w-xl mx-auto mb-8">Explore premium properties across major Lucknow areas with
@@ -50,7 +53,7 @@
             </div>
 
             <div
-                class="hero-search-form flex flex-col md:flex-row rounded-lg overflow-hidden shadow-2xl max-w-4xl mx-auto">
+                class="hero-search-form flex flex-col md:flex-row rounded-lg overflow-hidden shadow-2xl max-w-4xl mx-auto ">
                 <div class="flex-1 bg-white/10 backdrop-blur-md flex items-center px-4">
                     <i class="fas fa-search text-white/70 mr-3"></i>
                     <input type="text"
@@ -58,8 +61,8 @@
                         placeholder="Search by location, property type, or features" id="searchKeyword">
                 </div>
                 <div class="flex-shrink-0 flex">
-                    <select class="bg-white/10 backdrop-blur-md border-none text-black py-4 px-6 focus:outline-none" id="searchCity">
-                        <option value="">City</option>
+                    <select class="bg-white/10 backdrop-blur-md border-none text-black py-4 px-6 focus:outline-none w-96 " id="searchCity">
+                        <option value="" class="lg:text-right">City</option>
                         <option value="mumbai">Gomti Nagar</option>
                         <option value="delhi">Hazratganj</option>
                         <option value="bangalore">Indira Nagar</option>
@@ -71,10 +74,10 @@
                         <option value="lucknow">Lucknow</option>
                         <option value="basti">Basti</option>
                     </select>
-                    <button
+                    <!-- <button
                         class="bg-saffron hover:bg-saffron-dark text-white py-4 px-8 flex items-center justify-center text-base font-medium transition-colors duration-300" id="searchBtn">
                         Search
-                    </button>
+                    </button> -->
                 </div>
             </div>
 
@@ -102,10 +105,11 @@
 
 
         <!-- Scroll down indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+        <div class="hidden md:absolute md:bottom-8 md:left-[50%] transform -translate-x-1/2 md:flex flex-col items-center animate-bounce">
             <span class="text-white/80 text-sm mb-2">Scroll Down</span>
             <i class="fas fa-chevron-down text-white/80"></i>
         </div>
+
 
         <style>
             /* Custom color for the saffron accent */
@@ -189,7 +193,7 @@
             </div>
 
             <!-- Filter Controls -->
-            <div class="flex flex-wrap justify-center mb-12 gap-4" id="property-filters">
+            <!-- <div class="flex flex-wrap justify-center mb-12 gap-4" id="property-filters">
                 <button data-filter="all"
                     class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-saffron text-white">
                     All Properties
@@ -210,7 +214,27 @@
                     class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-white text-gray-700 hover:bg-gray-100">
                     Premium
                 </button>
+            </div> -->
+            <div id="property-filters" class="flex flex-wrap gap-4 justify-center mb-12">
+                <button data-filter="all" class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-saffron text-white">
+                    All Properties
+                </button>
+                  <button data-filter="rent" class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-white text-gray-700 hover:bg-gray-100">
+                    For Rent
+                </button>
+                <button data-filter="sell" class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-white text-gray-700 hover:bg-gray-100">
+                    For Sale
+                </button>
+              
+                <!-- <button data-filter="new" class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-white text-gray-700 hover:bg-gray-100">
+                    New Launches
+                </button>
+                <button data-filter="premium" class="filter-btn px-5 py-2 rounded-md shadow-sm transition-all duration-300 font-medium bg-white text-gray-700 hover:bg-gray-100">
+                    Premium
+                </button> -->
             </div>
+
+
 
             <!-- Loading State -->
             <div id="properties-loading" class="flex justify-center items-center py-20">
@@ -218,7 +242,7 @@
             </div>
 
             <!-- Properties Grid -->
-            <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 ">
+            <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 mt-10">
                 <!-- Property cards will be dynamically inserted here -->
             </div>
 
@@ -375,7 +399,7 @@
 
 
     <script>
-    window.isLoggedIn = @json(Auth::check());
+        window.isLoggedIn = @json(Auth::check());
     </script>
 
     <script src="{{asset('js/indexpage.js')}}"></script>

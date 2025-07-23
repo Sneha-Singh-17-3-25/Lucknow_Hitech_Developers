@@ -30,6 +30,7 @@ class PropertyController extends Controller
         $formatted = $allProperties->map(function ($property) {
             return [
                 'id' => $property->location_id,
+                'want_for' => $property->want_for ?? 'N/A',
                 'title' => $property->property_type ?? $property->type ?? 'No Title',
                 'location' => $property->location->address . ', ' . $property->location->city . ',' . $property->location->pincode,
                 'city' => $property->location->city ?? 'N/A',

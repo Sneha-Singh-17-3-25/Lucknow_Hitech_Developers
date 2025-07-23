@@ -15,7 +15,7 @@ class PropertiesController extends Controller
       $residential = DB::table('residential_properties as rp')
          ->join('users as u', 'rp.user_id', '=', 'u.id')
          ->select(
-             
+
             'u.name as name',
             'u.email as email',
             'u.mobile as phone',
@@ -25,7 +25,7 @@ class PropertiesController extends Controller
             'rp.want_for',
             'rp.poss_status',
             'rp.plot_area',
-            'rp.plot_area_unit',            
+            'rp.plot_area_unit',
             'rp.furnished_status as furnished',
             'rp.leased_out',
             'rp.property_price as price',
@@ -40,7 +40,7 @@ class PropertiesController extends Controller
             'u.mobile as phone',
             'cp.property_type',
             'cp.location_id',
-            'cp.user_id',          
+            'cp.user_id',
             'cp.want_for',
             'cp.poss_status',
             'cp.plot_area',
@@ -57,11 +57,11 @@ class PropertiesController extends Controller
             'u.name as name',
             'u.email as email',
             'u.mobile as phone',
-            'pp.property_type',          
+            'pp.property_type',
             'pp.location_id',
             'pp.user_id',
             'pp.want_for',
-            'pp.poss_status',         
+            'pp.poss_status',
             'pp.plot_area',
             'pp.plot_area_unit',
             DB::raw("'N/A' as furnished"),
@@ -120,40 +120,36 @@ class PropertiesController extends Controller
       ];
 
 
-if (in_array($propertyType, $residentialTypes)) {
-    DB::table('residential_properties')
-        ->where('location_id', $locationId)
-        ->update(['approved_status' => $status]);
+      if (in_array($propertyType, $residentialTypes)) {
+         DB::table('residential_properties')
+            ->where('location_id', $locationId)
+            ->update(['approved_status' => $status]);
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Residential property status updated.'
-    ], 200);
+         return response()->json([
+            'success' => true,
+            'message' => 'Residential property status updated.'
+         ], 200);
+      } elseif (in_array($propertyType, $commercialTypes)) {
+         DB::table('commercial_properties')
+            ->where('location_id', $locationId)
+            ->update(['approved_status' => $status]);
 
-} elseif (in_array($propertyType, $commercialTypes)) {
-    DB::table('commercial_properties')
-        ->where('location_id', $locationId)
-        ->update(['approved_status' => $status]);
+         return response()->json([
+            'success' => true,
+            'message' => 'Commercial property status updated.'
+         ], 200);
+      } elseif (in_array($propertyType, $landTypes)) {
+         DB::table('plot_land_properties')
+            ->where('location_id', $locationId)
+            ->update(['approved_status' => $status]);
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Commercial property status updated.'
-    ], 200);
-
-} elseif (in_array($propertyType, $landTypes)) {
-    DB::table('plot_land_properties')
-        ->where('location_id', $locationId)
-        ->update(['approved_status' => $status]);
-
-    return response()->json([
-        'success' => true,
-        'message' => 'Plot land property status updated.'
-    ], 200);
-}
+         return response()->json([
+            'success' => true,
+            'message' => 'Plot land property status updated.'
+         ], 200);
+      }
 
 
       return response()->json(['message' => 'Property type not matched. No action taken.']);
    }
-
-   
 }

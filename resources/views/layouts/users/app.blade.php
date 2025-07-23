@@ -41,7 +41,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- this both link for postpropertydetailspage image swipe -->
 
- 
+
 
     <script>
         tailwind.config = {
@@ -565,7 +565,7 @@
 
             // Show progress bar
             showProgressBar();
-            
+
             const formData = new FormData(this);
 
             fetch("{{ url('landing/register') }}", {
@@ -727,8 +727,8 @@
 
     <!-- function toshow the toast----------------------------------------- -->
     <script>
-      function showToast(title, message, iconClass, bgColor) {
-    const toastHTML = `
+        function showToast(title, message, iconClass, bgColor) {
+            const toastHTML = `
         <div class="bs-toast toast fade ${bgColor} text-white" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header ${bgColor} text-white">
                 <i class='${iconClass} me-2'></i>
@@ -742,26 +742,25 @@
         </div>
     `;
 
-    // Append the toast HTML
-    document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
+            // Append the toast HTML
+            document.getElementById('toast-container').insertAdjacentHTML('beforeend', toastHTML);
 
-    // Select the newly added toast
-    const toastEl = document.querySelector('#toast-container .toast:last-child');
+            // Select the newly added toast
+            const toastEl = document.querySelector('#toast-container .toast:last-child');
 
-    // Initialize Bootstrap Toast
-    const bsToast = new bootstrap.Toast(toastEl, {
-        delay: 3000
-    });
+            // Initialize Bootstrap Toast
+            const bsToast = new bootstrap.Toast(toastEl, {
+                delay: 3000
+            });
 
-    // Clean up after it's hidden
-    toastEl.addEventListener('hidden.bs.toast', () => {
-        toastEl.remove();
-    });
+            // Clean up after it's hidden
+            toastEl.addEventListener('hidden.bs.toast', () => {
+                toastEl.remove();
+            });
 
-    // Show the toast
-    bsToast.show();
-}
-
+            // Show the toast
+            bsToast.show();
+        }
     </script>
 
     <!-- JavaScript for navbar scroll effect -->
@@ -781,7 +780,7 @@
         });
     </script>
 
-   <script>
+    <script>
         // Initialize Notyf with custom configuration
         window.notyf = new Notyf({
             duration: 4000,
@@ -882,6 +881,7 @@
         `;
         document.head.appendChild(style);
     </script>
+
 </body>
 
 </html>

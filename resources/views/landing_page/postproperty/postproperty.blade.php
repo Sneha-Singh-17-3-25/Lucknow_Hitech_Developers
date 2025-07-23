@@ -140,7 +140,7 @@
 
     <!-- Main Form Section -->
     <div class="px-4 py-8 ">
-        <div class="bg-white rounded-sm shadow-md md:p-8  md:px-24">
+        <div class="bg-white rounded-sm shadow-md md:p-8  md:px-24 p-[10px]">
             <div class="mb-8">
                 <h2 class="text-2xl font-heading font-semibold text-slate">Property <span
                         class="text-saffron">Details</span></h2>
@@ -220,56 +220,60 @@
 
 
                     <!-- Residential Sub-options -->
-<div id="residential-options" class="property-sub-options">
-    <label class="block text-gray-700 text-sm mb-2">Property Type</label>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
-        @foreach($ResidentialProperty as $Rtype)
-        <div class="sub-property-option residential-option active border rounded-md p-3 cursor-pointer hover:bg-saffron/8 transition-all text-center flex flex-col justify-center min-h-[5rem] break-words px-2"
-            data-res-type="{{ strtolower($Rtype->property_type) }}"
-            onclick="document.getElementById('idrestype').value = '{{$Rtype->property_type}}'">
+                    <div id="residential-options" class="property-sub-options">
+                        <label class="block text-gray-700 text-sm mb-2">Property Type</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-3">
+                            @foreach($ResidentialProperty as $Rtype)
+                            <div class="sub-property-option residential-option border rounded-md cursor-pointer hover:bg-saffron/5 transition-all text-center p-2"
+                                data-res-type="{{ strtolower($Rtype->property_type) }}"
+                                onclick="document.getElementById('idrestype').value = '{{ $Rtype->property_type }}'">
+                                <div class="text-saffron mb-1 text-xl">
+                                    <i class="fas {{ $Rtype->icon_class }}"></i>
+                                </div>
+                                <span class="text-sm font-medium" id="res-property-type">{{ $Rtype->property_type }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
 
-            <div class="text-saffron mb-1"><i class="fas {{ $Rtype->icon_class }}"></i></div>
-            <span class="text-sm" id="res-property-type">{{$Rtype->property_type}}</span>
-        </div>
-        @endforeach
-    </div>
-</div>
                     <input type="hidden" class="hidden-input" id="idrestype" name="res-property-type_hidden" value="{{$Rtype->property_type}}">
 
                     <!-- Commercial Sub-options (Hidden by default) -->
                     <div id="commercial-options" class="property-sub-options hidden">
                         <label class="block text-gray-700 text-sm mb-2">Property Category</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
+                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-3">
                             @foreach($CommercialProperty as $Ctype)
-                            <div class="sub-property-option commercial-option border rounded-md p-3 cursor-pointer hover:bg-saffron/5 transition-all text-center"
-                                data-com-type="{{ strtolower($Ctype->property_type) }}" onclick="document.getElementById('idcommertype').value = '{{$Ctype->property_type}}' ">
-                                <div class="text-saffron mb-1">
+                            <div class="sub-property-option commercial-option border rounded-md cursor-pointer hover:bg-saffron/5 transition-all text-center px-4 py-2"
+                                data-com-type="{{ strtolower($Ctype->property_type) }}"
+                                onclick="document.getElementById('idcommertype').value = '{{$Ctype->property_type}}' ">
+                                <div class="text-saffron mb-1 text-xl">
                                     <i class="fas {{ $Ctype->icon_class }}"></i>
                                 </div>
-                                <span class="text-sm">{{$Ctype->property_type}}</span>
-
+                                <span class="text-sm font-medium">{{ $Ctype->property_type }}</span>
                             </div>
                             @endforeach
                         </div>
                     </div>
+
                     <input type="hidden" class="hidden-input" id="idcommertype" name="commer-property-type-hidden" value="{{$Ctype->property_type}}">
 
                     <!-- plot/land Sub-options (Hidden by default) -->
                     <div id="plotland-options" class="property-sub-options hidden">
                         <label class="block text-gray-700 text-sm mb-2">Property Category</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
+                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-3">
                             @foreach($PlotLandProperty as $Ptype)
-                            <div class="sub-property-option plotland-option border rounded-md p-3 cursor-pointer hover:bg-saffron/5 transition-all text-center"
+                            <div class="sub-property-option plotland-option border rounded-md p-2 cursor-pointer hover:bg-saffron/5 transition-all text-center"
                                 data-plot-type="{{ strtolower($Ptype->property_type) }}"
                                 onclick="document.getElementById('idplotlandtype').value = '{{ $Ptype->property_type }}'">
-                                <div class="text-saffron mb-1">
+                                <div class="text-saffron mb-1 text-xl">
                                     <i class="fas {{ $Ptype->icon_class }}"></i>
                                 </div>
-                                <span class="text-sm">{{ $Ptype->property_type }}</span>
+                                <span class="text-sm font-medium">{{ $Ptype->property_type }}</span>
                             </div>
                             @endforeach
                         </div>
                     </div>
+
                     <input type="hidden" class="hidden-input" id="idplotlandtype" name="plotland-property-type-hidden" value="{{$Ptype->property_type}}">
 
                 </div>
@@ -318,13 +322,13 @@
 
 
                 <!-- Transaction Type Section -->
-                <div class="mb-8">
+                <div class="mb-2">
                     <h3 class="text-xl font-heading font-semibold text-slate mb-4">Property<span class="text-saffron">
                             Availability</span></h3>
 
-                    <div class="mb-4 flex items-center">
-                        <label class="text-gray-700 text-sm font-medium mr-4 min-w-max">Possession Status:</label>
-                        <div class="flex items-center gap-6">
+                    <div class="mb-2">
+                        <label class="text-gray-700 text-sm font-medium block mb-2">Possession Status:</label>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
                             <label class="inline-flex items-center">
                                 <input type="radio" name="possession-status" value="under-construction"
                                     class="w-4 h-4 accent-orange-500">
@@ -337,6 +341,7 @@
                             </label>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- this common section for residential ------------------------------------------->
@@ -421,11 +426,12 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-gray-700 text-sm mb-2">Bedrooms</label>
-                                <div class="flex flex-wrap gap-2">
+                                <div class="flex flex-wrap gap-2 ">
                                     @for ($i = 1; $i <= 8; $i++)
-                                        <label>
-                                        <input type="radio" name="res-bedrooms" value="{{ $i < 8 ? $i : '8+' }}" class="peer hidden" {{ $i === 1 ? 'checked' : '' }}>
-                                        <span class="px-4 py-2 border rounded-md cursor-pointer border-gray-300 
+                                        <label class="w-[60px] sm:w-auto">
+                                        <input type="radio" name="res-bedrooms" value="{{ $i < 8 ? $i : '8+' }}"
+                                            class="peer hidden" {{ $i === 1 ? 'checked' : '' }}>
+                                        <span class="block text-center px-4 py-2 border rounded-md cursor-pointer border-gray-300 
                                         peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-600 
                                         hover:bg-amber-50 hover:border-amber-500 transition-all">
                                             {{ $i < 8 ? $i : '8+' }}
@@ -433,7 +439,6 @@
                                         </label>
                                         @endfor
                                 </div>
-
                             </div>
 
 
@@ -442,9 +447,9 @@
                                 <label class="block text-gray-700 text-sm mb-2">Balconies</label>
                                 <div class="flex flex-wrap gap-2">
                                     @for ($i = 1; $i <= 8; $i++)
-                                        <label>
+                                        <label class=" w-[60px] sm:w-auto">
                                         <input type="radio" name="res-balconies" value="{{ $i < 8 ? $i : '8+' }}" class="peer hidden" {{ $i === 1 ? 'checked' : '' }}>
-                                        <span class="px-4 py-2 border rounded-md cursor-pointer border-gray-300 
+                                        <span class=" block text-center px-4 py-2 border rounded-md cursor-pointer border-gray-300 
                                         peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron 
                                         hover:bg-saffron/5 hover:border-saffron transition-all">
                                             {{ $i < 8 ? $i : '8+' }}
@@ -463,10 +468,10 @@
                                     <label class="block text-gray-700 text-sm mb-2">Total rooms</label>
                                     <div class="flex flex-wrap gap-2">
                                         @for ($i = 1; $i <= 9; $i++)
-                                            <label>
+                                            <label class="w-[60px] sm:w-auto">
                                             <input type="radio" name="res-rooms" value="{{ $i < 9 ? $i : '9+' }}" class="peer hidden"
                                                 {{ $i === 1 ? 'checked' : '' }}>
-                                            <span class="px-4 py-2 border rounded-md cursor-pointer border-gray-300 
+                                            <span class=" block text-center px-4 py-2 border rounded-md cursor-pointer border-gray-300 
                                               peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron 
                                                hover:bg-saffron/5 hover:border-saffron transition-all">
                                                 {{ $i < 9 ? $i : '9+' }}
@@ -485,10 +490,10 @@
                                     <label class="block text-gray-700 text-sm mb-2">Total Floors</label>
                                     <div class="flex flex-wrap gap-2">
                                         @for ($i = 1; $i <= 9; $i++)
-                                            <label>
+                                            <label class="w-[60px] sm:w-auto ">
                                             <input type="radio" name="res-total-floors" value="{{ $i < 9 ? $i : '9+' }}" class="peer hidden"
                                                 {{ $i === 1 ? 'checked' : '' }}>
-                                            <span class="px-4 py-2 border rounded-md cursor-pointer border-gray-300 
+                                            <span class="block text-center px-4 py-2 border rounded-md cursor-pointer border-gray-300 
                                              peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron 
                                              hover:bg-saffron/5 hover:border-saffron transition-all">
                                                 {{ $i < 9 ? $i : '9+' }}
@@ -504,10 +509,10 @@
                                 <label class="block text-gray-700 text-sm mb-2">Furnished Status</label>
                                 <div class="flex flex-wrap gap-2">
                                     <!-- Furnished -->
-                                    <label>
+                                    <label class="w-[130px] sm:w-auto">
                                         <input type="radio" id="furnished" name="res-furnished" value="furnished" class="peer hidden"
                                             checked>
-                                        <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                        <span class=" block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                          peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron
                                          hover:bg-saffron/5 hover:border-saffron transition-all">
                                             Furnished
@@ -515,9 +520,9 @@
                                     </label>
 
                                     <!-- Unfurnished -->
-                                    <label>
+                                    <label class="w-[130px] sm:w-auto">
                                         <input type="radio" id="unfurnished" name="res-furnished" value="unfurnished" class="peer hidden">
-                                        <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                        <span class=" block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                          peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron
                                          hover:bg-saffron/5 hover:border-saffron transition-all">
                                             Unfurnished
@@ -525,9 +530,9 @@
                                     </label>
 
                                     <!-- Semi-Furnished -->
-                                    <label>
+                                    <label class="w-[130px] sm:w-auto">
                                         <input type="radio" id="semi-furnished" name="res-furnished" value="semi-furnished" class="peer hidden">
-                                        <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                        <span class=" block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                         peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron
                                         hover:bg-saffron/5 hover:border-saffron transition-all">
                                             Semi-Furnished
@@ -542,10 +547,10 @@
                                 <label class="block text-gray-700 text-sm mb-2">Bathrooms</label>
                                 <div class="flex flex-wrap gap-2">
                                     @for ($i = 1; $i <= 8; $i++)
-                                        <label>
+                                        <label class="w-[60px] sm:w-auto">
                                         <input type="radio" name="res-bathrooms" value="{{ $i < 8 ? $i : '8+' }}" class="peer hidden"
                                             {{ $i === 1 ? 'checked' : '' }}>
-                                        <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                        <span class=" block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                          peer-checked:bg-saffron/10 peer-checked:border-saffron peer-checked:text-saffron
                                          hover:bg-saffron/5 hover:border-saffron transition-all">
                                             {{ $i < 8 ? $i : '8+' }}
@@ -693,27 +698,27 @@
                             <label class="block text-gray-700 font-medium mb-2">Floor No.</label>
                             <div class="flex flex-wrap gap-2">
 
-                                <label>
+                                <label class="w-[130px] sm:w-auto">
                                     <input type="radio" name="commer_floor_no" value="Lower Basement" class="peer hidden" />
-                                    <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                    <span class="block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                      peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-600
                                      hover:bg-amber-50 hover:border-amber-500 transition-all">
                                         Lower Basement
                                     </span>
                                 </label>
 
-                                <label>
+                                <label class="w-[130px] sm:w-auto">
                                     <input type="radio" name="commer_floor_no" value="Upper Basement" class="peer hidden" />
-                                    <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                    <span class="block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                     peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-600
                                     hover:bg-amber-50 hover:border-amber-500 transition-all">
                                         Upper Basement
                                     </span>
                                 </label>
 
-                                <label>
+                                <label class="w-[100px] sm:w-auto">
                                     <input type="radio" name="commer_floor_no" value="Ground" class="peer hidden" />
-                                    <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                    <span class="block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                      peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-600
                                      hover:bg-amber-50 hover:border-amber-500 transition-all">
                                         Ground
@@ -721,15 +726,15 @@
                                 </label>
 
                                 @for($i = 1; $i <= 6; $i++)
-                                    <label>
+                                    <label class="w-[60px] sm:w-auto">
                                     <input type="radio" name="commer_floor_no" value="{{ $i < 6 ? $i : '6+' }}" class="peer hidden" />
-                                    <span class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                    <span class="block text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
                                     peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-600
                                     hover:bg-amber-50 hover:border-amber-500 transition-all">
                                         {{ $i < 6 ? $i : '6+' }}
                                     </span>
                                     </label>
-                                @endfor
+                                    @endfor
                             </div>
                         </div>
 
@@ -755,44 +760,45 @@
                         <!-- Furnished Status -->
                         <div class="mb-4">
                             <label class="block text-gray-700 font-medium mb-2">Furnished Status</label>
-                            <div class="flex gap-2">
+                            <div class="flex flex-wrap gap-2 mt-2">
                                 <!-- Furnished -->
-                                <label>
+                                <label class="w-full sm:w-auto">
                                     <input type="radio" name="commer_furnished_status" value="Furnished"
                                         class="sr-only peer" />
                                     <div
-                                        class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
-                                     hover:bg-amber-50 hover:border-amber-500
-                                     peer-checked:bg-amber-100 peer-checked:border-amber-500 peer-checked:text-amber-600">
+                                        class="w-full text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                                        hover:bg-amber-50 hover:border-amber-500
+                                        peer-checked:bg-amber-100 peer-checked:border-amber-500 peer-checked:text-amber-600">
                                         Furnished
                                     </div>
                                 </label>
 
                                 <!-- Unfurnished -->
-                                <label>
+                                <label class="w-full sm:w-auto">
                                     <input type="radio" name="commer_furnished_status" value="Unfurnished"
                                         class="sr-only peer" />
                                     <div
-                                        class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
-                                    hover:bg-amber-50 hover:border-amber-500
-                                     peer-checked:bg-amber-100 peer-checked:border-amber-500 peer-checked:text-amber-600">
+                                        class="w-full text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                hover:bg-amber-50 hover:border-amber-500
+                peer-checked:bg-amber-100 peer-checked:border-amber-500 peer-checked:text-amber-600">
                                         Unfurnished
                                     </div>
                                 </label>
 
                                 <!-- Semi-Furnished -->
-                                <label>
+                                <label class="w-full sm:w-auto">
                                     <input type="radio" name="commer_furnished_status" value="Semi-Furnished"
                                         class="sr-only peer" />
                                     <div
-                                        class="px-4 py-2 border border-gray-300 rounded-md cursor-pointer
-                                     hover:bg-amber-50 hover:border-amber-500
-                                     peer-checked:bg-amber-100 peer-checked:border-amber-500 peer-checked:text-amber-600">
+                                        class="w-full text-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer
+                hover:bg-amber-50 hover:border-amber-500
+                peer-checked:bg-amber-100 peer-checked:border-amber-500 peer-checked:text-amber-600">
                                         Semi-Furnished
                                     </div>
                                 </label>
                             </div>
                         </div>
+
 
 
                         <!-- Washrooms -->
@@ -1598,14 +1604,11 @@
                 .then(response => console.log(response.json())) // FIXED THIS LINE
                 .then(data => {
                     console.log(data);
-
-                    // showToast('Success', data.message, 'bx bx-check-circle', 'bg-saffron');
-                    // alert('Property Posted successfully!');
                     document.getElementById('form').reset();
                     notyf.success('Property Posted successfully!');
 
                     setTimeout(() => {
-                      window.location.href = '/'; // or replace '/' with your actual homepage route
+                        window.location.href = '/'; // or replace '/' with your actual homepage route
                     }, 1000);
 
                 })
